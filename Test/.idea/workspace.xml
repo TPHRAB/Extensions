@@ -2,19 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="74ab00d0-197f-48a4-8f67-2658a66e4feb" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../DownloadManager/.idea/libraries/dom4jExtension.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../DownloadManager/.idea/libraries/dom4jExtension__2_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../DownloadManager/.idea/libraries/dom4j_2_1_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../DownloadManager/.idea/libraries/dom4j_2_1_1__2_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../DownloadManager/.idea/libraries/jaxen_1_1_6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../DownloadManager/.idea/libraries/jaxen_1_1_6__2_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../DownloadManager/.idea/libraries/jline_3_12_2_SNAPSHOT.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../DownloadManager/.idea/libraries/jline_3_12_2_SNAPSHOT__2_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../DownloadManager/.idea/libraries/progressbar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../DownloadManager/.idea/libraries/progressbar__2_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../DownloadManager/lib/dom4j-2.1.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../DownloadManager/lib/dom4jExtension.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../DownloadManager/lib/jaxen-1.1.6.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../DownloadManager/lib/jline-3.12.2-SNAPSHOT.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../DownloadManager/lib/progressbar.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DownloadManager/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DownloadManager/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DownloadManager/DownloadManager.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DownloadManager/src/extensions/copy/Copy.java" beforeDir="false" afterPath="$PROJECT_DIR$/../DownloadManager/src/extensions/copy/Copy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DownloadManager/src/extensions/copy/CopyThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/../DownloadManager/src/extensions/copy/CopyThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DownloadManager/src/extensions/copy/TestThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/../DownloadManager/src/extensions/copy/TestThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DownloadManager/src/extensions/dom4j/Dom4jUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/../DownloadManager/src/extensions/dom4j/Dom4jUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DownloadManager/src/extensions/download/Download.java" beforeDir="false" afterPath="$PROJECT_DIR$/../DownloadManager/src/extensions/download/Download.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DownloadManager/src/extensions/download/DownloadThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/../DownloadManager/src/extensions/download/DownloadThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DownloadManager/src/extensions/download/TestThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/../DownloadManager/src/extensions/download/TestThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DownloadManager/src/extensions/download/TestURL.java" beforeDir="false" afterPath="$PROJECT_DIR$/../DownloadManager/src/extensions/download/TestURL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DownloadManager/src/extensions/download/WatchFileSize.java" beforeDir="false" afterPath="$PROJECT_DIR$/../DownloadManager/src/extensions/download/WatchFileSize.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/copy.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/extensions/copy/Compare.java" beforeDir="false" afterPath="$PROJECT_DIR$/../DownloadManager/src/extensions/copy/Compare.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/extensions/copy/Copy.java" beforeDir="false" afterPath="$PROJECT_DIR$/../DownloadManager/src/extensions/copy/Copy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/extensions/copy/CopyThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/../DownloadManager/src/extensions/copy/CopyThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/extensions/copy/TestThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/../DownloadManager/src/extensions/copy/TestThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/extensions/dom4j/Dom4jUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/../DownloadManager/src/extensions/dom4j/Dom4jUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/extensions/download/Download.java" beforeDir="false" afterPath="$PROJECT_DIR$/../DownloadManager/src/extensions/download/Download.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/extensions/download/DownloadThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/../DownloadManager/src/extensions/download/DownloadThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/extensions/download/TestThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/../DownloadManager/src/extensions/download/TestThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/extensions/download/TestURL.java" beforeDir="false" afterPath="$PROJECT_DIR$/../DownloadManager/src/extensions/download/TestURL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/extensions/download/WatchFileSize.java" beforeDir="false" afterPath="$PROJECT_DIR$/../DownloadManager/src/extensions/download/WatchFileSize.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/extensions/download/problems.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../DownloadManager/src/extensions/download/problems.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -113,7 +127,6 @@
       <list>
         <item itemvalue="Application.SortFileName" />
         <item itemvalue="Application.TestThread" />
-        <item itemvalue="Application.TestThread (1)" />
         <item itemvalue="Application.Compare" />
       </list>
     </recent_temporary>

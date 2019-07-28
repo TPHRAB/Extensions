@@ -8,3 +8,4 @@ Download
 Copy
 	- 设置默认合并路径
 
+- 管道
