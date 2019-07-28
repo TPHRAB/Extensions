@@ -7,5 +7,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="dom4j-2.1.1" level="project" />
+    <orderEntry type="library" name="dom4jExtension" level="project" />
+    <orderEntry type="library" name="jaxen-1.1.6" level="project" />
+    <orderEntry type="library" name="jline-3.12.2-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="progressbar" level="project" />
   </component>
 </module>
