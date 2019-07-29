@@ -7,7 +7,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
-import org.dom4j.*;
 import org.dom4jExtension.*;
 
 public class AutoDownload {
@@ -23,7 +22,7 @@ public class AutoDownload {
         String url = console.nextLine();
 
         URL u = new URL(url);
-        
+        org.dom4j.Document xml = Dom4jUtil.getDocument("websites.xml");
     }
 
     public static void orangle(String url) throws Exception {
