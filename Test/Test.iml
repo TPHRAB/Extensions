@@ -12,5 +12,9 @@
     <orderEntry type="library" name="jline-3.12.2-SNAPSHOT" level="project" />
     <orderEntry type="library" name="progressbar" level="project" />
     <orderEntry type="library" name="dom4jExtension" level="project" />
+    <orderEntry type="library" name="jsoup-1.12.1" level="project" />
+    <orderEntry type="library" name="commons-codec-1.11" level="project" />
+    <orderEntry type="library" name="selenium-java-3.141" level="project" />
+    <orderEntry type="library" name="libs" level="project" />
   </component>
 </module>

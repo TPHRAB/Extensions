@@ -26,6 +26,17 @@ public class Download {
 			throw new IllegalArgumentException("thread number should be at least 1!");
 		}
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+
+		// test whether the site support multithread
+		connection.setRequestMethod("GET");
+		connection.setRequestProperty("Range", "bytes=0-1");
+		if (connection.getResponseCode() != 206) {
+			threadNum = 1;
+		}
+
+
+		connection = (HttpURLConnection) url.openConnection();
 		connection.setRequestMethod("HEAD");
 		this.fileName = out.getName();
 		this.fileLength = connection.getContentLengthLong();
