@@ -11,6 +11,18 @@ public class TestThread {
 		System.setProperty("javax.net.ssl.keyStore", "icekeystore.jks");
 		System.setProperty("javax.net.ssl.keyStorePassword", "123456");
 
+		PipedReader pr = new PipedReader();
+		PipedWriter pw = new PipedWriter();
+		pr.connect(pw);
+		// char : 0-65535, (char) ((int) -1) == 65535
+//		pw.write(65535);
+//		pw.write(1);
+//		pw.write(65535);
+//
+//		System.out.println(pr.read());
+//		System.out.println(pr.read());
+//		System.out.println(pr.read());
+
 		Scanner console = new Scanner(System.in);
 		boolean loop = true;
 		int option = -1;
@@ -73,7 +85,7 @@ public class TestThread {
 					if (console.next().equals("Y")) {
 						forward2 = true;
 						console.nextLine(); // skip \n
-					} 
+					}
 				} else {
 					forward2 = true;
 				}
@@ -158,6 +170,7 @@ public class TestThread {
 	public static String getURLFileName(URL url) {
 		return url.getFile().substring(url.getFile().lastIndexOf('/'));
 	}
+
 	public static void getBold(String str) {
 		System.out.println("\33[;;1m" + str + "\33[;;0m");
 	}

@@ -2,6 +2,8 @@ package extensions.download;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class DownloadManager {
@@ -11,6 +13,29 @@ public class DownloadManager {
         Download threads = new Download(url, out, threadNum);
         threads.start();
         threads.join();
+    }
+
+    public static void DonwloadTsFileList(List<String> list, File outputPath, int threads) throws Exception {
+        int num = list.size() / threads;
+        if (list.size() % threads != 0) {
+            threads++;
+        }
+        int start = 0;
+        List<MultithreadDownloadList> threadsPool = new ArrayList<MultithreadDownloadList>();
+        // start all threads
+        for (int i = 0; i < threads; i++) {
+            int end = start + num - 1;
+            // hahahaha
+            end = i == threads - 1 ? list.size() - 1 : end;
+            MultithreadDownloadList t = new MultithreadDownloadList(list.get(start), list.get(end), outputPath);
+            threadsPool.add(t);
+            t.start();
+            start += num;
+        }
+        // wait for all subthreads to join
+        for (MultithreadDownloadList t : threadsPool) {
+            t.join();
+        }
     }
 
     // post : donwload ts files from "first" to "last" and output them to dir

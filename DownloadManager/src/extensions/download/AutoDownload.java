@@ -55,18 +55,7 @@ public class AutoDownload {
         List<String> list = getList(link, out2, 1, null);
         File outputPath = new File("C:\\Users\\Timmy\\Desktop\\raw");
         int threads = 10;
-        int num = list.size() / threads;
-        if (list.size() % threads != 0) {
-            threads++;
-        }
-        int start = 0;
-        for (int i = 0; i < threads; i++) {
-            int end = start + num - 1;
-            // hahahaha
-            end = i == threads - 1 ? list.size() - 1 : end;
-            new MultithreadDownloadList(list.get(start), list.get(end), outputPath).start();
-            start += num;
-        }
+        DownloadManager.DonwloadTsFileList(list, outputPath, 10);
     }
 
     public static List<String> getList(String link, File m3u8, int threadNum,
