@@ -54,6 +54,7 @@ public class Download {
 		this.threadsPool = new ArrayList<DownloadThread>();
 		for (int i = 0; i < threadNum; i++) {
 			long end = start + blockSize - 1;
+			// connection = (HttpURLConnection) new URL(url.toString()).openConnection();
 			connection = (HttpURLConnection) url.openConnection();
 			connection.setRequestProperty("Range", "bytes=" + start + "-" + end);
 			threadsPool.add(new DownloadThread(connection, out, start, pW));
@@ -89,5 +90,6 @@ public class Download {
 		for (DownloadThread d : threadsPool) {
 			d.join();
 		}
+		pb.join();
 	}
 }
