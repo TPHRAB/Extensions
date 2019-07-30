@@ -18,8 +18,9 @@ public class ProgressBarThread implements Runnable {
     @Override
     public void run() {
         double totalRounded = Math.round(totalBytes / 1024.0 / 1024.0 * 100.0) / 100.0;
-        System.out.print(taskName + ": 0% " + "(0/" + totalBytes + "), " + totalRounded + " MiB");
+        System.out.print("[*** " + taskName + ": 0% " + "(0/" + totalBytes + "), " + totalRounded + " MiB ***]");
         long currentBytes = 0;
+        long start = System.currentTimeMillis();
         while (currentBytes < totalBytes) {
             try {
                 char[] buffer = new char[1024];
@@ -28,10 +29,14 @@ public class ProgressBarThread implements Runnable {
                     currentBytes += buffer[i];
                 }
                 double currentRounded = Math.round(currentBytes * 100.0 / totalBytes);
-                System.out.print("\r" + taskName + ": " + currentRounded + "% (" + currentBytes + "/" + totalBytes +
-                        "), " + totalRounded + " MiB");
+                System.out.print("\r" + "[*** " + taskName + ": " + currentRounded + "% ("
+                        + currentBytes + "/" + totalBytes + "), " + totalRounded + " MiB ***]");
             } catch (Exception e) {}
         }
+        System.out.println("\r" + taskName + ": " + 100 + "% (" + currentBytes + "/" + totalBytes +
+                "), " + totalRounded + " MiB, done.");
+        System.out.println(getBold("Total time consumed: " + (System.currentTimeMillis() - start) / 1000.0
+                +  "seconds"));
     }
 
     public void start() {
@@ -40,5 +45,9 @@ public class ProgressBarThread implements Runnable {
 
     public void join() throws Exception {
         thread.join();
+    }
+
+    public static String getBold(String str) {
+        return "\33[;;1m" + str + "\33[;;0m";
     }
 }
