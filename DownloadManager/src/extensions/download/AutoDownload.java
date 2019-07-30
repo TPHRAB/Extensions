@@ -1,5 +1,7 @@
 package extensions.download;
 
+import org.dom4j.Element;
+import org.dom4j.Node;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import java.io.File;
@@ -21,11 +23,15 @@ public class AutoDownload {
         System.out.print("Please input the video url: ");
         String url = console.nextLine();
 
-        URL u = new URL(url);
+        // URL u = new URL(url);
         org.dom4j.Document xml = Dom4jUtil.getDocument("websites.xml");
+        Node orange = xml.selectNodes("/methods/m3u8/host[@id='https://jzavzy.com']").get(0);
+        if(orange.getText().equals("orange")) {
+            orange(url);
+        }
     }
 
-    public static void orangle(String url) throws Exception {
+    public static void orange(String url) throws Exception {
         Document doc = Jsoup.connect(url.toString()).get();
 
         // get first m3u8
@@ -59,6 +65,7 @@ public class AutoDownload {
             // hahahaha
             end = i == threads - 1 ? list.size() - 1 : end;
             new MultithreadDownloadList(list.get(start), list.get(end), outputPath).start();
+            start += num;
         }
     }
 
