@@ -7,6 +7,7 @@ Download
 	- 不是所有的String url都需要存在list中
 	- 根据start和end自动生成list的函数
 	- 有一个.ts文件创建成功却没内容，rsd
+	- dilidili m3u8文件url格式不同
 
 Copy
 	- 设置默认合并路径

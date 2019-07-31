@@ -4,13 +4,13 @@ import java.io.PipedReader;
 
 public class ProgressBarThread implements Runnable {
 
-    private PipedReader pipeR;
+    private PipedReader pR;
     private long totalBytes;
     private String taskName;
     private Thread thread;
 
-    public ProgressBarThread(PipedReader pipeR, String taskName, long totalBytes) {
-        this.pipeR = pipeR;
+    public ProgressBarThread(PipedReader pR, String taskName, long totalBytes) {
+        this.pR = pR;
         this.taskName = taskName;
         this.totalBytes = totalBytes;
         this.thread = new Thread(this);
@@ -24,7 +24,7 @@ public class ProgressBarThread implements Runnable {
         while (currentBytes < totalBytes) {
             try {
                 char[] buffer = new char[1024];
-                int count = pipeR.read(buffer);
+                int count = pR.read(buffer);
                 for (int i = 0; i < count; i++) {
                     currentBytes += buffer[i];
                 }

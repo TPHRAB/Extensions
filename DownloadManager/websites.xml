@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<methods>
-    <m3u8>
-        <host id="https://jzavzy.com">orange</host>
-        <host id="https://avgle.com">avgle</host>
-    </m3u8>>
-</methods>
+<config>
+    <methods>
+        <m3u8>
+            <host id="https://jzavzy.com">orange</host>
+            <host id="https://avgle.com">avgle</host>
+            <host id="http://www.dilidili.name/">dilidili</host>
+        </m3u8>
+    </methods>
+    <history>
+        <path>./</path>
+    </history>
+</config>

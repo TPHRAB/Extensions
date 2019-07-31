@@ -1,25 +1,30 @@
 package extensions.download;
 
 import java.io.File;
+import java.io.PipedWriter;
 import java.util.List;
 
 public class MultithreadDownloadList implements Runnable {
     private File out;
-    private String start;
-    private String end;
+    private List<String> list;
+    private int start;
+    private int end;
+    private PipedWriter pW;
     private Thread thread;
 
-    public MultithreadDownloadList(String start, String end, File out) {
+    public MultithreadDownloadList(List<String> list, int start, int end, File out, PipedWriter pW) {
         this.out = out;
         this.start = start;
         this.end = end;
+        this.pW = pW;
+        this.list = list;
         this.thread = new Thread(this);
     }
 
     @Override
     public void run() {
         try {
-            DownloadManager.doDownloadTSFileList(start, end, out);
+            DownloadManager.doDownloadTSFileList(list, start, end, out, pW);
         } catch (Exception e) {
             e.printStackTrace();
         }

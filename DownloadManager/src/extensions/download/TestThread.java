@@ -44,7 +44,7 @@ public class TestThread {
 		if (option == 1) {
 			downloadSingleFile(console);
 		} else {
-			downloadFileList(console);
+//			downloadFileList(console);
 		}
 
 	}
@@ -90,49 +90,58 @@ public class TestThread {
 					forward2 = true;
 				}
 				if (forward2) {
-					doDownloadSingleFile(url, out, 10);
+					ProgressBar pb = new ProgressBar("Downloading", DownloadManager.getURLFileLength(url));
+					pb.start();
+					doDownloadSingleFile(url, out, 10, pb.getPipedWriter());
+					pb.join();
 					loop = false;
 				}
 			}
 		}
 	}
 
-	public static void doDownloadSingleFile(URL url, File out, int threadNum) throws Exception {
-		Download threads = new Download(url, out, threadNum);
+	// post : download the file from the url and output it to "out"
+	public static void doDownloadSingleFile(URL url, File out, int threadNum, PipedWriter pW) throws Exception {
+		Download threads = new Download(url, out, threadNum, pW);
 		threads.start();
 		threads.join();
 	}
 
-	public static void downloadFileList(Scanner console) throws Exception {
-		boolean loop = true;
-		String first = null;
-		String last = null;
-		while (loop) {
-			System.out.print("Please input the starting file's link: ");
-			first = console.nextLine();
-			System.out.print("Please input the ending file's link: ");
-			last = console.nextLine();
-			try {
-				new URL(first).openConnection().connect();
-				new URL(last).openConnection().connect();
-				loop = false;
-			} catch (Exception e) {
-				System.out.println("Links don't exist or internet connection error!");
-				getBold("Please check the links and input them again.");
-				System.out.println();
-			}
-		}
-		loop = true;
-		System.out.println("Please input the path of a directory to generate output: ");
-		File dir = null;
-		dir = new File(console.nextLine());
+
+//	public static void downloadFileList(Scanner console) throws Exception {
+//		boolean loop = true;
+//		String first = null;
+//		String last = null;
+//		while (loop) {
+//			System.out.print("Please input the starting file's link: ");
+//			first = console.nextLine();
+//			System.out.print("Please input the ending file's link: ");
+//			last = console.nextLine();
+//			try {
+//				new URL(first).openConnection().connect();
+//				new URL(last).openConnection().connect();
+//				loop = false;
+//			} catch (Exception e) {
+//				System.out.println("Links don't exist or internet connection error!");
+//				getBold("Please check the links and input them again.");
+//				System.out.println();
+//			}
+//		}
+//		loop = true;
+//		System.out.println("Please input the path of a directory to generate output: ");
+//		File dir = null;
+//		dir = new File(console.nextLine());
+//		if (!dir.exists()) {
+//			dir.mkdir();
+//		}
+//		doDownloadTSFileList(first, last, dir);
+//	}
+
+	// post : donwload ts files from "first" to "last" and output them to dir
+	public static void doDownloadTSFileList(String first, String last, File dir, ProgressBar pb) throws Exception {
 		if (!dir.exists()) {
 			dir.mkdir();
 		}
-		doDownloadFileList(first, last, dir);
-	}
-
-	public static void doDownloadFileList(String first, String last, File dir) throws Exception {
 		String difference = getDifference(first, last);
 		int bound = Integer.parseInt(difference);
 		int startingIndex = last.indexOf(difference);
@@ -142,7 +151,7 @@ public class TestThread {
 			String var = addZeros(difference.length() - String.valueOf(i).length()) + i;
 			URL url = new URL(part1 + var + part2);
 			File out = new File(dir.getAbsoluteFile() + getURLFileName(url));
-			doDownloadSingleFile(url, out, 1);
+			doDownloadSingleFile(url, out, 1, pb.getPipedWriter());
 		}
 	}
 

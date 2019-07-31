@@ -1,33 +1,60 @@
 package extensions.download;
 
 import java.io.File;
+import java.io.PipedWriter;
+import java.net.HttpURLConnection;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+
+import static extensions.download.ProgressBarThread.getBold;
 
 public class DownloadManager {
 
     // post : download the file from the url and output it to "out"
-    public static void doDownloadSingleFile(URL url, File out, int threadNum) throws Exception {
-        Download threads = new Download(url, out, threadNum);
+    public static void doDownloadSingleFile(URL url, File out, int threadNum, PipedWriter pW) throws Exception {
+        Download threads = new Download(url, out, threadNum, pW);
         threads.start();
         threads.join();
     }
 
-    public static void DonwloadTsFileList(List<String> list, File outputPath, int threads) throws Exception {
+    // post : donwload ts files from "first" to "last" and output them to dir
+    public static void downloadTSFileList(String first, String last, File dir, int threads) throws Exception {
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
+        String difference = getDifference(first, last);
+        int bound = Integer.parseInt(difference);
+        int startingIndex = last.lastIndexOf(difference);
+        String part1 = last.substring(0, startingIndex);
+        String part2 = last.substring(startingIndex + difference.length());
+        List<String> list = new ArrayList<String>();
+        for (int i = 0; i <= bound; i++) {
+            String var = addZeros(difference.length() - String.valueOf(i).length()) + i;
+            list.add(part1 + var + part2);
+        }
+        downloadTSFileList(list, dir, threads);
+    }
+
+    public static void downloadTSFileList(List<String> list, File dir, int threads) throws Exception {
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
         int num = list.size() / threads;
         if (list.size() % threads != 0) {
             threads++;
         }
         int start = 0;
         List<MultithreadDownloadList> threadsPool = new ArrayList<MultithreadDownloadList>();
+        ProgressBar pb = new ProgressBar("Download", DownloadManager.getListFilesLength(list));
+        pb.start();
         // start all threads
         for (int i = 0; i < threads; i++) {
             int end = start + num - 1;
             // hahahaha
             end = i == threads - 1 ? list.size() - 1 : end;
-            MultithreadDownloadList t = new MultithreadDownloadList(list.get(start), list.get(end), outputPath);
+            MultithreadDownloadList t = new MultithreadDownloadList(list, start, end, dir, pb.getPipedWriter());
             threadsPool.add(t);
             t.start();
             start += num;
@@ -36,23 +63,19 @@ public class DownloadManager {
         for (MultithreadDownloadList t : threadsPool) {
             t.join();
         }
+        pb.join();
     }
 
     // post : donwload ts files from "first" to "last" and output them to dir
-    public static void doDownloadTSFileList(String first, String last, File dir) throws Exception {
+    public static void doDownloadTSFileList(List<String> list, int first, int last, File dir, PipedWriter pW) throws Exception {
         if (!dir.exists()) {
             dir.mkdir();
         }
-        String difference = getDifference(first, last);
-        int bound = Integer.parseInt(difference);
-        int startingIndex = last.indexOf(difference);
-        String part1 = last.substring(0, startingIndex);
-        String part2 = last.substring(startingIndex + difference.length());
-        for (int i = 0; i <= bound; i++) {
-            String var = addZeros(difference.length() - String.valueOf(i).length()) + i;
-            URL url = new URL(part1 + var + part2);
+
+        for (String link : list) {
+            URL url = new URL(link);
             File out = new File(dir.getAbsoluteFile() + getURLFileName(url));
-            doDownloadSingleFile(url, out, 1);
+            doDownloadSingleFile(url, out, 1, pW);
         }
     }
 
@@ -82,5 +105,37 @@ public class DownloadManager {
     // post : return the file's name in this url
     public static String getURLFileName(URL url) {
         return url.getFile().substring(url.getFile().lastIndexOf('/'));
+    }
+
+    // post : return the URL file's length
+    public static long getURLFileLength(URL url) throws Exception {
+        long contentLength = -1;
+        try {
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setConnectTimeout(100);
+            connection.setRequestMethod("HEAD");
+            if (connection.getResponseCode() == 200) {
+                contentLength = connection.getContentLength();
+            } else {
+                System.out.println(getBold("Error: " + url + "\t(" + connection.getResponseCode() + ")"));
+            }
+        } catch (SocketTimeoutException e) {
+            System.out.println(getBold("Time out: " + url));
+        }
+        return contentLength;
+    }
+
+    private static long getListFilesLength(List<String> list) throws Exception {
+        long totalBytes = 0;
+        for (int i = list.size() - 1; i >= 0; i--) {
+            long fileLength = getURLFileLength(new URL(list.get(i)));
+            if (fileLength != -1) {
+                totalBytes += fileLength;
+            } else {
+                list.remove(i);
+            }
+            Thread.sleep(100);
+        }
+        return totalBytes;
     }
 }
