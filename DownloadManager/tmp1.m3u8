@@ -1,293 +1,724 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta name="referrer" content="never">
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/> 
-<meta name="renderer" content="webkit"/>
-<meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>嘀哩嘀哩，这里是兴趣使然的无名小站（D站）_dilidili</title>
-<style type="text/css">body,html,.content{background-color:black;padding:0;margin:0;width:100%;height:100%;color:#999;}.divs{width:100%;height:auto;position:fixed;left:0;top:0;z-index:999}.total{position:absolute;top:0;left:0;color:#fff;font-size:10px;padding:10px}.total span{margin-right:3px}</style>
-<script src="https://cdn.staticfile.org/jquery/1.11.3/jquery.min.js"></script>
-<script type="text/javascript">window.jQuery || document.write('<script type="text/javascript" src="js/jquery.min.js"><\/script>')</script>
-<script type="text/javascript" src="http://player.jfrft.net/ckplayer/ckplayer2.js"></script>
-<script src="https://cdn.staticfile.org/hls.js/8.0.0-beta.3/hls.min.js"></script>
-<link href="https://cdn.staticfile.org/dplayer/1.25.0/DPlayer.min.css" rel="stylesheet">
-<script src="js/DPlayer.min.js"></script>
-<script type="text/javascript" src="https://cdn.staticfile.org/blueimp-md5/2.10.0/js/md5.min.js"></script>
-</head>
-<body style="overflow-y:hidden;">
-<div id="loading" align="center"><strong><br><br><br><br><br><span class="tips">服务器正在解析中,请稍等....<font class="timemsg">0</font>s</span></strong><span class="timeout" style="display:none;color:#f90;">解析响应超时，请刷新重试！</span></div>
-<input type="hidden" id="k" value="c49d018649d46a13f70cac9fbf29c7e">
-<input type="hidden" id="hdMd5" value="EFBFCB31D5BACE6BB5793A529254424E" />
-<div id="a1" class="content" style="display:none;"></div>
-<div class="total">
-   <span class="peer"></span>
-   <span class="load"></span>
-   <span class="line"></span>
-</div>
-<div id="error" class="content" style="display:none;font-weight:bold;padding-top:90px;" align="center"></div>
-<script type="text/javascript">  
-function tipstime(count){$('.timemsg').text(count);if (count == 20){$('.tips').hide();$('.timeout').show()}else{count += 1;setTimeout(function(){tipstime(count)},1000)}}tipstime(0);site_domaim = function(){var path = window.location.pathname;if (path.indexOf(".") > -1){var i = path.lastIndexOf("/");var path = path.substring(0,i + 1)}return path}();console.log("请勿盗用本解析，谢谢合作/*(*^__^*)*/"+"ﾟωﾟﾉ= /｀ｍ´）ﾉ ~┻━┻   //*´∇｀*/ ['_']; o=(ﾟｰﾟ)  =_=3; c=(ﾟΘﾟ) =(ﾟｰﾟ)-(ﾟｰﾟ); (ﾟДﾟ) =(ﾟΘﾟ)= (o^_^o)/ (o^_^o);(ﾟДﾟ)={ﾟΘﾟ: '_' ,ﾟωﾟﾉ : ((ﾟωﾟﾉ==3) +'_') [ﾟΘﾟ] ,ﾟｰﾟﾉ :(ﾟωﾟﾉ+ '_')[o^_^o -(ﾟΘﾟ)] ,ﾟДﾟﾉ:((ﾟｰﾟ==3) +'_')[ﾟｰﾟ] }; (ﾟДﾟ) [ﾟΘﾟ] =((ﾟωﾟﾉ==3) +'_') [c^_^o];(ﾟДﾟ) ['c'] = ((ﾟДﾟ)+'_') [ (ﾟｰﾟ)+(ﾟｰﾟ)-(ﾟΘﾟ) ];(ﾟДﾟ) ['o'] = ((ﾟДﾟ)+'_') [ﾟΘﾟ];(ﾟoﾟ)=(ﾟДﾟ) ['c']+(ﾟДﾟ) ['o']+(ﾟωﾟﾉ +'_')[ﾟΘﾟ]+ ((ﾟωﾟﾉ==3) +'_') [ﾟｰﾟ] + ((ﾟДﾟ) +'_') [(ﾟｰﾟ)+(ﾟｰﾟ)]+ ((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+((ﾟｰﾟ==3) +'_') [(ﾟｰﾟ) - (ﾟΘﾟ)]+(ﾟДﾟ) ['c']+((ﾟДﾟ)+'_') [(ﾟｰﾟ)+(ﾟｰﾟ)]+ (ﾟДﾟ) ['o']+((ﾟｰﾟ==3) +'_') [ﾟΘﾟ];(ﾟДﾟ) ['_'] =(o^_^o) [ﾟoﾟ] [ﾟoﾟ];(ﾟεﾟ)=((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+ (ﾟДﾟ) .ﾟДﾟﾉ+((ﾟДﾟ)+'_') [(ﾟｰﾟ) + (ﾟｰﾟ)]+((ﾟｰﾟ==3) +'_') [o^_^o -ﾟΘﾟ]+((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+ (ﾟωﾟﾉ +'_') [ﾟΘﾟ]; (ﾟｰﾟ)+=(ﾟΘﾟ); (ﾟДﾟ)[ﾟεﾟ]='\\'; (ﾟДﾟ).ﾟΘﾟﾉ=(ﾟДﾟ+ ﾟｰﾟ)[o^_^o -(ﾟΘﾟ)];(oﾟｰﾟo)=(ﾟωﾟﾉ +'_')[c^_^o];(ﾟДﾟ) [ﾟoﾟ]='\"';(ﾟДﾟ) ['_'] ( (ﾟДﾟ) ['_'] (ﾟεﾟ+/*´∇｀*/(ﾟДﾟ)[ﾟoﾟ]+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+((o^_^o) +(o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+(o^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+(o^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+(c^_^o)+(ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (o^_^o))+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+(c^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+((ﾟｰﾟ) + (o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+(ﾟΘﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+(o^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+(ﾟΘﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟｰﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+(ﾟｰﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+(ﾟΘﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(o^_^o)+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+((o^_^o) +(o^_^o))+(ﾟΘﾟ)+(ﾟДﾟ)[ﾟεﾟ]+((o^_^o) +(o^_^o))+((o^_^o) +(o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+(ﾟｰﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+((ﾟｰﾟ) + (o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (o^_^o))+(c^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟΘﾟ)+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (o^_^o))+(c^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟΘﾟ)+(o^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+(o^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) - (ﾟΘﾟ))+((o^_^o) +(o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+((o^_^o) +(o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+(c^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(o^_^o)+(ﾟΘﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+((ﾟｰﾟ) + (o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+((o^_^o) +(o^_^o))+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+(ﾟｰﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+(ﾟΘﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+(c^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) - (ﾟΘﾟ))+((o^_^o) +(o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+(o^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+(ﾟｰﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(o^_^o)+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (o^_^o))+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+((ﾟｰﾟ) + (o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+(o^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+(ﾟΘﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (o^_^o))+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) - (ﾟΘﾟ))+((o^_^o) +(o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(o^_^o)+(ﾟΘﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+((o^_^o) +(o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟΘﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+((ﾟｰﾟ) + (o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (o^_^o))+(o^_^o)+(ﾟДﾟ)[ﾟoﾟ]) (ﾟΘﾟ)) ('_');");console.clear();ﾟωﾟﾉ= /｀ｍ´）ﾉ ~┻━┻   //*´∇｀*/ ['_']; o=(ﾟｰﾟ)  =_=3; c=(ﾟΘﾟ) =(ﾟｰﾟ)-(ﾟｰﾟ); (ﾟДﾟ) =(ﾟΘﾟ)= (o^_^o)/ (o^_^o);(ﾟДﾟ)={ﾟΘﾟ: '_' ,ﾟωﾟﾉ : ((ﾟωﾟﾉ==3) +'_') [ﾟΘﾟ] ,ﾟｰﾟﾉ :(ﾟωﾟﾉ+ '_')[o^_^o -(ﾟΘﾟ)] ,ﾟДﾟﾉ:((ﾟｰﾟ==3) +'_')[ﾟｰﾟ] }; (ﾟДﾟ) [ﾟΘﾟ] =((ﾟωﾟﾉ==3) +'_') [c^_^o];(ﾟДﾟ) ['c'] = ((ﾟДﾟ)+'_') [ (ﾟｰﾟ)+(ﾟｰﾟ)-(ﾟΘﾟ) ];(ﾟДﾟ) ['o'] = ((ﾟДﾟ)+'_') [ﾟΘﾟ];(ﾟoﾟ)=(ﾟДﾟ) ['c']+(ﾟДﾟ) ['o']+(ﾟωﾟﾉ +'_')[ﾟΘﾟ]+ ((ﾟωﾟﾉ==3) +'_') [ﾟｰﾟ] + ((ﾟДﾟ) +'_') [(ﾟｰﾟ)+(ﾟｰﾟ)]+ ((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+((ﾟｰﾟ==3) +'_') [(ﾟｰﾟ) - (ﾟΘﾟ)]+(ﾟДﾟ) ['c']+((ﾟДﾟ)+'_') [(ﾟｰﾟ)+(ﾟｰﾟ)]+ (ﾟДﾟ) ['o']+((ﾟｰﾟ==3) +'_') [ﾟΘﾟ];(ﾟДﾟ) ['_'] =(o^_^o) [ﾟoﾟ] [ﾟoﾟ];(ﾟεﾟ)=((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+ (ﾟДﾟ) .ﾟДﾟﾉ+((ﾟДﾟ)+'_') [(ﾟｰﾟ) + (ﾟｰﾟ)]+((ﾟｰﾟ==3) +'_') [o^_^o -ﾟΘﾟ]+((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+ (ﾟωﾟﾉ +'_') [ﾟΘﾟ]; (ﾟｰﾟ)+=(ﾟΘﾟ); (ﾟДﾟ)[ﾟεﾟ]='\\'; (ﾟДﾟ).ﾟΘﾟﾉ=(ﾟДﾟ+ ﾟｰﾟ)[o^_^o -(ﾟΘﾟ)];(oﾟｰﾟo)=(ﾟωﾟﾉ +'_')[c^_^o];(ﾟДﾟ) [ﾟoﾟ]='\"';(ﾟДﾟ) ['_'] ( (ﾟДﾟ) ['_'] (ﾟεﾟ+/*´∇｀*/(ﾟДﾟ)[ﾟoﾟ]+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+((o^_^o) +(o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+(o^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+(o^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+(c^_^o)+(ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (o^_^o))+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+(c^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+((ﾟｰﾟ) + (o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+(ﾟΘﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+(o^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+(ﾟΘﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟｰﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+(ﾟｰﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+(ﾟΘﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(o^_^o)+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+((o^_^o) +(o^_^o))+(ﾟΘﾟ)+(ﾟДﾟ)[ﾟεﾟ]+((o^_^o) +(o^_^o))+((o^_^o) +(o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+(ﾟｰﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+((ﾟｰﾟ) + (o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (o^_^o))+(c^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟΘﾟ)+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (o^_^o))+(c^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟΘﾟ)+(o^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+(o^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) - (ﾟΘﾟ))+((o^_^o) +(o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+((o^_^o) +(o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+(c^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(o^_^o)+(ﾟΘﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+((ﾟｰﾟ) + (o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+((o^_^o) +(o^_^o))+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+(ﾟｰﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+(ﾟΘﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+(c^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) - (ﾟΘﾟ))+((o^_^o) +(o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+(o^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+(ﾟｰﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(o^_^o)+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (o^_^o))+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+((ﾟｰﾟ) + (o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+(o^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+(ﾟΘﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (o^_^o))+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) - (ﾟΘﾟ))+((o^_^o) +(o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(o^_^o)+(ﾟΘﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+((o^_^o) +(o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟΘﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+((ﾟｰﾟ) + (o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (o^_^o))+(o^_^o)+(ﾟДﾟ)[ﾟoﾟ]) (ﾟΘﾟ)) ('_');;vid = 'https://cdn-4.haku99.com/hls/2019/03/18/xhN2QJZA/playlist.m3u8';key = 'dcbcdf9145061c0b10adfcad91f4e54a';time = '1564551550';k1= $("#k").val();k2= $("#k").val(k1);k3= $("#k").val(k2);k4= $("#k").val(k3);k5= $("#k").val(k4);k6= $("#k").val(k5);
-eval(function(p,a,c,k,e,r){e=function(c){return c.toString(36)};if('0'.replace(0,e)==0){while(c--)r[e(c)]=k[c];k=[function(e){return r[e]||e}];e=function(){return'[a-hjlmo-u]'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('a p=[\'0\',\'1\',\'2\',\'3\',\'4\',\'5\',\'6\',\'7\',\'8\',\'9\'];function b(n){a f="";for(a i=0;i<n;i++){a q=r.ceil(r.random()*9);f+=p[q]}return f}c=b(g);a k=$("#k").h(c);d=b(g);a k=$("#k").h(d);e=b(g);a k=$("#k").h(e);s=j(l.m+c+d+o+\'s\');t=j(l.m+c+e+o+\'t\');u=j(l.m+d+e+o+\'u\');',[],31,'||||||||||var|generateMixed|k1|k2|k3|res|20|val||md5||document|domain||time|chars|id|Math|k4|k5|k6'.split('|'),0,{}))
-url = 'api.php?url='+vid+'&time='+time+'&md5='+key+'&k1='+k1+'&k2='+k2+'&k3='+k3+'&k4='+k4+'&k5='+k5+'&k6='+k6; 
-var isiPad = navigator.userAgent.match(/iPad|iPhone|Android|Linux|iPod/i) != null;
-function player() {
-    if (isiPad) {
-        var form = '1'
-    } else {
-        var form = '0'
-    }
-    $.post(url, {
-        'url': 'https://cdn-4.haku99.com/hls/2019/03/18/xhN2QJZA/playlist.m3u8',
-        'referer': '',
-        'ref': form,
-        'time': time,
-        'md5': key,
-        'type': 'auto',
-        'cip': '85.203.47.220',
-        'ua': navigator.userAgent,
-        'fuck': fuck,
-        'sign': $('#hdMd5').val(),
-    }, function(data) {
-        if (data.code == "200") {
-            if (data.play == 'url') {
-                $('#a1').html('<video src="'+data.url+'" controls="controls" autoplay="autoplay" preload="preload" poster="'+site_domaim+'loading_wap.gif" width="100%" height="100%" ></video>');
-                $('<div class="content" id="divBag" style="position: fixed;left: 0px;top: 0px;z-index: 1;background-color: rgba(0,0,0,0);"></div>').appendTo($('body'));
-                $('#divBag').on('click', function() {
-                    $('video').get(0).play();
-                    $(this).remove()
-                })
-            } else if (data.play == 'ajax') {
-                if (data.type == 'qiyi') {
-                    var url = data.url + '&vf=' + jgParser.iqiyi.cmd5x(data.url);
-                    $.ajax({
-                        url: '//cache.m.iqiyi.com' + url,
-                        dataType: 'html',
-                        success: function(json) {
-                            var json = eval("(" + json.substring(13) + ")");
-                            data.url = json.data.m3u;
-                            if (isiPad) {
-                                data.play = 'h5';
-                                ckplayer_(data)
-                            } else {
-                                data.play = 'h5mp4';
-                                dplayer_(data)
-                            }
-                        }
-                    })
-                } else if (data.type == 'iqiyi') {
-                    tmtsCallback = data.url.match(/callback=(\S*)/)[1];
-                    var url = data.url.match(/(\S*)&callback/)[1] + '&vf=' + jgParser.iqiyi.cmd5x(data.url);
-                    $.ajax({
-                        url: '//cache.video.iqiyi.com' + url,
-                        dataType: 'jsonp',
-                        jsonpCallback: tmtsCallback,
-                        cache: !0,
-                        success: function(json) {
-                            var k = 0;
-                            if (isiPad) {
-                                for (var i = 0; i < json.data.program.video.length; i++) {
-                                    if (json.data.program.video[i].url) {
-                                        k = i;
-                                        break
-                                    }
-                                }
-                                data.url = json.data.program.video[k].url.replace('https://', 'http://');
-                                data.play = 'h5';
-                                ckplayer_(data)
-                            } else {
-                                for (var i = 0; i < json.data.program.video.length; i++) {
-                                    if (json.data.program.video[i].mp4Url) {
-                                        k = i;
-                                        break
-                                    }
-                                }
-                                data.url = json.data.program.video[k].mp4Url.replace('https://', 'http://');
-                                data.play = 'h5mp4';
-                                dplayer_(data)
-                            }
-                        }
-                    })
-                }
-            } else if (data.play == 'iframe') {
-                $("#a1").html('<iframe frameborder=0  marginheight=0 marginwidth=0 scrolling=no src="' + data.url + '" width="100%" height="100%" allowfullscreen="true"></iframe>')
-            } else if (data.play == 'hls_p2p') {
-                    getScript('js/p2p.min.js',function(){
-                            var dp = new DPlayer({
-                            container: document.getElementById('a1'),
-                            autoplay: true,
-                            theme: '#FF0000',
-                            logo: 'http://player.jfrft.net/logo6.png',
-                            video: {
-                                url: data.url,
-                                type: 'customHls',
-                                pic: isiPad ? site_domaim+'loading_wap.gif': '',
-                                customType: {
-                                    'customHls': function (video, player) {
-                                            var hls = new Hls();
-                                            hls.loadSource(video.src);
-                                            hls.attachMedia(video);
-                                            var engine = new P2PEngine(hls,{
-                                                    maxBufSize: {
-                                                        'pc': 1024 * 1024 * 512,
-                                                        'mobile': 1024 * 1024 * 256
-                                                    }
-                                            });
-                                            engine.on('peerId', function(peerId) {
-                                                    $('.load').text('加载0MB 共享0MB 加速0MB');
-                                                    $('.peer').text('P2P已开启');
-                                                    $('.line').text('在线1NP');
-                                            });
-                                            engine.on('peers', function(peers) {
-                                                    $('.line').text('在线' + (peers.length + 1) + 'NP');
-                                                    $('.peer').text('P2P已开启');
-                                            });
-                                            engine.on('stats', function(data) {
-                                                    $('.load').text('加载' + (data.totalHTTPDownloaded / 1024).toFixed(2) + 'MB 共享' + (data.totalP2PUploaded / 1024).toFixed(2) + 'MB 加速' + (data.totalP2PDownloaded / 1024).toFixed(2) + 'MB');
-                                                    data.totalP2PDownloaded ? $('.peer').text('P2P加速中') : $('.peer').text('P2P已开启');
-                                            });
-                                    }
-                                }
-                            }, contextmenu: [{
-                                text: '',
-                                link: ''
-                            }]
-                        });
-                    });
-            } else if (isiPad || data.play == 'h5' || data.play == 'html5') {
-                $('#a1').html('<video src="'+data.url+'" controls="controls" autoplay="autoplay" preload="preload" poster="'+site_domaim+'loading_wap.gif" width="100%" height="100%" ></video>');
-            } else if (data.play == 'hls' || data.play == 'h5mp4') {
-                dplayer_(data)
-            } else {
-                ckplayer_(data)
-            }
-            $("#loading").hide();
-            $("#a1").show()
-        } else {
-            $("#loading").hide();
-            $("#a1").hide();
-            $("#error").show();
-            $("#error").html(data.msg)
-        }; if (data.code != '200') {
-            $("#a1").html('<iframe frameborder=0  marginheight=0 marginwidth=0 scrolling=no src="http://jx.itaoju.top/?url=https://cdn-4.haku99.com/hls/2019/03/18/xhN2QJZA/playlist.m3u8" width="100%" height="100%" allowfullscreen="true"></iframe>');
-            $("#error").hide();
-            $("#loading").hide();
-            $("#a1").show()
-        }
-    }, "json")
-}
-
-$(function(){
-    eval("\x24\x28\x27\x23\x68\x64\x4d\x64\x35\x27\x29\x2e\x76\x61\x6c\x28\x27\x61\x32\x33\x62\x39\x65\x61\x31\x63\x63\x31\x38\x66\x66\x31\x38\x38\x36\x36\x61\x34\x31\x61\x37\x61\x61\x63\x35\x39\x61\x38\x32\x27\x29\x3b");	var vid=GetQueryString('url');
-	vid = decodeURIComponent(vid);
-	var type=GetQueryString('type');
-	if(location.href.indexOf('alicdn')>0 && type==null){
-		type='alicdn';
-	}else if(location.href.indexOf('.m3u8')>0 && type==null){
-		type='hls';
-	}else if(location.href.indexOf('.mp4')>0 && type==null && location.href.indexOf('~')<0){
-		type='mp4';
-	}
-    if(location.href.indexOf('#')>0 && location.href.indexOf('bilibili')){
-		location.href = location.href.replace('#','_');
-	}else if(type=='mp4'){
-        $('#loading').hide();
-		$('#a1').show();
-      	if(isiPad){
-				$('#a1').html('<video src="'+vid+'" controls="controls" autoplay="autoplay" preload="preload" poster="'+site_domaim+'loading_wap.gif" width="100%" height="100%" ></video>');
-		}else{
-                var dp = new DPlayer({
-                    element: document.getElementById("a1"),
-                    autoplay: true,
-                    theme: '#FF0000',
-                    logo: 'http://player.jfrft.net/logo6.png',
-                    video: {
-                        url: vid,
-                        type: 'normal',
-                    }, contextmenu: [{
-                        text: '',
-                        link: ''
-                    }],
-                });
-        }
-    }else if(type=="hls" || type=="alicdn" || type=="m3u8"){
-      	$('#loading').hide();
-		$('#a1').show();
-		if (type=="alicdn" || type=='hls') {
-            if(isiPad){
-				$('#a1').html('<video src="'+vid+'" controls="controls" autoplay="autoplay" preload="preload" poster="'+site_domaim+'loading_wap.gif" width="100%" height="100%" ></video>');
-			}else{
-                getScript('js/p2p.min.js',function(){
-                        var dp = new DPlayer({
-                        container: document.getElementById('a1'),
-                        autoplay: true,
-                        theme: '#FF0000',
-                        logo: 'http://player.jfrft.net/logo6.png',
-                        video: {
-                            url: vid,
-                            type: 'customHls',
-                            pic: isiPad ? site_domaim+'loading_wap.gif': '',
-                            customType: {
-                                'customHls': function (video, player) {
-                                        var hls = new Hls();
-                                        hls.loadSource(video.src);
-                                        hls.attachMedia(video);
-                                        var engine = new P2PEngine(hls,{
-                                                maxBufSize: {
-                                                    'pc': 1024 * 1024 * 512,
-                                                    'mobile': 1024 * 1024 * 256
-                                                }
-                                        });
-                                        engine.on('peerId', function(peerId) {
-                                                $('.load').text('加载0MB 共享0MB 加速0MB');
-                                                $('.peer').text('P2P已开启');
-                                                $('.line').text('在线1NP');
-                                        });
-                                        engine.on('peers', function(peers) {
-                                                $('.line').text('在线' + (peers.length + 1) + 'NP');
-                                                $('.peer').text('P2P已开启');
-                                        });
-                                        engine.on('stats', function(data) {
-                                                $('.load').text('加载' + (data.totalHTTPDownloaded / 1024).toFixed(2) + 'MB 共享' + (data.totalP2PUploaded / 1024).toFixed(2) + 'MB 加速' + (data.totalP2PDownloaded / 1024).toFixed(2) + 'MB');
-                                                data.totalP2PDownloaded ? $('.peer').text('P2P加速中') : $('.peer').text('P2P已开启');
-                                        });
-                                }
-                            }
-                        }, contextmenu: [{
-                            text: '',
-                            link: ''
-                        }]
-                    });
-                });
-        	}
-        }else{
-			if(isiPad){
-				$('#a1').html('<video src="'+vid+'" controls="controls" autoplay="autoplay" preload="preload" poster="'+site_domaim+'loading_wap.gif" width="100%" height="100%" ></video>');
-			}else{
-                var flashvars = {
-                    f: 'http://player.jfrft.net/ckplayer/m3u8.swf',
-                    a: vid,
-                    c: 0,
-                    p: 1,
-                    s: 4,
-                    lv: 0
-                }
-				var params = {
-                    bgcolor: '#FFF',
-                    allowFullScreen: true,
-                    allowScriptAccess: 'always',
-                    wmode: 'transparent'
-                };
-                CKobject.embedSWF('http://player.jfrft.net/ckplayer/ckplayer.swf', 'a1', 'ckplayer_a1', '100%', '100%', flashvars, params)
-           }
-		}
-    }else{
-		player();
-	}
-});
-  
-function getScript(jsUrl,callback){var jQueryJS = document.createElement("script");jQueryJS.type = "text/javascript";jQueryJS.src = jsUrl;if (jQueryJS.addEventListener){jQueryJS.addEventListener('load',function(){callback()},false)}else if (jQueryJS.attachEvent){jQueryJS.attachEvent('onreadystatechange',function(){var target = window.event.srcElement;if (target.readyState == 'loaded'){callback()}})}document.getElementsByTagName("head")[0].appendChild(jQueryJS)}function playerstop(){var next =  location.href.toLowerCase().split('next=');if(next.length>1 && next[1].indexOf('http')==0){parent.location.href=next[1];}else if(next.length>1){alert(decodeURI(next[1]));}}function GetQueryString(name){var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");var r = window.location.search.substr(1).match(reg);if(r!=null)return  r[2];return null;}function getCookie(c_name){if (document.cookie.length>0){c_start=document.cookie.indexOf(c_name + "=");if (c_start!=-1){c_start=c_start + c_name.length+1;c_end=document.cookie.indexOf(";",c_start);if (c_end==-1) c_end=document.cookie.length;return unescape(document.cookie.substring(c_start,c_end));}}return "";}function getCkey(){let ckey;try{if($.isFunction(function h(){})){ckey = h(22);}}catch(e){}return ckey;}function ckplayer_(data){if (data.play == 'h5'){$('#a1').html('<video src="'+data.url+'" controls="controls" autoplay="autoplay" preload="preload" poster="'+site_domaim+'loading_wap.gif" width="100%" height="100%" ></video>');}else{if (data.play == 'm3u8'){var flashvars ={f:'http://player.jfrft.net/ckplayer/m3u8.swf',a:data.url,c:0,p:1,s:4,lv:0}}else{var flashvars ={f:data.url,c:0,s:2,p:1,b:1}}var params ={bgcolor:'#FFF',allowFullScreen:true,allowScriptAccess:'always',wmode:'transparent'};CKobject.embedSWF('http://player.jfrft.net/ckplayer/ckplayer.swf','a1','ckplayer_a1','100%','100%',flashvars,params)}}function dplayer_(data){var dp = new DPlayer({element:document.getElementById("a1"),autoplay:true,theme:'#FF0000',logo:'http://player.jfrft.net/logo6.png',video:{url:data.url,type:(data.play == 'h5mp4') ? 'normal':data.play,},contextmenu:[{text:'',link:''}],});}
-</script>
-</body>
-</html>
+#EXTM3U
+#EXT-X-VERSION:3
+#EXT-X-MEDIA-SEQUENCE:0
+#EXT-X-ALLOW-CACHE:YES
+#EXT-X-TARGETDURATION:11
+#EXTINF:5.922589,
+out000.ts
+#EXTINF:1.543211,
+out001.ts
+#EXTINF:4.587922,
+out002.ts
+#EXTINF:3.503511,
+out003.ts
+#EXTINF:3.920589,
+out004.ts
+#EXTINF:2.961289,
+https://stat.41pan.com/api/stats/hls/2019/03/18/xhN2QJZA/out005.ts
+#EXTINF:4.045711,
+out006.ts
+#EXTINF:3.294956,
+out007.ts
+#EXTINF:0.959300,
+out008.ts
+#EXTINF:0.959300,
+out009.ts
+#EXTINF:3.169833,
+out010.ts
+#EXTINF:3.503500,
+out011.ts
+#EXTINF:0.959289,
+out012.ts
+#EXTINF:5.964289,
+out013.ts
+#EXTINF:0.959300,
+out014.ts
+#EXTINF:1.793467,
+out015.ts
+#EXTINF:3.420078,
+out016.ts
+#EXTINF:3.294967,
+out017.ts
+#EXTINF:3.420089,
+out018.ts
+#EXTINF:3.712044,
+out019.ts
+#EXTINF:4.129122,
+out020.ts
+#EXTINF:1.001000,
+out021.ts
+#EXTINF:3.420089,
+out022.ts
+#EXTINF:4.587922,
+out023.ts
+#EXTINF:1.251256,
+out024.ts
+#EXTINF:3.503511,
+out025.ts
+#EXTINF:1.501511,
+out026.ts
+#EXTINF:3.044711,
+out027.ts
+#EXTINF:4.921589,
+out028.ts
+#EXTINF:1.501500,
+out029.ts
+#EXTINF:4.254244,
+out030.ts
+#EXTINF:1.126133,
+out031.ts
+#EXTINF:3.878878,
+out032.ts
+#EXTINF:3.086422,
+out033.ts
+#EXTINF:2.043711,
+out034.ts
+#EXTINF:3.670344,
+out035.ts
+#EXTINF:3.712044,
+out036.ts
+#EXTINF:2.377378,
+out037.ts
+#EXTINF:2.210544,
+out038.ts
+#EXTINF:3.503500,
+out039.ts
+#EXTINF:4.004000,
+out040.ts
+#EXTINF:2.544211,
+out041.ts
+#EXTINF:2.460800,
+out042.ts
+#EXTINF:2.669333,
+out043.ts
+#EXTINF:10.427078,
+out044.ts
+#EXTINF:10.427089,
+out045.ts
+#EXTINF:9.759744,
+out046.ts
+#EXTINF:3.003000,
+out047.ts
+#EXTINF:5.005000,
+out048.ts
+#EXTINF:5.672333,
+out049.ts
+#EXTINF:2.460800,
+out050.ts
+#EXTINF:2.043711,
+out051.ts
+#EXTINF:3.920589,
+out052.ts
+#EXTINF:6.256244,
+out053.ts
+#EXTINF:2.877878,
+out054.ts
+#EXTINF:3.461789,
+out055.ts
+#EXTINF:1.626633,
+out056.ts
+#EXTINF:4.421089,
+out057.ts
+#EXTINF:3.962289,
+out058.ts
+#EXTINF:4.212544,
+out059.ts
+#EXTINF:2.002000,
+out060.ts
+#EXTINF:2.502500,
+out061.ts
+#EXTINF:2.002000,
+out062.ts
+#EXTINF:3.503500,
+out063.ts
+#EXTINF:1.209544,
+out064.ts
+#EXTINF:2.669333,
+out065.ts
+#EXTINF:2.711044,
+out066.ts
+#EXTINF:1.042711,
+out067.ts
+#EXTINF:2.544211,
+out068.ts
+#EXTINF:2.961289,
+out069.ts
+#EXTINF:2.961300,
+out070.ts
+#EXTINF:3.628633,
+out071.ts
+#EXTINF:1.668333,
+out072.ts
+#EXTINF:3.128122,
+out073.ts
+#EXTINF:1.459789,
+out074.ts
+#EXTINF:1.918589,
+out075.ts
+#EXTINF:5.672333,
+out076.ts
+#EXTINF:5.880878,
+out077.ts
+#EXTINF:1.584922,
+out078.ts
+#EXTINF:1.501500,
+out079.ts
+#EXTINF:2.377378,
+out080.ts
+#EXTINF:3.378378,
+out081.ts
+#EXTINF:3.461800,
+out082.ts
+#EXTINF:2.293956,
+out083.ts
+#EXTINF:1.501500,
+out084.ts
+#EXTINF:2.419089,
+out085.ts
+#EXTINF:3.169844,
+out086.ts
+#EXTINF:5.380378,
+out087.ts
+#EXTINF:4.462800,
+out088.ts
+#EXTINF:1.668344,
+out089.ts
+#EXTINF:2.836178,
+out090.ts
+#EXTINF:5.714044,
+out091.ts
+#EXTINF:8.216544,
+out092.ts
+#EXTINF:1.501500,
+out093.ts
+#EXTINF:2.002000,
+out094.ts
+#EXTINF:2.585922,
+out095.ts
+#EXTINF:3.962300,
+out096.ts
+#EXTINF:1.751744,
+out097.ts
+#EXTINF:3.503500,
+out098.ts
+#EXTINF:3.378378,
+out099.ts
+#EXTINF:4.713044,
+out100.ts
+#EXTINF:1.835167,
+out101.ts
+#EXTINF:8.091411,
+out102.ts
+#EXTINF:2.544211,
+out103.ts
+#EXTINF:7.716044,
+out104.ts
+#EXTINF:4.254244,
+out105.ts
+#EXTINF:2.168833,
+out106.ts
+#EXTINF:5.005000,
+out107.ts
+#EXTINF:2.585922,
+out108.ts
+#EXTINF:5.588911,
+out109.ts
+#EXTINF:1.501500,
+out110.ts
+#EXTINF:2.335667,
+out111.ts
+#EXTINF:10.427089,
+out112.ts
+#EXTINF:5.755744,
+out113.ts
+#EXTINF:4.713044,
+out114.ts
+#EXTINF:2.711044,
+out115.ts
+#EXTINF:3.545211,
+out116.ts
+#EXTINF:2.002011,
+out117.ts
+#EXTINF:6.006011,
+out118.ts
+#EXTINF:4.754756,
+out119.ts
+#EXTINF:2.335667,
+out120.ts
+#EXTINF:4.337667,
+out121.ts
+#EXTINF:1.543211,
+out122.ts
+#EXTINF:1.042711,
+out123.ts
+#EXTINF:3.420089,
+out124.ts
+#EXTINF:3.128122,
+out125.ts
+#EXTINF:3.795467,
+out126.ts
+#EXTINF:1.876878,
+out127.ts
+#EXTINF:1.084422,
+out128.ts
+#EXTINF:4.254244,
+out129.ts
+#EXTINF:2.210544,
+out130.ts
+#EXTINF:4.713044,
+out131.ts
+#EXTINF:3.336667,
+out132.ts
+#EXTINF:3.003000,
+out133.ts
+#EXTINF:2.711044,
+out134.ts
+#EXTINF:1.251256,
+out135.ts
+#EXTINF:3.795456,
+out136.ts
+#EXTINF:1.835167,
+out137.ts
+#EXTINF:3.003000,
+out138.ts
+#EXTINF:3.586922,
+out139.ts
+#EXTINF:2.877878,
+out140.ts
+#EXTINF:2.919589,
+out141.ts
+#EXTINF:1.626622,
+out142.ts
+#EXTINF:5.171833,
+out143.ts
+#EXTINF:2.502500,
+out144.ts
+#EXTINF:3.503500,
+out145.ts
+#EXTINF:1.543211,
+out146.ts
+#EXTINF:1.960289,
+out147.ts
+#EXTINF:4.879878,
+out148.ts
+#EXTINF:2.293956,
+out149.ts
+#EXTINF:1.459800,
+out150.ts
+#EXTINF:2.919589,
+out151.ts
+#EXTINF:1.960289,
+out152.ts
+#EXTINF:2.544211,
+out153.ts
+#EXTINF:2.127122,
+out154.ts
+#EXTINF:4.212544,
+out155.ts
+#EXTINF:2.961289,
+out156.ts
+#EXTINF:1.918589,
+out157.ts
+#EXTINF:3.211544,
+out158.ts
+#EXTINF:6.297967,
+out159.ts
+#EXTINF:5.588911,
+out160.ts
+#EXTINF:3.670333,
+out161.ts
+#EXTINF:1.668333,
+out162.ts
+#EXTINF:2.585922,
+out163.ts
+#EXTINF:1.251244,
+out164.ts
+#EXTINF:1.960300,
+out165.ts
+#EXTINF:2.877878,
+out166.ts
+#EXTINF:3.003000,
+out167.ts
+#EXTINF:2.460800,
+out168.ts
+#EXTINF:2.085422,
+out169.ts
+#EXTINF:3.169833,
+out170.ts
+#EXTINF:2.127122,
+out171.ts
+#EXTINF:2.085422,
+out172.ts
+#EXTINF:1.960289,
+out173.ts
+#EXTINF:7.465789,
+out174.ts
+#EXTINF:8.550211,
+out175.ts
+#EXTINF:4.129122,
+out176.ts
+#EXTINF:1.501500,
+out177.ts
+#EXTINF:1.126133,
+out178.ts
+#EXTINF:2.669344,
+out179.ts
+#EXTINF:3.503511,
+out180.ts
+#EXTINF:2.460800,
+out181.ts
+#EXTINF:3.211544,
+out182.ts
+#EXTINF:4.921589,
+out183.ts
+#EXTINF:2.460789,
+out184.ts
+#EXTINF:1.376378,
+out185.ts
+#EXTINF:1.543211,
+out186.ts
+#EXTINF:2.961289,
+out187.ts
+#EXTINF:6.297956,
+out188.ts
+#EXTINF:9.801467,
+out189.ts
+#EXTINF:5.797467,
+out190.ts
+#EXTINF:2.502500,
+out191.ts
+#EXTINF:2.002000,
+out192.ts
+#EXTINF:5.839167,
+out193.ts
+#EXTINF:2.127122,
+out194.ts
+#EXTINF:2.711044,
+out195.ts
+#EXTINF:1.668333,
+out196.ts
+#EXTINF:1.209544,
+out197.ts
+#EXTINF:1.710044,
+out198.ts
+#EXTINF:0.959300,
+out199.ts
+#EXTINF:1.126133,
+out200.ts
+#EXTINF:2.502500,
+out201.ts
+#EXTINF:1.084411,
+out202.ts
+#EXTINF:3.211544,
+out203.ts
+#EXTINF:1.459789,
+out204.ts
+#EXTINF:1.126133,
+out205.ts
+#EXTINF:1.501511,
+out206.ts
+#EXTINF:1.334678,
+out207.ts
+#EXTINF:1.251256,
+out208.ts
+#EXTINF:0.959289,
+out209.ts
+#EXTINF:1.001000,
+out210.ts
+#EXTINF:1.376378,
+out211.ts
+#EXTINF:1.042711,
+out212.ts
+#EXTINF:1.292956,
+out213.ts
+#EXTINF:1.001000,
+out214.ts
+#EXTINF:2.043711,
+out215.ts
+#EXTINF:2.836167,
+out216.ts
+#EXTINF:9.551211,
+out217.ts
+#EXTINF:4.212544,
+out218.ts
+#EXTINF:4.713044,
+out219.ts
+#EXTINF:3.253256,
+out220.ts
+#EXTINF:3.420089,
+out221.ts
+#EXTINF:4.713044,
+out222.ts
+#EXTINF:7.757744,
+out223.ts
+#EXTINF:8.717044,
+out224.ts
+#EXTINF:3.795456,
+out225.ts
+#EXTINF:9.676333,
+out226.ts
+#EXTINF:2.669333,
+out227.ts
+#EXTINF:10.427089,
+out228.ts
+#EXTINF:9.884878,
+out229.ts
+#EXTINF:4.212544,
+out230.ts
+#EXTINF:9.676333,
+out231.ts
+#EXTINF:2.919589,
+out232.ts
+#EXTINF:9.092411,
+out233.ts
+#EXTINF:4.963300,
+out234.ts
+#EXTINF:2.836178,
+out235.ts
+#EXTINF:4.629633,
+out236.ts
+#EXTINF:8.758744,
+out237.ts
+#EXTINF:2.669333,
+out238.ts
+#EXTINF:0.959300,
+out239.ts
+#EXTINF:1.584922,
+out240.ts
+#EXTINF:10.427089,
+out241.ts
+#EXTINF:10.427089,
+out242.ts
+#EXTINF:1.918589,
+out243.ts
+#EXTINF:2.961300,
+out244.ts
+#EXTINF:3.003000,
+out245.ts
+#EXTINF:10.427078,
+out246.ts
+#EXTINF:4.129133,
+out247.ts
+#EXTINF:3.461800,
+out248.ts
+#EXTINF:9.551211,
+out249.ts
+#EXTINF:3.920589,
+out250.ts
+#EXTINF:1.501500,
+out251.ts
+#EXTINF:6.715044,
+out252.ts
+#EXTINF:2.002000,
+out253.ts
+#EXTINF:9.843167,
+out254.ts
+#EXTINF:10.427078,
+out255.ts
+#EXTINF:4.421089,
+out256.ts
+#EXTINF:6.756744,
+out257.ts
+#EXTINF:4.087422,
+out258.ts
+#EXTINF:3.545211,
+out259.ts
+#EXTINF:10.427089,
+out260.ts
+#EXTINF:10.427089,
+out261.ts
+#EXTINF:3.086422,
+out262.ts
+#EXTINF:4.754756,
+out263.ts
+#EXTINF:5.839178,
+out264.ts
+#EXTINF:6.089422,
+out265.ts
+#EXTINF:3.253256,
+out266.ts
+#EXTINF:10.427089,
+out267.ts
+#EXTINF:4.713044,
+out268.ts
+#EXTINF:6.965289,
+out269.ts
+#EXTINF:10.427089,
+out270.ts
+#EXTINF:5.714044,
+out271.ts
+#EXTINF:6.881878,
+out272.ts
+#EXTINF:9.009000,
+out273.ts
+#EXTINF:10.427089,
+out274.ts
+#EXTINF:9.592922,
+out275.ts
+#EXTINF:2.502500,
+out276.ts
+#EXTINF:5.005000,
+out277.ts
+#EXTINF:7.257256,
+out278.ts
+#EXTINF:4.754756,
+out279.ts
+#EXTINF:5.755756,
+out280.ts
+#EXTINF:4.421089,
+out281.ts
+#EXTINF:4.587922,
+out282.ts
+#EXTINF:4.045711,
+out283.ts
+#EXTINF:3.003000,
+out284.ts
+#EXTINF:3.795467,
+out285.ts
+#EXTINF:6.047711,
+out286.ts
+#EXTINF:3.586922,
+out287.ts
+#EXTINF:4.004000,
+out288.ts
+#EXTINF:9.676333,
+out289.ts
+#EXTINF:10.427078,
+out290.ts
+#EXTINF:7.090422,
+out291.ts
+#EXTINF:6.965289,
+out292.ts
+#EXTINF:2.002000,
+out293.ts
+#EXTINF:3.003000,
+out294.ts
+#EXTINF:6.381378,
+out295.ts
+#EXTINF:0.959289,
+out296.ts
+#EXTINF:4.713044,
+out297.ts
+#EXTINF:8.425078,
+out298.ts
+#EXTINF:3.503500,
+out299.ts
+#EXTINF:5.213544,
+out300.ts
+#EXTINF:6.006000,
+out301.ts
+#EXTINF:2.502500,
+out302.ts
+#EXTINF:5.964289,
+out303.ts
+#EXTINF:7.549211,
+out304.ts
+#EXTINF:3.211544,
+out305.ts
+#EXTINF:2.419078,
+out306.ts
+#EXTINF:3.795467,
+out307.ts
+#EXTINF:5.422089,
+out308.ts
+#EXTINF:5.547211,
+out309.ts
+#EXTINF:1.918578,
+out310.ts
+#EXTINF:6.256256,
+out311.ts
+#EXTINF:6.965289,
+out312.ts
+#EXTINF:2.377378,
+out313.ts
+#EXTINF:5.005000,
+out314.ts
+#EXTINF:4.004000,
+out315.ts
+#EXTINF:2.168833,
+out316.ts
+#EXTINF:2.168833,
+out317.ts
+#EXTINF:2.002000,
+out318.ts
+#EXTINF:1.960289,
+out319.ts
+#EXTINF:2.502500,
+out320.ts
+#EXTINF:7.507500,
+out321.ts
+#EXTINF:9.300956,
+out322.ts
+#EXTINF:10.427089,
+out323.ts
+#EXTINF:2.335667,
+out324.ts
+#EXTINF:2.502500,
+out325.ts
+#EXTINF:1.459789,
+out326.ts
+#EXTINF:2.961289,
+out327.ts
+#EXTINF:5.171833,
+out328.ts
+#EXTINF:3.336667,
+out329.ts
+#EXTINF:3.003000,
+out330.ts
+#EXTINF:2.836167,
+out331.ts
+#EXTINF:1.668333,
+out332.ts
+#EXTINF:2.085422,
+out333.ts
+#EXTINF:3.586911,
+out334.ts
+#EXTINF:6.256256,
+out335.ts
+#EXTINF:2.252244,
+out336.ts
+#EXTINF:10.427089,
+out337.ts
+#EXTINF:2.085411,
+out338.ts
+#EXTINF:4.713044,
+out339.ts
+#EXTINF:6.923589,
+out340.ts
+#EXTINF:3.044711,
+out341.ts
+#EXTINF:6.715044,
+out342.ts
+#EXTINF:7.090422,
+out343.ts
+#EXTINF:7.382378,
+out344.ts
+#EXTINF:4.838167,
+out345.ts
+#EXTINF:6.923589,
+out346.ts
+#EXTINF:7.382378,
+out347.ts
+#EXTINF:1.292967,
+out348.ts
+#EXTINF:10.427078,
+out349.ts
+#EXTINF:5.422089,
+out350.ts
+#EXTINF:5.839167,
+out351.ts
+#EXTINF:5.088411,
+out352.ts
+#EXTINF:3.253256,
+https://stat.41pan.com/api/stats2/hls/2019/03/18/xhN2QJZA/out353.ts
+#EXTINF:3.628622,
+out354.ts
+#EXTINF:1.084422,
+out355.ts
+#EXTINF:3.169844,
+out356.ts
+#EXTINF:10.427089,
+out357.ts
+#EXTINF:0.333667,
+out358.ts
+#EXT-X-ENDLIST
