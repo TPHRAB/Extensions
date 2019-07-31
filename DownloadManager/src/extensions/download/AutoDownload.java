@@ -1,10 +1,9 @@
 package extensions.download;
 
-import org.dom4j.Node;
+import org.dom4j.Element;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import java.io.File;
-import java.io.PipedWriter;
 import java.net.URL;
 import java.util.List;
 import java.util.Scanner;
@@ -23,72 +22,91 @@ public class AutoDownload {
         // get url and output path
         Scanner console = new Scanner(System.in);
         System.out.print("Please input the video url: ");
-        String url = console.nextLine();
+        String url = "http://www.dilidili.name/watch3/14697/";
         System.out.print("Pleae input the path for generating video(s): ");
-        String path = console.nextLine();
+        String path = "/Users/zhaochenze/Desktop/raw";
 
         org.dom4j.Document xml = Dom4jUtil.getDocument("websites.xml");
-        String XPath = "/methods/m3u8/host[@id='" + new URL(url).getHost() + "']";
-        Node orange = xml.selectNodes(XPath).get(0);
-        if(orange.getText().equals("orange")) {
-            orange(url);
+        String XPath = "/config/methods/host[@id='" + new URL(url).getHost() + "']";
+        Element host = (Element) xml.selectSingleNode(XPath);
+        // 要得到父节点判断是哪个方法
+        if(host.attributeValue("method").equals("m3u8Append")) {
+            m3u8Appended(url, new File(path), host);
         }
-        File dir = new File("/Users/zhaochenze/Desktop/raw/");
-        DownloadManager.downloadTSFileList("https://cdn-5.haku99.com/hls/2019/04/22/AZTlkq9B/out000.ts",
-                "https://cdn-5.haku99.com/hls/2019/04/22/AZTlkq9B/out019.ts", dir, 1);
+
     }
 
-    public static void orange(String l) throws Exception {
+    public static void m3u8Appended(String l, File dir, Element host) throws Exception {
         Document doc = Jsoup.connect(l.toString()).get();
 
-        // get first m3u8
-        String link = doc.getElementsByTag("source").get(0).attributes().get("src");
-        File out1 = new File(DEFAULT_OUTPUT_PATH + link.substring(link.lastIndexOf('/') + 1));
-        out1.createNewFile();
+        // read selected "host" in xml to get the first m3u8 file
+        String link = doc.getElementsByTag(host.element("tag").getTextTrim())
+                .get(Integer.parseInt(host.element("index").getTextTrim()))
+                .attributes()
+                .get(host.element("attribute").getTextTrim());
+        link = link.substring(link.lastIndexOf("http"));
+        File out = new File("./tmp1.m3u8");
+        out.createNewFile();
         URL url = new URL(link);
         ProgressBar pb = new ProgressBar("Download", DownloadManager.getURLFileLength(url));
         pb.start();
-        DownloadManager.doDownloadSingleFile(url, out1, 1, pb.getPipedWriter());
+        DownloadManager.doDownloadSingleFile(url, out, 1, pb.getPipedWriter());
         pb.join();
 
-        // get second m3u8
-        Scanner read = new Scanner(out1);
-        String file = null;
-        while (read.hasNextLine()) {
-            file = read.nextLine();
+        if (host.attributeValue("trace").equals("true")) {
+            // get second m3u8
+            Scanner read = new Scanner(out);
+            String file = null;
+            while (read.hasNextLine()) {
+                file = read.nextLine();
+            }
+            link = link.substring(0, link.lastIndexOf('/') + 1) + file;
+            File out2 = new File("./tmp2.m3u8");
+            out2.createNewFile();
+            url = new URL(link);
+            pb = new ProgressBar("Download", DownloadManager.getURLFileLength(url));
+            pb.start();
+            DownloadManager.doDownloadSingleFile(url, out2, 1, pb.getPipedWriter());
+            pb.join();
+            // set "out" to be "out2"
+            out.delete();
+            out = out2;
         }
-        link = link.substring(0, link.lastIndexOf('/') + 1) + file;
-        File out2 = new File("C:\\Users\\Timmy\\Desktop\\result.m3u8");
-        out2.createNewFile();
-        url = new URL(link);
-        pb = new ProgressBar("Download", DownloadManager.getURLFileLength(url));
-        pb.start();
-        DownloadManager.doDownloadSingleFile(url, out2, 1, pb.getPipedWriter());
-        pb.join();
 
         // download ts files
-        List<String> list = getOrangeList(link, out2, 1, null);
-        File outputPath = new File("C:\\Users\\Timmy\\Desktop\\raw");
+        List<String> list = getAppendedList(link, out, 1, null);
         int threads = 10;
         if (list.size() / threads == 0) {
             throw new IllegalArgumentException("list.size() / threads == 0!");
         }
-        DownloadManager.downloadTSFileList(list, outputPath, 10);
+        DownloadManager.downloadTSFileList(list, dir, 10);
+
+        // delete tmp files
+        // out.delete();
     }
 
-    public static List<String> getOrangeList(String link, File m3u8, int threadNum,
+    public static List<String> getAppendedList(String link, File m3u8, int threadNum,
                                        String from) throws Exception {
         Scanner read = new Scanner(m3u8);
         List<String> list = new ArrayList<String>();
         boolean startCombine = (from == null);
+
+        int count = 0;
+
         while (read.hasNextLine()) {
             String line = read.nextLine();
             if (line.equals(from)) {
                 startCombine = true;
             }
             if (startCombine && line.charAt(0) != '#') {
-                list.add(link.substring(0, link.lastIndexOf('/') + 1) + line);
+                if (line.indexOf("http") == -1) {
+                    list.add(link.substring(0, link.lastIndexOf('/') + 1) + line);
+                } else {
+                    list.add(line);
+                }
             }
+
+
         }
         return list;
     }

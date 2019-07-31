@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="referrer" content="never">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/> 
+<meta name="renderer" content="webkit"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>嘀哩嘀哩，这里是兴趣使然的无名小站（D站）_dilidili</title>
+<style type="text/css">body,html,.content{background-color:black;padding:0;margin:0;width:100%;height:100%;color:#999;}.divs{width:100%;height:auto;position:fixed;left:0;top:0;z-index:999}.total{position:absolute;top:0;left:0;color:#fff;font-size:10px;padding:10px}.total span{margin-right:3px}</style>
+<script src="https://cdn.staticfile.org/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript">window.jQuery || document.write('<script type="text/javascript" src="js/jquery.min.js"><\/script>')</script>
+<script type="text/javascript" src="http://player.jfrft.net/ckplayer/ckplayer2.js"></script>
+<script src="https://cdn.staticfile.org/hls.js/8.0.0-beta.3/hls.min.js"></script>
+<link href="https://cdn.staticfile.org/dplayer/1.25.0/DPlayer.min.css" rel="stylesheet">
+<script src="js/DPlayer.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/blueimp-md5/2.10.0/js/md5.min.js"></script>
+</head>
+<body style="overflow-y:hidden;">
+<div id="loading" align="center"><strong><br><br><br><br><br><span class="tips">服务器正在解析中,请稍等....<font class="timemsg">0</font>s</span></strong><span class="timeout" style="display:none;color:#f90;">解析响应超时，请刷新重试！</span></div>
+<input type="hidden" id="k" value="c49d018649d46a13f70cac9fbf29c7e">
+<input type="hidden" id="hdMd5" value="EFBFCB31D5BACE6BB5793A529254424E" />
+<div id="a1" class="content" style="display:none;"></div>
+<div class="total">
+   <span class="peer"></span>
+   <span class="load"></span>
+   <span class="line"></span>
+</div>
+<div id="error" class="content" style="display:none;font-weight:bold;padding-top:90px;" align="center"></div>
+<script type="text/javascript">  
+function tipstime(count){$('.timemsg').text(count);if (count == 20){$('.tips').hide();$('.timeout').show()}else{count += 1;setTimeout(function(){tipstime(count)},1000)}}tipstime(0);site_domaim = function(){var path = window.location.pathname;if (path.indexOf(".") > -1){var i = path.lastIndexOf("/");var path = path.substring(0,i + 1)}return path}();console.log("请勿盗用本解析，谢谢合作/*(*^__^*)*/"+"ﾟωﾟﾉ= /｀ｍ´）ﾉ ~┻━┻   //*´∇｀*/ ['_']; o=(ﾟｰﾟ)  =_=3; c=(ﾟΘﾟ) =(ﾟｰﾟ)-(ﾟｰﾟ); (ﾟДﾟ) =(ﾟΘﾟ)= (o^_^o)/ (o^_^o);(ﾟДﾟ)={ﾟΘﾟ: '_' ,ﾟωﾟﾉ : ((ﾟωﾟﾉ==3) +'_') [ﾟΘﾟ] ,ﾟｰﾟﾉ :(ﾟωﾟﾉ+ '_')[o^_^o -(ﾟΘﾟ)] ,ﾟДﾟﾉ:((ﾟｰﾟ==3) +'_')[ﾟｰﾟ] }; (ﾟДﾟ) [ﾟΘﾟ] =((ﾟωﾟﾉ==3) +'_') [c^_^o];(ﾟДﾟ) ['c'] = ((ﾟДﾟ)+'_') [ (ﾟｰﾟ)+(ﾟｰﾟ)-(ﾟΘﾟ) ];(ﾟДﾟ) ['o'] = ((ﾟДﾟ)+'_') [ﾟΘﾟ];(ﾟoﾟ)=(ﾟДﾟ) ['c']+(ﾟДﾟ) ['o']+(ﾟωﾟﾉ +'_')[ﾟΘﾟ]+ ((ﾟωﾟﾉ==3) +'_') [ﾟｰﾟ] + ((ﾟДﾟ) +'_') [(ﾟｰﾟ)+(ﾟｰﾟ)]+ ((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+((ﾟｰﾟ==3) +'_') [(ﾟｰﾟ) - (ﾟΘﾟ)]+(ﾟДﾟ) ['c']+((ﾟДﾟ)+'_') [(ﾟｰﾟ)+(ﾟｰﾟ)]+ (ﾟДﾟ) ['o']+((ﾟｰﾟ==3) +'_') [ﾟΘﾟ];(ﾟДﾟ) ['_'] =(o^_^o) [ﾟoﾟ] [ﾟoﾟ];(ﾟεﾟ)=((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+ (ﾟДﾟ) .ﾟДﾟﾉ+((ﾟДﾟ)+'_') [(ﾟｰﾟ) + (ﾟｰﾟ)]+((ﾟｰﾟ==3) +'_') [o^_^o -ﾟΘﾟ]+((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+ (ﾟωﾟﾉ +'_') [ﾟΘﾟ]; (ﾟｰﾟ)+=(ﾟΘﾟ); (ﾟДﾟ)[ﾟεﾟ]='\\'; (ﾟДﾟ).ﾟΘﾟﾉ=(ﾟДﾟ+ ﾟｰﾟ)[o^_^o -(ﾟΘﾟ)];(oﾟｰﾟo)=(ﾟωﾟﾉ +'_')[c^_^o];(ﾟДﾟ) [ﾟoﾟ]='\"';(ﾟДﾟ) ['_'] ( (ﾟДﾟ) ['_'] (ﾟεﾟ+/*´∇｀*/(ﾟДﾟ)[ﾟoﾟ]+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+((o^_^o) +(o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+(o^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+(o^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+(c^_^o)+(ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (o^_^o))+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+(c^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+((ﾟｰﾟ) + (o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+(ﾟΘﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+(o^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+(ﾟΘﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟｰﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+(ﾟｰﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+(ﾟΘﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(o^_^o)+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+((o^_^o) +(o^_^o))+(ﾟΘﾟ)+(ﾟДﾟ)[ﾟεﾟ]+((o^_^o) +(o^_^o))+((o^_^o) +(o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+(ﾟｰﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+((ﾟｰﾟ) + (o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (o^_^o))+(c^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟΘﾟ)+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (o^_^o))+(c^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟΘﾟ)+(o^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+(o^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) - (ﾟΘﾟ))+((o^_^o) +(o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+((o^_^o) +(o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+(c^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(o^_^o)+(ﾟΘﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+((ﾟｰﾟ) + (o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+((o^_^o) +(o^_^o))+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+(ﾟｰﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+(ﾟΘﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+(c^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) - (ﾟΘﾟ))+((o^_^o) +(o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+(o^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+(ﾟｰﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(o^_^o)+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (o^_^o))+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+((ﾟｰﾟ) + (o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+(o^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+(ﾟΘﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (o^_^o))+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) - (ﾟΘﾟ))+((o^_^o) +(o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(o^_^o)+(ﾟΘﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+((o^_^o) +(o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟΘﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+((ﾟｰﾟ) + (o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (o^_^o))+(o^_^o)+(ﾟДﾟ)[ﾟoﾟ]) (ﾟΘﾟ)) ('_');");console.clear();ﾟωﾟﾉ= /｀ｍ´）ﾉ ~┻━┻   //*´∇｀*/ ['_']; o=(ﾟｰﾟ)  =_=3; c=(ﾟΘﾟ) =(ﾟｰﾟ)-(ﾟｰﾟ); (ﾟДﾟ) =(ﾟΘﾟ)= (o^_^o)/ (o^_^o);(ﾟДﾟ)={ﾟΘﾟ: '_' ,ﾟωﾟﾉ : ((ﾟωﾟﾉ==3) +'_') [ﾟΘﾟ] ,ﾟｰﾟﾉ :(ﾟωﾟﾉ+ '_')[o^_^o -(ﾟΘﾟ)] ,ﾟДﾟﾉ:((ﾟｰﾟ==3) +'_')[ﾟｰﾟ] }; (ﾟДﾟ) [ﾟΘﾟ] =((ﾟωﾟﾉ==3) +'_') [c^_^o];(ﾟДﾟ) ['c'] = ((ﾟДﾟ)+'_') [ (ﾟｰﾟ)+(ﾟｰﾟ)-(ﾟΘﾟ) ];(ﾟДﾟ) ['o'] = ((ﾟДﾟ)+'_') [ﾟΘﾟ];(ﾟoﾟ)=(ﾟДﾟ) ['c']+(ﾟДﾟ) ['o']+(ﾟωﾟﾉ +'_')[ﾟΘﾟ]+ ((ﾟωﾟﾉ==3) +'_') [ﾟｰﾟ] + ((ﾟДﾟ) +'_') [(ﾟｰﾟ)+(ﾟｰﾟ)]+ ((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+((ﾟｰﾟ==3) +'_') [(ﾟｰﾟ) - (ﾟΘﾟ)]+(ﾟДﾟ) ['c']+((ﾟДﾟ)+'_') [(ﾟｰﾟ)+(ﾟｰﾟ)]+ (ﾟДﾟ) ['o']+((ﾟｰﾟ==3) +'_') [ﾟΘﾟ];(ﾟДﾟ) ['_'] =(o^_^o) [ﾟoﾟ] [ﾟoﾟ];(ﾟεﾟ)=((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+ (ﾟДﾟ) .ﾟДﾟﾉ+((ﾟДﾟ)+'_') [(ﾟｰﾟ) + (ﾟｰﾟ)]+((ﾟｰﾟ==3) +'_') [o^_^o -ﾟΘﾟ]+((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+ (ﾟωﾟﾉ +'_') [ﾟΘﾟ]; (ﾟｰﾟ)+=(ﾟΘﾟ); (ﾟДﾟ)[ﾟεﾟ]='\\'; (ﾟДﾟ).ﾟΘﾟﾉ=(ﾟДﾟ+ ﾟｰﾟ)[o^_^o -(ﾟΘﾟ)];(oﾟｰﾟo)=(ﾟωﾟﾉ +'_')[c^_^o];(ﾟДﾟ) [ﾟoﾟ]='\"';(ﾟДﾟ) ['_'] ( (ﾟДﾟ) ['_'] (ﾟεﾟ+/*´∇｀*/(ﾟДﾟ)[ﾟoﾟ]+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+((o^_^o) +(o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+(o^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+(o^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+(c^_^o)+(ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (o^_^o))+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+(c^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+((ﾟｰﾟ) + (o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+(ﾟΘﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+(o^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+(ﾟΘﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟｰﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+(ﾟｰﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+(ﾟΘﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(o^_^o)+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+((o^_^o) +(o^_^o))+(ﾟΘﾟ)+(ﾟДﾟ)[ﾟεﾟ]+((o^_^o) +(o^_^o))+((o^_^o) +(o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+(ﾟｰﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+((ﾟｰﾟ) + (o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (o^_^o))+(c^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟΘﾟ)+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (o^_^o))+(c^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟΘﾟ)+(o^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+(o^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) - (ﾟΘﾟ))+((o^_^o) +(o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+((o^_^o) +(o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+(c^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(o^_^o)+(ﾟΘﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+((ﾟｰﾟ) + (o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+((o^_^o) +(o^_^o))+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+(ﾟｰﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+(ﾟΘﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+(c^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) - (ﾟΘﾟ))+((o^_^o) +(o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+(o^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+(ﾟｰﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(o^_^o)+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (o^_^o))+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+((ﾟｰﾟ) + (o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(c^_^o)+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+(o^_^o)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+(ﾟΘﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (o^_^o))+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) - (ﾟΘﾟ))+((o^_^o) +(o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(o^_^o)+(ﾟΘﾟ)+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+((o^_^o) - (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟｰﾟ)+((o^_^o) +(o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+(ﾟΘﾟ)+((ﾟｰﾟ) + (ﾟΘﾟ))+(ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+((ﾟｰﾟ) + (o^_^o))+(ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (o^_^o))+(o^_^o)+(ﾟДﾟ)[ﾟoﾟ]) (ﾟΘﾟ)) ('_');;vid = 'https://cdn-4.haku99.com/hls/2019/03/18/xhN2QJZA/playlist.m3u8';key = 'dcbcdf9145061c0b10adfcad91f4e54a';time = '1564551550';k1= $("#k").val();k2= $("#k").val(k1);k3= $("#k").val(k2);k4= $("#k").val(k3);k5= $("#k").val(k4);k6= $("#k").val(k5);
+eval(function(p,a,c,k,e,r){e=function(c){return c.toString(36)};if('0'.replace(0,e)==0){while(c--)r[e(c)]=k[c];k=[function(e){return r[e]||e}];e=function(){return'[a-hjlmo-u]'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('a p=[\'0\',\'1\',\'2\',\'3\',\'4\',\'5\',\'6\',\'7\',\'8\',\'9\'];function b(n){a f="";for(a i=0;i<n;i++){a q=r.ceil(r.random()*9);f+=p[q]}return f}c=b(g);a k=$("#k").h(c);d=b(g);a k=$("#k").h(d);e=b(g);a k=$("#k").h(e);s=j(l.m+c+d+o+\'s\');t=j(l.m+c+e+o+\'t\');u=j(l.m+d+e+o+\'u\');',[],31,'||||||||||var|generateMixed|k1|k2|k3|res|20|val||md5||document|domain||time|chars|id|Math|k4|k5|k6'.split('|'),0,{}))
+url = 'api.php?url='+vid+'&time='+time+'&md5='+key+'&k1='+k1+'&k2='+k2+'&k3='+k3+'&k4='+k4+'&k5='+k5+'&k6='+k6; 
+var isiPad = navigator.userAgent.match(/iPad|iPhone|Android|Linux|iPod/i) != null;
+function player() {
+    if (isiPad) {
+        var form = '1'
+    } else {
+        var form = '0'
+    }
+    $.post(url, {
+        'url': 'https://cdn-4.haku99.com/hls/2019/03/18/xhN2QJZA/playlist.m3u8',
+        'referer': '',
+        'ref': form,
+        'time': time,
+        'md5': key,
+        'type': 'auto',
+        'cip': '85.203.47.220',
+        'ua': navigator.userAgent,
+        'fuck': fuck,
+        'sign': $('#hdMd5').val(),
+    }, function(data) {
+        if (data.code == "200") {
+            if (data.play == 'url') {
+                $('#a1').html('<video src="'+data.url+'" controls="controls" autoplay="autoplay" preload="preload" poster="'+site_domaim+'loading_wap.gif" width="100%" height="100%" ></video>');
+                $('<div class="content" id="divBag" style="position: fixed;left: 0px;top: 0px;z-index: 1;background-color: rgba(0,0,0,0);"></div>').appendTo($('body'));
+                $('#divBag').on('click', function() {
+                    $('video').get(0).play();
+                    $(this).remove()
+                })
+            } else if (data.play == 'ajax') {
+                if (data.type == 'qiyi') {
+                    var url = data.url + '&vf=' + jgParser.iqiyi.cmd5x(data.url);
+                    $.ajax({
+                        url: '//cache.m.iqiyi.com' + url,
+                        dataType: 'html',
+                        success: function(json) {
+                            var json = eval("(" + json.substring(13) + ")");
+                            data.url = json.data.m3u;
+                            if (isiPad) {
+                                data.play = 'h5';
+                                ckplayer_(data)
+                            } else {
+                                data.play = 'h5mp4';
+                                dplayer_(data)
+                            }
+                        }
+                    })
+                } else if (data.type == 'iqiyi') {
+                    tmtsCallback = data.url.match(/callback=(\S*)/)[1];
+                    var url = data.url.match(/(\S*)&callback/)[1] + '&vf=' + jgParser.iqiyi.cmd5x(data.url);
+                    $.ajax({
+                        url: '//cache.video.iqiyi.com' + url,
+                        dataType: 'jsonp',
+                        jsonpCallback: tmtsCallback,
+                        cache: !0,
+                        success: function(json) {
+                            var k = 0;
+                            if (isiPad) {
+                                for (var i = 0; i < json.data.program.video.length; i++) {
+                                    if (json.data.program.video[i].url) {
+                                        k = i;
+                                        break
+                                    }
+                                }
+                                data.url = json.data.program.video[k].url.replace('https://', 'http://');
+                                data.play = 'h5';
+                                ckplayer_(data)
+                            } else {
+                                for (var i = 0; i < json.data.program.video.length; i++) {
+                                    if (json.data.program.video[i].mp4Url) {
+                                        k = i;
+                                        break
+                                    }
+                                }
+                                data.url = json.data.program.video[k].mp4Url.replace('https://', 'http://');
+                                data.play = 'h5mp4';
+                                dplayer_(data)
+                            }
+                        }
+                    })
+                }
+            } else if (data.play == 'iframe') {
+                $("#a1").html('<iframe frameborder=0  marginheight=0 marginwidth=0 scrolling=no src="' + data.url + '" width="100%" height="100%" allowfullscreen="true"></iframe>')
+            } else if (data.play == 'hls_p2p') {
+                    getScript('js/p2p.min.js',function(){
+                            var dp = new DPlayer({
+                            container: document.getElementById('a1'),
+                            autoplay: true,
+                            theme: '#FF0000',
+                            logo: 'http://player.jfrft.net/logo6.png',
+                            video: {
+                                url: data.url,
+                                type: 'customHls',
+                                pic: isiPad ? site_domaim+'loading_wap.gif': '',
+                                customType: {
+                                    'customHls': function (video, player) {
+                                            var hls = new Hls();
+                                            hls.loadSource(video.src);
+                                            hls.attachMedia(video);
+                                            var engine = new P2PEngine(hls,{
+                                                    maxBufSize: {
+                                                        'pc': 1024 * 1024 * 512,
+                                                        'mobile': 1024 * 1024 * 256
+                                                    }
+                                            });
+                                            engine.on('peerId', function(peerId) {
+                                                    $('.load').text('加载0MB 共享0MB 加速0MB');
+                                                    $('.peer').text('P2P已开启');
+                                                    $('.line').text('在线1NP');
+                                            });
+                                            engine.on('peers', function(peers) {
+                                                    $('.line').text('在线' + (peers.length + 1) + 'NP');
+                                                    $('.peer').text('P2P已开启');
+                                            });
+                                            engine.on('stats', function(data) {
+                                                    $('.load').text('加载' + (data.totalHTTPDownloaded / 1024).toFixed(2) + 'MB 共享' + (data.totalP2PUploaded / 1024).toFixed(2) + 'MB 加速' + (data.totalP2PDownloaded / 1024).toFixed(2) + 'MB');
+                                                    data.totalP2PDownloaded ? $('.peer').text('P2P加速中') : $('.peer').text('P2P已开启');
+                                            });
+                                    }
+                                }
+                            }, contextmenu: [{
+                                text: '',
+                                link: ''
+                            }]
+                        });
+                    });
+            } else if (isiPad || data.play == 'h5' || data.play == 'html5') {
+                $('#a1').html('<video src="'+data.url+'" controls="controls" autoplay="autoplay" preload="preload" poster="'+site_domaim+'loading_wap.gif" width="100%" height="100%" ></video>');
+            } else if (data.play == 'hls' || data.play == 'h5mp4') {
+                dplayer_(data)
+            } else {
+                ckplayer_(data)
+            }
+            $("#loading").hide();
+            $("#a1").show()
+        } else {
+            $("#loading").hide();
+            $("#a1").hide();
+            $("#error").show();
+            $("#error").html(data.msg)
+        }; if (data.code != '200') {
+            $("#a1").html('<iframe frameborder=0  marginheight=0 marginwidth=0 scrolling=no src="http://jx.itaoju.top/?url=https://cdn-4.haku99.com/hls/2019/03/18/xhN2QJZA/playlist.m3u8" width="100%" height="100%" allowfullscreen="true"></iframe>');
+            $("#error").hide();
+            $("#loading").hide();
+            $("#a1").show()
+        }
+    }, "json")
+}
+
+$(function(){
+    eval("\x24\x28\x27\x23\x68\x64\x4d\x64\x35\x27\x29\x2e\x76\x61\x6c\x28\x27\x61\x32\x33\x62\x39\x65\x61\x31\x63\x63\x31\x38\x66\x66\x31\x38\x38\x36\x36\x61\x34\x31\x61\x37\x61\x61\x63\x35\x39\x61\x38\x32\x27\x29\x3b");	var vid=GetQueryString('url');
+	vid = decodeURIComponent(vid);
+	var type=GetQueryString('type');
+	if(location.href.indexOf('alicdn')>0 && type==null){
+		type='alicdn';
+	}else if(location.href.indexOf('.m3u8')>0 && type==null){
+		type='hls';
+	}else if(location.href.indexOf('.mp4')>0 && type==null && location.href.indexOf('~')<0){
+		type='mp4';
+	}
+    if(location.href.indexOf('#')>0 && location.href.indexOf('bilibili')){
+		location.href = location.href.replace('#','_');
+	}else if(type=='mp4'){
+        $('#loading').hide();
+		$('#a1').show();
+      	if(isiPad){
+				$('#a1').html('<video src="'+vid+'" controls="controls" autoplay="autoplay" preload="preload" poster="'+site_domaim+'loading_wap.gif" width="100%" height="100%" ></video>');
+		}else{
+                var dp = new DPlayer({
+                    element: document.getElementById("a1"),
+                    autoplay: true,
+                    theme: '#FF0000',
+                    logo: 'http://player.jfrft.net/logo6.png',
+                    video: {
+                        url: vid,
+                        type: 'normal',
+                    }, contextmenu: [{
+                        text: '',
+                        link: ''
+                    }],
+                });
+        }
+    }else if(type=="hls" || type=="alicdn" || type=="m3u8"){
+      	$('#loading').hide();
+		$('#a1').show();
+		if (type=="alicdn" || type=='hls') {
+            if(isiPad){
+				$('#a1').html('<video src="'+vid+'" controls="controls" autoplay="autoplay" preload="preload" poster="'+site_domaim+'loading_wap.gif" width="100%" height="100%" ></video>');
+			}else{
+                getScript('js/p2p.min.js',function(){
+                        var dp = new DPlayer({
+                        container: document.getElementById('a1'),
+                        autoplay: true,
+                        theme: '#FF0000',
+                        logo: 'http://player.jfrft.net/logo6.png',
+                        video: {
+                            url: vid,
+                            type: 'customHls',
+                            pic: isiPad ? site_domaim+'loading_wap.gif': '',
+                            customType: {
+                                'customHls': function (video, player) {
+                                        var hls = new Hls();
+                                        hls.loadSource(video.src);
+                                        hls.attachMedia(video);
+                                        var engine = new P2PEngine(hls,{
+                                                maxBufSize: {
+                                                    'pc': 1024 * 1024 * 512,
+                                                    'mobile': 1024 * 1024 * 256
+                                                }
+                                        });
+                                        engine.on('peerId', function(peerId) {
+                                                $('.load').text('加载0MB 共享0MB 加速0MB');
+                                                $('.peer').text('P2P已开启');
+                                                $('.line').text('在线1NP');
+                                        });
+                                        engine.on('peers', function(peers) {
+                                                $('.line').text('在线' + (peers.length + 1) + 'NP');
+                                                $('.peer').text('P2P已开启');
+                                        });
+                                        engine.on('stats', function(data) {
+                                                $('.load').text('加载' + (data.totalHTTPDownloaded / 1024).toFixed(2) + 'MB 共享' + (data.totalP2PUploaded / 1024).toFixed(2) + 'MB 加速' + (data.totalP2PDownloaded / 1024).toFixed(2) + 'MB');
+                                                data.totalP2PDownloaded ? $('.peer').text('P2P加速中') : $('.peer').text('P2P已开启');
+                                        });
+                                }
+                            }
+                        }, contextmenu: [{
+                            text: '',
+                            link: ''
+                        }]
+                    });
+                });
+        	}
+        }else{
+			if(isiPad){
+				$('#a1').html('<video src="'+vid+'" controls="controls" autoplay="autoplay" preload="preload" poster="'+site_domaim+'loading_wap.gif" width="100%" height="100%" ></video>');
+			}else{
+                var flashvars = {
+                    f: 'http://player.jfrft.net/ckplayer/m3u8.swf',
+                    a: vid,
+                    c: 0,
+                    p: 1,
+                    s: 4,
+                    lv: 0
+                }
+				var params = {
+                    bgcolor: '#FFF',
+                    allowFullScreen: true,
+                    allowScriptAccess: 'always',
+                    wmode: 'transparent'
+                };
+                CKobject.embedSWF('http://player.jfrft.net/ckplayer/ckplayer.swf', 'a1', 'ckplayer_a1', '100%', '100%', flashvars, params)
+           }
+		}
+    }else{
+		player();
+	}
+});
+  
+function getScript(jsUrl,callback){var jQueryJS = document.createElement("script");jQueryJS.type = "text/javascript";jQueryJS.src = jsUrl;if (jQueryJS.addEventListener){jQueryJS.addEventListener('load',function(){callback()},false)}else if (jQueryJS.attachEvent){jQueryJS.attachEvent('onreadystatechange',function(){var target = window.event.srcElement;if (target.readyState == 'loaded'){callback()}})}document.getElementsByTagName("head")[0].appendChild(jQueryJS)}function playerstop(){var next =  location.href.toLowerCase().split('next=');if(next.length>1 && next[1].indexOf('http')==0){parent.location.href=next[1];}else if(next.length>1){alert(decodeURI(next[1]));}}function GetQueryString(name){var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");var r = window.location.search.substr(1).match(reg);if(r!=null)return  r[2];return null;}function getCookie(c_name){if (document.cookie.length>0){c_start=document.cookie.indexOf(c_name + "=");if (c_start!=-1){c_start=c_start + c_name.length+1;c_end=document.cookie.indexOf(";",c_start);if (c_end==-1) c_end=document.cookie.length;return unescape(document.cookie.substring(c_start,c_end));}}return "";}function getCkey(){let ckey;try{if($.isFunction(function h(){})){ckey = h(22);}}catch(e){}return ckey;}function ckplayer_(data){if (data.play == 'h5'){$('#a1').html('<video src="'+data.url+'" controls="controls" autoplay="autoplay" preload="preload" poster="'+site_domaim+'loading_wap.gif" width="100%" height="100%" ></video>');}else{if (data.play == 'm3u8'){var flashvars ={f:'http://player.jfrft.net/ckplayer/m3u8.swf',a:data.url,c:0,p:1,s:4,lv:0}}else{var flashvars ={f:data.url,c:0,s:2,p:1,b:1}}var params ={bgcolor:'#FFF',allowFullScreen:true,allowScriptAccess:'always',wmode:'transparent'};CKobject.embedSWF('http://player.jfrft.net/ckplayer/ckplayer.swf','a1','ckplayer_a1','100%','100%',flashvars,params)}}function dplayer_(data){var dp = new DPlayer({element:document.getElementById("a1"),autoplay:true,theme:'#FF0000',logo:'http://player.jfrft.net/logo6.png',video:{url:data.url,type:(data.play == 'h5mp4') ? 'normal':data.play,},contextmenu:[{text:'',link:''}],});}
+</script>
+</body>
+</html>
