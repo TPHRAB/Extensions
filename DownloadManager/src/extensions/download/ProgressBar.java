@@ -8,11 +8,11 @@ public class ProgressBar {
     private PipedReader pR;
     private PipedWriter pW;
 
-    public ProgressBar(String taskName, long totalBytes) throws Exception {
+    public ProgressBar(String taskName, long total, String unit, int num, String threadNum) throws Exception {
         this.pR = new PipedReader();
         this.pW = new PipedWriter();
         this.pR.connect(pW);
-        this.pb = new ProgressBarThread(pR, taskName, totalBytes);
+        this.pb = new ProgressBarThread(pR, taskName, total, unit, num, threadNum);
     }
 
     public PipedWriter getPipedWriter() {

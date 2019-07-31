@@ -13,7 +13,5 @@
                 <attribute>src</attribute>
             </host>
     </methods>
-    <history>
-        <path>./</path>
-    </history>
+    <history record="true" path="./history.txt"/>
 </config>

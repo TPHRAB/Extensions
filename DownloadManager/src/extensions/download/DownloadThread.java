@@ -43,8 +43,8 @@ public class DownloadThread implements Runnable {
 			int count = 0;
 			while ((count = in.read(buffer)) != -1) {
 				out.write(buffer, 0, count);
-				pW.write(count);
 			}
+			pW.write(1);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

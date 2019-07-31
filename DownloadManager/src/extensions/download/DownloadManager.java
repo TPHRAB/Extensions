@@ -1,5 +1,8 @@
 package extensions.download;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
 import java.io.File;
 import java.io.PipedWriter;
 import java.net.HttpURLConnection;
@@ -37,23 +40,24 @@ public class DownloadManager {
         downloadTSFileList(list, dir, threads);
     }
 
-    public static void downloadTSFileList(List<String> list, File dir, int threads) throws Exception {
+    public static void downloadTSFileList(List<String> list, File dir, int threadNum) throws Exception {
         if (!dir.exists()) {
             dir.mkdir();
         }
-        int num = list.size() / threads;
-        if (list.size() % threads != 0) {
-            threads++;
+        int num = list.size() / threadNum;
+        if (list.size() % threadNum != 0) {
+            threadNum++;
         }
         int start = 0;
         List<MultithreadDownloadList> threadsPool = new ArrayList<MultithreadDownloadList>();
-        ProgressBar pb = new ProgressBar("Download", DownloadManager.getListFilesLength(list));
+        ProgressBar pb = new ProgressBar("Download", list.size(), "files", 1,
+                Integer.toString(threadNum));
         pb.start();
         // start all threads
-        for (int i = 0; i < threads; i++) {
+        for (int i = 0; i < threadNum; i++) {
             int end = start + num - 1;
             // hahahaha
-            end = i == threads - 1 ? list.size() - 1 : end;
+            end = i == threadNum - 1 ? list.size() - 1 : end;
             MultithreadDownloadList t = new MultithreadDownloadList(list, start, end, dir, pb.getPipedWriter());
             threadsPool.add(t);
             t.start();
@@ -72,8 +76,8 @@ public class DownloadManager {
             dir.mkdir();
         }
 
-        for (String link : list) {
-            URL url = new URL(link);
+        for (int i = first; i <= last; i++) {
+            URL url = new URL(list.get(i));
             File out = new File(dir.getAbsoluteFile() + getURLFileName(url));
             doDownloadSingleFile(url, out, 1, pW);
         }
@@ -107,12 +111,17 @@ public class DownloadManager {
         return url.getFile().substring(url.getFile().lastIndexOf('/'));
     }
 
+    public static String getURLTitle(String link) throws Exception {
+        Document doc = Jsoup.connect(link).get();
+        return doc.title();
+    }
+
     // post : return the URL file's length
     public static long getURLFileLength(URL url) throws Exception {
         long contentLength = -1;
         try {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setConnectTimeout(100);
+            connection.setConnectTimeout(2000);
             connection.setRequestMethod("HEAD");
             if (connection.getResponseCode() == 200) {
                 contentLength = connection.getContentLength();

@@ -4,7 +4,9 @@ import org.dom4j.Element;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import java.io.File;
+import java.io.RandomAccessFile;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -22,18 +24,38 @@ public class AutoDownload {
         // get url and output path
         Scanner console = new Scanner(System.in);
         System.out.print("Please input the video url: ");
-        String url = "http://www.dilidili.name/watch3/14697/";
+        String url = console.nextLine();
         System.out.print("Pleae input the path for generating video(s): ");
-        String path = "/Users/zhaochenze/Desktop/raw";
+        File out = new File(console.nextLine());
 
         org.dom4j.Document xml = Dom4jUtil.getDocument("websites.xml");
         String XPath = "/config/methods/host[@id='" + new URL(url).getHost() + "']";
         Element host = (Element) xml.selectSingleNode(XPath);
+
         // 要得到父节点判断是哪个方法
         if(host.attributeValue("method").equals("m3u8Append")) {
-            m3u8Appended(url, new File(path), host);
+            m3u8Appended(url, out, host);
         }
 
+        // delete tmp file
+        out.delete();
+
+        // write history
+        boolean recordHistory = ((Element) xml.selectSingleNode("/config/history"))
+                .attributeValue("record")
+                .equals("true");
+        if (recordHistory) {
+            String path = ((Element) xml.selectSingleNode("/config/history")).attributeValue("path");
+            File history = new File(path);
+            if (!history.exists()) {
+                history.createNewFile();
+            }
+            RandomAccessFile r = new RandomAccessFile(path, "rwd");
+            r.seek(history.length());
+            r.writeChars(new Date() + "    " + url + "    " + DownloadManager.getURLTitle(url));
+            r.close();
+        }
+        console.close();
     }
 
     public static void m3u8Appended(String l, File dir, Element host) throws Exception {
@@ -48,7 +70,8 @@ public class AutoDownload {
         File out = new File("./tmp1.m3u8");
         out.createNewFile();
         URL url = new URL(link);
-        ProgressBar pb = new ProgressBar("Download", DownloadManager.getURLFileLength(url));
+        ProgressBar pb = new ProgressBar("Download", DownloadManager.getURLFileLength(url), "Bytes",
+                1, "1");
         pb.start();
         DownloadManager.doDownloadSingleFile(url, out, 1, pb.getPipedWriter());
         pb.join();
@@ -64,7 +87,7 @@ public class AutoDownload {
             File out2 = new File("./tmp2.m3u8");
             out2.createNewFile();
             url = new URL(link);
-            pb = new ProgressBar("Download", DownloadManager.getURLFileLength(url));
+            pb = new ProgressBar("Download", DownloadManager.getURLFileLength(url), "Bytes", 1, "1");
             pb.start();
             DownloadManager.doDownloadSingleFile(url, out2, 1, pb.getPipedWriter());
             pb.join();
@@ -74,19 +97,15 @@ public class AutoDownload {
         }
 
         // download ts files
-        List<String> list = getAppendedList(link, out, 1, null);
+        List<String> list = getAppendedList(link, out, null);
         int threads = 10;
         if (list.size() / threads == 0) {
             throw new IllegalArgumentException("list.size() / threads == 0!");
         }
         DownloadManager.downloadTSFileList(list, dir, 10);
-
-        // delete tmp files
-        // out.delete();
     }
 
-    public static List<String> getAppendedList(String link, File m3u8, int threadNum,
-                                       String from) throws Exception {
+    public static List<String> getAppendedList(String link, File m3u8, String from) throws Exception {
         Scanner read = new Scanner(m3u8);
         List<String> list = new ArrayList<String>();
         boolean startCombine = (from == null);

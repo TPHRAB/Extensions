@@ -90,7 +90,8 @@ public class TestThread {
 					forward2 = true;
 				}
 				if (forward2) {
-					ProgressBar pb = new ProgressBar("Downloading", DownloadManager.getURLFileLength(url));
+					ProgressBar pb = new ProgressBar("Downloading", DownloadManager.getURLFileLength(url),
+							"Bytes", 1, "10");
 					pb.start();
 					doDownloadSingleFile(url, out, 10, pb.getPipedWriter());
 					pb.join();
