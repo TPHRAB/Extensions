@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
     <methods>
-        <m3u8>
-            <host id="https://jzavzy.com">orange</host>
-            <host id="https://avgle.com">avgle</host>
-            <host id="http://www.dilidili.name/">dilidili</host>
-        </m3u8>
+            <host id="jzavzy.com" method="m3u8Append" trace="true">
+                <tag>source</tag>
+                <index>0</index>
+                <attribute>src</attribute>
+            </host>
+            <host id="avgle.com" method="handInput"></host>
+            <host id="www.dilidili.name" method="m3u8Append" trace="false">
+                <tag>iframe</tag>
+                <index>0</index>
+                <attribute>src</attribute>
+            </host>
     </methods>
     <history>
         <path>./</path>
