@@ -21,7 +21,6 @@ public class DownloadThread implements Runnable {
 	
 	public DownloadThread(BufferedInputStream in, File out, int start, PipedWriter pW) throws Exception {
 		this.in = in;
-		out.createNewFile();
 		this.out = new RandomAccessFile(out, "rws");
 		this.out.seek(start);
 		this.pW = pW;

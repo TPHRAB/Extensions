@@ -23,7 +23,10 @@ public class Download {
 		if (threadNum < 1) {
 			throw new IllegalArgumentException("thread number should be at least 1!");
 		}
-		out.createNewFile();
+
+		if (!out.exists()) {
+			throw new IllegalArgumentException("output file not initialized!");
+		}
 
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 		connection = (HttpURLConnection) url.openConnection();

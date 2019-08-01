@@ -140,7 +140,7 @@ public class TestThread {
 	}
 
 	// wait for threads to die
-	private static void waitThreads(List<Copy> threads) throws Exception {
+	public static void waitThreads(List<Copy> threads) throws Exception {
 		System.out.println("waiting for saving...");
 		for (Copy c : threads) {
 			c.join();

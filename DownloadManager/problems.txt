@@ -9,3 +9,5 @@ Copy
 	- 设置默认合并路径
 
 - 管道
+- prohub
+    videoURL 在javascript标签内

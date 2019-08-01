@@ -1,0 +1,1 @@
+ffmpeg.exe -i %1 -vcodec h264 %2

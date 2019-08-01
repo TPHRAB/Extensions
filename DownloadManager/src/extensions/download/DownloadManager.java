@@ -17,13 +17,14 @@ public class DownloadManager {
 
     // post : download the file from the url and output it to "out"
     public static void doDownloadSingleFile(URL url, File out, int threadNum, PipedWriter pW) throws Exception {
+        out.createNewFile();
         Download threads = new Download(url, out, threadNum, pW);
         threads.start();
         threads.join();
     }
 
     // post : donwload ts files from "first" to "last" and output them to dir
-    public static void downloadTSFileList(String first, String last, File dir, int threads) throws Exception {
+    public static void downloadTSFileList(String first, String last, File dir, int threadNum) throws Exception {
         if (!dir.exists()) {
             dir.mkdir();
         }
@@ -37,7 +38,16 @@ public class DownloadManager {
             String var = addZeros(difference.length() - String.valueOf(i).length()) + i;
             list.add(part1 + var + part2);
         }
-        downloadTSFileList(list, dir, threads);
+        downloadTSFileList(list, dir, threadNum);
+    }
+
+    public static void downloadTSFileListCustom(String part1, String part2, int start, int end, File dir,
+                                                int threads) throws Exception {
+        List<String> list = new ArrayList<String>();
+        for (int i = start; i <= end; i++) {
+            list.add(part1 + i + part2);
+        }
+        downloadTSFileList(list, dir, 10);
     }
 
     public static void downloadTSFileList(List<String> list, File dir, int threadNum) throws Exception {
@@ -79,6 +89,7 @@ public class DownloadManager {
         for (int i = first; i <= last; i++) {
             URL url = new URL(list.get(i));
             File out = new File(dir.getAbsoluteFile() + getURLFileName(url));
+            out.createNewFile();
             doDownloadSingleFile(url, out, 1, pW);
         }
     }
@@ -121,7 +132,7 @@ public class DownloadManager {
         long contentLength = -1;
         try {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setConnectTimeout(2000);
+            connection.setConnectTimeout(20000);
             connection.setRequestMethod("HEAD");
             if (connection.getResponseCode() == 200) {
                 contentLength = connection.getContentLength();

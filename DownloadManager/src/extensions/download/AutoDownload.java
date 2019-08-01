@@ -35,10 +35,29 @@ public class AutoDownload {
         // 要得到父节点判断是哪个方法
         if(host.attributeValue("method").equals("m3u8Append")) {
             m3u8Appended(url, out, host);
+            System.out.print("Please input the path for combination: ");
+            String path = console.nextLine();
+            path = path + DownloadManager.getURLTitle(url) + ".ts";
+            extensions.copy.TestThread.waitThreads(
+                    extensions.copy.TestThread.doCombine(out.listFiles(),
+                            new File(path)));
+            String p1 = "\"" + path + "\"" ;
+            String p2 = "\"" + path.substring(0, path.length() - 3) + ".mp4" + "\"";
+            String system = ((Element) xml.selectSingleNode("/config/convert")).attributeValue("system").toLowerCase();
+            String script = xml.selectSingleNode("/config/convert/" + system).getText();
+            String command = "cmd.exe /c start " + script + " " + p1 + " " + p2;
+            Runtime.getRuntime().exec(command);
+        } else {
+            System.out.print("Please input the first common part of the sequence url: ");
+            String part1 = console.nextLine().trim();
+            System.out.print("Please input the second part of the common url: ");
+            String part2 = console.nextLine().trim();
+            System.out.print("Please input the starting index: ");
+            int start = Integer.parseInt(console.nextLine());
+            System.out.print("Please input the ending index: ");
+            int end = Integer.parseInt(console.nextLine());
+            DownloadManager.downloadTSFileListCustom(part1, part2, start, end, out,1);
         }
-
-        // delete tmp file
-        out.delete();
 
         // write history
         boolean recordHistory = ((Element) xml.selectSingleNode("/config/history"))
@@ -52,14 +71,14 @@ public class AutoDownload {
             }
             RandomAccessFile r = new RandomAccessFile(path, "rwd");
             r.seek(history.length());
-            r.writeChars(new Date() + "    " + url + "    " + DownloadManager.getURLTitle(url));
+            r.writeChars(new Date() + "    " + url + "    " + DownloadManager.getURLTitle(url) + "\r\n");
             r.close();
         }
         console.close();
     }
 
     public static void m3u8Appended(String l, File dir, Element host) throws Exception {
-        Document doc = Jsoup.connect(l.toString()).get();
+        Document doc = Jsoup.connect(l).get();
 
         // read selected "host" in xml to get the first m3u8 file
         String link = doc.getElementsByTag(host.element("tag").getTextTrim())
@@ -68,9 +87,8 @@ public class AutoDownload {
                 .get(host.element("attribute").getTextTrim());
         link = link.substring(link.lastIndexOf("http"));
         File out = new File("./tmp1.m3u8");
-        out.createNewFile();
         URL url = new URL(link);
-        ProgressBar pb = new ProgressBar("Download", DownloadManager.getURLFileLength(url), "Bytes",
+        ProgressBar pb = new ProgressBar("Download", 1, "Threads",
                 1, "1");
         pb.start();
         DownloadManager.doDownloadSingleFile(url, out, 1, pb.getPipedWriter());
@@ -85,9 +103,8 @@ public class AutoDownload {
             }
             link = link.substring(0, link.lastIndexOf('/') + 1) + file;
             File out2 = new File("./tmp2.m3u8");
-            out2.createNewFile();
             url = new URL(link);
-            pb = new ProgressBar("Download", DownloadManager.getURLFileLength(url), "Bytes", 1, "1");
+            pb = new ProgressBar("Download", 1, "Threads", 1, "1");
             pb.start();
             DownloadManager.doDownloadSingleFile(url, out2, 1, pb.getPipedWriter());
             pb.join();
@@ -103,6 +120,12 @@ public class AutoDownload {
             throw new IllegalArgumentException("list.size() / threads == 0!");
         }
         DownloadManager.downloadTSFileList(list, dir, 10);
+
+        for (File f : dir.listFiles()) {
+            if (f.length() == 0) {
+                f.delete();
+            }
+        }
     }
 
     public static List<String> getAppendedList(String link, File m3u8, String from) throws Exception {
