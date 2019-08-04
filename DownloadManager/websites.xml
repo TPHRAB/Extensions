@@ -14,8 +14,8 @@
             </host>
     </methods>
     <history record="true" path="./history.txt"/>
-    <convert system="windows">
+    <convert>
         <windows>convert.bat</windows>
-        <macos>conver.sh</macos>
+        <macos>convert.sh</macos>
     </convert>
 </config>

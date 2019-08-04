@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="dom4jExtension">
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/DownloadManager/lib/dom4jExtension.jar" />
+  </library>
+  <library name="dom4jExtension (2)">
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/DownloadManager/lib/dom4jExtension.jar" />
+  </library>
+  <library name="dom4j-2.1.1">
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/DownloadManager/lib/dom4j-2.1.1.jar" />
+  </library>
+  <library name="dom4j-2.1.1 (2)">
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/DownloadManager/lib/dom4j-2.1.1.jar" />
+  </library>
+  <library name="jaxen-1.1.6">
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/DownloadManager/lib/jaxen-1.1.6.jar" />
+  </library>
+  <library name="jaxen-1.1.6 (2)">
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/DownloadManager/lib/jaxen-1.1.6.jar" />
+  </library>
+  <library name="jline-3.12.2-SNAPSHOT">
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/DownloadManager/lib/jline-3.12.2-SNAPSHOT.jar" />
+  </library>
+  <library name="jline-3.12.2-SNAPSHOT (2)">
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/DownloadManager/lib/jline-3.12.2-SNAPSHOT.jar" />
+  </library>
+  <library name="jsoup-1.12.1">
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/DownloadManager/lib/jsoup-1.12.1.jar" />
+  </library>
+  <library name="jsoup-1.12.1-javadoc" />
+  <library name="jsoup-1.12.1-javadoc (2)" />
+  <library name="progressbar">
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/DownloadManager/lib/progressbar.jar" />
+  </library>
+  <library name="progressbar (2)">
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/DownloadManager/lib/progressbar.jar" />
+  </library>
+</eclipse-userlibraries>
+

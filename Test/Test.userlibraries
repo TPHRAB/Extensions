@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="commons-codec-1.11">
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/Test/lib/htmlunit_lib/commons-codec-1.11.jar" />
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/Test/lib/htmlunit_lib/commons-lang3-3.9.jar" />
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/Test/lib/htmlunit_lib/commons-io-2.6.jar" />
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/Test/lib/htmlunit_lib/commons-logging-1.2.jar" />
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/Test/lib/htmlunit_lib/commons-net-3.6.jar" />
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/Test/lib/htmlunit_lib/commons-text-1.6.jar" />
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/Test/lib/htmlunit_lib/htmlunit-core-js-2.35.0.jar" />
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/Test/lib/htmlunit_lib/htmlunit-2.35.0.jar" />
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/Test/lib/htmlunit_lib/htmlunit-cssparser-1.4.0.jar" />
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/Test/lib/htmlunit_lib/httpclient-4.5.8.jar" />
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/Test/lib/htmlunit_lib/httpcore-4.4.11.jar" />
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/Test/lib/htmlunit_lib/httpmime-4.5.8.jar" />
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/Test/lib/htmlunit_lib/jetty-client-9.4.16.v20190411.jar" />
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/Test/lib/htmlunit_lib/jetty-http-9.4.16.v20190411.jar" />
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/Test/lib/htmlunit_lib/jetty-io-9.4.16.v20190411.jar" />
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/Test/lib/htmlunit_lib/jetty-util-9.4.16.v20190411.jar" />
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/Test/lib/htmlunit_lib/jetty-xml-9.4.16.v20190411.jar" />
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/Test/lib/htmlunit_lib/neko-htmlunit-2.35.0.jar" />
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/Test/lib/htmlunit_lib/serializer-2.7.2.jar" />
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/Test/lib/htmlunit_lib/websocket-api-9.4.16.v20190411.jar" />
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/Test/lib/htmlunit_lib/websocket-client-9.4.16.v20190411.jar" />
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/Test/lib/htmlunit_lib/websocket-common-9.4.16.v20190411.jar" />
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/Test/lib/htmlunit_lib/xalan-2.7.2.jar" />
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/Test/lib/htmlunit_lib/xercesImpl-2.12.0.jar" />
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/Test/lib/htmlunit_lib/xml-apis-1.4.01.jar" />
+  </library>
+  <library name="copy" />
+  <library name="dom4jExtension">
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/Test/lib/dom4jExtension.jar" />
+  </library>
+  <library name="dom4j-2.1.1">
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/Test/lib/dom4j-2.1.1.jar" />
+  </library>
+  <library name="jaxen-1.1.6">
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/Test/lib/jaxen-1.1.6.jar" />
+  </library>
+  <library name="jline-3.12.2-SNAPSHOT">
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/Test/lib/jline-3.12.2-SNAPSHOT.jar" />
+  </library>
+  <library name="jsoup-1.12.1">
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/Test/lib/jsoup-1.12.1.jar" />
+  </library>
+  <library name="libs" />
+  <library name="progressbar">
+    <archive path="/Users/zhaochenze/Dropbox/intelliJ-workspace/Test/lib/progressbar.jar" />
+  </library>
+  <library name="selenium-java-3.141" />
+</eclipse-userlibraries>
+

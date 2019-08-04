@@ -137,13 +137,15 @@ public class DownloadManager {
             if (connection.getResponseCode() == 200) {
                 contentLength = connection.getContentLength();
             } else {
-                System.out.println(getBold("Error: " + url + "\t(" + connection.getResponseCode() + ")"));
+            	System.out.println(getBold("Error: " + url + "\t(" + connection.getResponseCode() + ")"));
+                throw new IllegalAccessException();
             }
         } catch (SocketTimeoutException e) {
             System.out.println(getBold("Time out: " + url));
         }
         return contentLength;
     }
+    
 
     private static long getListFilesLength(List<String> list) throws Exception {
         long totalBytes = 0;

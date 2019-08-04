@@ -87,6 +87,7 @@ public class TestThread {
 						console.nextLine(); // skip \n
 					}
 				} else {
+					out.createNewFile();
 					forward2 = true;
 				}
 				if (forward2) {

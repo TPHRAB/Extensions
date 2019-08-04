@@ -3,7 +3,11 @@ package extensions.download;
 import org.dom4j.Element;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+
+import java.util.regex.*;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.net.URL;
 import java.util.Date;
@@ -34,19 +38,45 @@ public class AutoDownload {
 
         // 要得到父节点判断是哪个方法
         if(host.attributeValue("method").equals("m3u8Append")) {
-            m3u8Appended(url, out, host);
+//            m3u8Appended(url, out, host);
             System.out.print("Please input the path for combination: ");
             String path = console.nextLine();
             path = path + DownloadManager.getURLTitle(url) + ".ts";
-            extensions.copy.TestThread.waitThreads(
-                    extensions.copy.TestThread.doCombine(out.listFiles(),
-                            new File(path)));
+//            extensions.copy.TestThread.waitThreads(
+//                    extensions.copy.TestThread.doCombine(out.listFiles(),
+//                            new File(path)));
+            // 初始化参数
             String p1 = "\"" + path + "\"" ;
             String p2 = "\"" + path.substring(0, path.length() - 3) + ".mp4" + "\"";
-            String system = ((Element) xml.selectSingleNode("/config/convert")).attributeValue("system").toLowerCase();
-            String script = xml.selectSingleNode("/config/convert/" + system).getText();
-            String command = "cmd.exe /c start " + script + " " + p1 + " " + p2;
-            Runtime.getRuntime().exec(command);
+            // 得到系统
+            String os = System.getProperty("os.name").toLowerCase();
+            String system = null;
+            String command = null;
+            boolean execution = true;
+            if (os.contains("mac")) {
+            	system = "macos";
+            	command = "./ffmpeg -i ";
+            } else if (os.contains("win")) {
+            	system="windows";
+            	command = "cmd.exe /c start ";
+            } else {
+            	execution = false;
+            	System.out.println("Not supported operating system! Please do the convertion by yourself!");
+            }
+            // run script
+            if (execution) {
+	            String script = xml.selectSingleNode("/config/convert/" + system).getText();
+	            // ProcessBuilder pb = new ProcessBuilder("./" + script, p1, p2);
+	            command = command + script + " " + p1 + " " + p2;
+	            Process process = Runtime.getRuntime().exec(command);
+	    		BufferedReader r = new BufferedReader(new InputStreamReader(process.getInputStream()));
+	    		String nextLine = r.readLine();
+	    		while(nextLine != null) {
+	    			System.out.println(nextLine);
+	    			nextLine = r.readLine();
+	    		}
+	    		process.waitFor();
+            }
         } else {
             System.out.print("Please input the first common part of the sequence url: ");
             String part1 = console.nextLine().trim();
@@ -75,6 +105,7 @@ public class AutoDownload {
             r.close();
         }
         console.close();
+        System.out.println("Finish...");
     }
 
     public static void m3u8Appended(String l, File dir, Element host) throws Exception {
@@ -86,8 +117,8 @@ public class AutoDownload {
                 .attributes()
                 .get(host.element("attribute").getTextTrim());
         link = link.substring(link.lastIndexOf("http"));
-        File out = new File("./tmp1.m3u8");
         URL url = new URL(link);
+        File out = new File("./" + DownloadManager.getURLFileName(url));
         ProgressBar pb = new ProgressBar("Download", 1, "Threads",
                 1, "1");
         pb.start();
@@ -102,8 +133,8 @@ public class AutoDownload {
                 file = read.nextLine();
             }
             link = link.substring(0, link.lastIndexOf('/') + 1) + file;
-            File out2 = new File("./tmp2.m3u8");
             url = new URL(link);
+            File out2 = new File("./" + DownloadManager.getURLFileName(url));
             pb = new ProgressBar("Download", 1, "Threads", 1, "1");
             pb.start();
             DownloadManager.doDownloadSingleFile(url, out2, 1, pb.getPipedWriter());
@@ -111,6 +142,7 @@ public class AutoDownload {
             // set "out" to be "out2"
             out.delete();
             out = out2;
+            read.close();
         }
 
         // download ts files
@@ -133,8 +165,6 @@ public class AutoDownload {
         List<String> list = new ArrayList<String>();
         boolean startCombine = (from == null);
 
-        int count = 0;
-
         while (read.hasNextLine()) {
             String line = read.nextLine();
             if (line.equals(from)) {
@@ -150,6 +180,7 @@ public class AutoDownload {
 
 
         }
+        read.close();
         return list;
     }
 

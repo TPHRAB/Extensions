@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/dom4j-2.1.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jaxen-1.1.6"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jline-3.12.2-SNAPSHOT"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/progressbar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/dom4jExtension"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jsoup-1.12.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/commons-codec-1.11"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/selenium-java-3.141"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/libs"/>
+	<classpathentry kind="output" path="out/production/Test"/>
+</classpath>

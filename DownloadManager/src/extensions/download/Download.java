@@ -28,21 +28,26 @@ public class Download {
 			throw new IllegalArgumentException("output file not initialized!");
 		}
 
-		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-		connection = (HttpURLConnection) url.openConnection();
-		long fileLength = DownloadManager.getURLFileLength(url);
+		boolean forward = true;
+		long fileLength = -1;
 		this.threadsPool = new ArrayList<DownloadThread>();
-		if (fileLength == -1) {
-			System.out.println(ProgressBarThread.getBold("#### Error: " + url + " ####"));
+		try {
+			fileLength = DownloadManager.getURLFileLength(url);
+		} catch (Exception e) {
+			forward = false;
 			pW.write(threadNum);
-		} else {
+		}
+		if (forward) {
 			long blockSize = fileLength / threadNum;
 			if (blockSize == 0) {
 				throw new IllegalArgumentException("please enter a smaller thread number!");
 			}
-
+			if (fileLength % threadNum != 0) {
+				threadNum++;
+			}
 			int start = 0;
-			for (int i = 0; i < threadNum; i++) {
+			HttpURLConnection connection = null;
+			for (int i = 0; i < threadNum - 1; i++) {
 				long end = start + blockSize - 1;
 				// connection = (HttpURLConnection) new URL(url.toString()).openConnection();
 				connection = (HttpURLConnection) url.openConnection();
@@ -50,11 +55,9 @@ public class Download {
 				threadsPool.add(new DownloadThread(connection, out, start, pW));
 				start += blockSize;
 			}
-			if (connection.getContentLengthLong() % threadNum != 0) {
-				connection = (HttpURLConnection) url.openConnection();
-				connection.setRequestProperty("Range", "bytes=" + start + "-");
-				threadsPool.add(new DownloadThread(connection, out, start, pW));
-			}
+			connection = (HttpURLConnection) url.openConnection();
+			connection.setRequestProperty("Range", "bytes=" + start + "-");
+			threadsPool.add(new DownloadThread(connection, out, start, pW));
 		}
 	}
 

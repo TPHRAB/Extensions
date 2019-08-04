@@ -97,7 +97,6 @@ public class TestThread {
 		long totalSize = 0;
 		List<Copy> threads = new ArrayList<Copy>();
 		Arrays.parallelSort(list);
-		long offset = 0;
 		for (File f : list) {
 			if (f.isFile()) {
 				threads.add(doCopySingleFile(f, out, totalSize));
