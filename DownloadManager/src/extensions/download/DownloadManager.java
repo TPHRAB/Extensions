@@ -66,7 +66,7 @@ public class DownloadManager {
 
     public static void downloadTSFileList(List<String> list, File dir, int threadNum) throws Exception {
     	if (dir.exists()) {
-    		if (dir.isDirectory()) {	
+    		if (!dir.isDirectory()) {	
     			throw new IllegalArgumentException();
     		}
     	} else {

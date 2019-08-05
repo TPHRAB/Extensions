@@ -16,7 +16,7 @@
                 <index>0</index>
                 <attribute>src</attribute>
             </host>
-            <host id="www.dilidili.name" method="m3u8Append" trace="false" addProtocal="false" autoConvert="true">
+            <host id="www.dilidili.name" method="m3u8Append" trace="false" addProtocal="false" autoConvert="false">
                 <tag>iframe</tag>
                 <index>0</index>
                 <attribute>src</attribute>
