@@ -1,21 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
     <methods>
-            <host id="jzavzy.com" method="m3u8Append" trace="true">
+            <host id="jzavzy.com" method="m3u8Append" trace="true" addProtocal="false">
                 <tag>source</tag>
                 <index>0</index>
                 <attribute>src</attribute>
             </host>
-            <host id="avgle.com" method="handInput"></host>
-            <host id="www.dilidili.name" method="m3u8Append" trace="false">
+            <host id="www.jzavzy.com" method="m3u8Append" trace="true" addProtocal="false">
+                <tag>source</tag>
+                <index>0</index>
+                <attribute>src</attribute>
+            </host>
+            <host id="18porn.cc" method="m3u8Append" trace="false" addProtocal="false">
+            	<tag>source</tag>
+                <index>0</index>
+                <attribute>src</attribute>
+            </host>
+            <host id="avgle.com" method="handInput" addProtocal="false"></host>
+            <host id="www.dilidili.name" method="m3u8Append" trace="false" addProtocal="false">
                 <tag>iframe</tag>
                 <index>0</index>
                 <attribute>src</attribute>
             </host>
+            <host id="julyporn.com" method="m3u8Append" trace="false" addProtocal="true">
+            	<tag>video</tag>
+            	<index>0</index>
+            	<attribute>data-src</attribute>
+            </host>
+            <host id="porn87.com" method="embeded">
+            	<page1>
+	            	<tag>iframe</tag>
+	            	<index>0</index>
+	            	<attribute>src</attribute>
+            	</page1>
+            	<page2>
+            		<tag>source</tag>
+            		<attribute>src</attribute>
+            	</page2>
+            </host>
     </methods>
     <history record="true" path="./history.txt"/>
     <convert>
-        <windows>convert.bat</windows>
-        <macos>convert.sh</macos>
+        <windows>ffmpeg.exe</windows>
+        <macos>ffmpeg</macos>
     </convert>
 </config>
