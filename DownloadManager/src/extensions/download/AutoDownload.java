@@ -57,32 +57,35 @@ public class AutoDownload {
             }
             
             // 得到系统
-            String os = System.getProperty("os.name").toLowerCase();
-            List<String> command = new ArrayList<>();
-            boolean execution = false;
-            if (os.contains("win")) {
-            	command.add("cmd.exe");
-            	command.add("/c"); 
-            	command.add("start");
-            	command.add("./ffmpeg.exe");
-            	execution = true;
-            } else if (os.contains("mac")) {
-            	command.add("./ffmpeg");
-            	execution = true;
-            } else {
-            	System.out.println("Not supported operating system! Please do the convertion by yourself!");
+            String convert = host.attributeValue("autoConvert");
+            if (convert != null && convert.equals("true")) {
+	            String os = System.getProperty("os.name").toLowerCase();
+	            List<String> command = new ArrayList<>();
+	            boolean execution = false;
+	            if (os.contains("win")) {
+	            	command.add("cmd.exe");
+	            	command.add("/c"); 
+	            	command.add("start");
+	            	command.add("./ffmpeg.exe");
+	            	execution = true;
+	            } else if (os.contains("mac")) {
+	            	command.add("./ffmpeg");
+	            	execution = true;
+	            } else {
+	            	System.out.println("Not supported operating system! Please do the convertion by yourself!");
+	            }
+	            
+	            // set input file and output file
+	            command.add("-i");
+	            command.add(path);
+	            command.add(path.substring(0, path.length() - 2) + "mp4");
+	            
+	            // run script
+	            if (execution) {
+	            	videoConvert(command);
+	            	result.delete();
+	            }
             }
-            
-            // set input file and output file
-            command.add("-i");
-            command.add(path);
-            command.add(path.substring(0, path.length() - 2) + "mp4");
-            
-            // run script
-            if (execution) {
-            	videoConvert(command);
-            }
-            result.delete();
         } else {
             System.out.print("Please input the first common part of the sequence url: ");
             String part1 = console.nextLine().trim();

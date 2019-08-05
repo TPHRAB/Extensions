@@ -28,7 +28,11 @@ public class DownloadManager {
 
     // post : donwload ts files from "first" to "last" and output them to dir
     public static void downloadTSFileList(String first, String last, File dir, int threadNum) throws Exception {
-        if (!dir.exists()) {
+    	if (dir.exists()) {
+    		if (dir.isDirectory()) {	
+    			throw new IllegalArgumentException();
+    		}
+    	} else {
             dir.mkdir();
         }
         String difference = getDifference(first, last);
@@ -46,6 +50,13 @@ public class DownloadManager {
 
     public static void downloadTSFileListCustom(String part1, String part2, int start, int end, File dir,
                                                 int threads) throws Exception {
+    	if (dir.exists()) {
+    		if (dir.isDirectory()) {	
+    			throw new IllegalArgumentException();
+    		}
+    	} else {
+            dir.mkdir();
+        }
         List<String> list = new ArrayList<String>();
         for (int i = start; i <= end; i++) {
             list.add(part1 + i + part2);
@@ -54,7 +65,11 @@ public class DownloadManager {
     }
 
     public static void downloadTSFileList(List<String> list, File dir, int threadNum) throws Exception {
-        if (!dir.exists()) {
+    	if (dir.exists()) {
+    		if (dir.isDirectory()) {	
+    			throw new IllegalArgumentException();
+    		}
+    	} else {
             dir.mkdir();
         }
         int num = list.size() / threadNum;
@@ -83,15 +98,12 @@ public class DownloadManager {
         pb.join();
     }
 
+    // pre  : dir is a existing directory
     // post : donwload ts files from "first" to "last" and output them to dir
     public static void doDownloadTSFileList(List<String> list, int first, int last, File dir, PipedWriter pW) throws Exception {
-        if (!dir.exists()) {
-            dir.mkdir();
-        }
-
         for (int i = first; i <= last; i++) {
             URL url = new URL(list.get(i));
-            File out = new File(dir.getAbsoluteFile() + getURLFileName(url));
+            File out = new File(dir.getAbsoluteFile() + "/" + getURLFileName(url));
             out.createNewFile();
             doDownloadSingleFile(url, out, 1, pW);
         }
@@ -122,7 +134,7 @@ public class DownloadManager {
 
     // post : return the file's name in this url
     public static String getURLFileName(URL url) {
-        return url.getFile().substring(url.getFile().lastIndexOf('/'));
+        return url.getFile().substring(url.getFile().lastIndexOf('/') + 1);
     }
 
     public static String getURLTitle(String link) throws Exception {
