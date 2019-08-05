@@ -12,15 +12,16 @@ public class Test {
 			+ "Accept-Encoding: gzip, deflate\n" + "Connection: close\n"
 			+ "Cookie: JSESSIONID=42C8232F7E3CF19DB4474029B9638A90\n" + "Upgrade-Insecure-Requests: 1\n" + "\n";
 
-	public static void testURL(String[] args) throws Exception {
-		URL url = new URL("http://localhost:8080/hello/index.jsp");
-		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-		connection.setDoOutput(true);
-		connection.setDoInput(true);
-		BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-		String line = in.readLine();
-		while (line != null) {
-			line = in.readLine();
-		}
+	public static void main(String[] args) throws Exception {
+//		URL url = new URL("http://localhost:8080/hello/index.jsp");
+//		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//		connection.setDoOutput(true);
+//		connection.setDoInput(true);
+//		BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+//		String line = in.readLine();
+//		while (line != null) {
+//			line = in.readLine();
+//		}
+		String string = "abcabc";
 	}
 }
