@@ -36,19 +36,18 @@ public class MacShellCommand {
 		// String[] command = new String[]{"./ffmpeg",  "-i", "\"肌肉少女：哑铃能举多少公斤？ 第1话丨嘀哩嘀哩.ts\"", "\"肌肉少女：哑铃能举多少公斤？ 第1话丨嘀哩嘀哩.mp4\""};  
 //		String[] command = {"./ffmpeg", "-i", "/Users/zhaochenze/Desktop/肌肉少女：哑铃能举多少公斤？ 第1话丨嘀哩嘀哩.ts", 
 //				"/Users/zhaochenze/Desktop/肌肉少女：哑铃能举多少公斤？ 第1话丨嘀哩嘀哩.mp4"};
-		
-		videoConvert("./ffmpeg", "/Users/zhaochenze/Desktop/肌肉少女：哑铃能举多少公斤？ 第1话丨嘀哩嘀哩.ts", 
-				"/Users/zhaochenze/Desktop/肌肉少女：哑铃能举多少公斤？ 第1话丨嘀哩嘀哩.mp4");
+		videoConvert("./ffmpeg", "/Users/zhaochenze/Desktop/91四驱兄弟之D罩杯旗袍翻版李X璐 720P高清完整版-桔子AV在线成人视频.ts", 
+				"/Users/zhaochenze/Desktop/91四驱兄弟之D罩杯旗袍翻版李X璐 720P高清完整版-桔子AV在线成人视频.mp4");
 
 	}
 	
 	public static void videoConvert(String ffmpegPath, String videoInputPath, String videoOutputPath) throws IOException {
 		// 构建命令
 		List<String> command = new ArrayList<>();
-		command.add(ffmpegPath);
+		command.add("./ffmpeg");
 		command.add("-i");
-		command.add(videoInputPath);
-		command.add(videoOutputPath);
+		command.add("/Users/zhaochenze/Desktop/91啪啪很猛的大神约炮丽人高素质外围女露脸开裆黑丝美腿抱起来干把妹子操的说不要不行了720P高清-桔子AV在线成人视频.ts");
+		command.add("/Users/zhaochenze/Desktop/91啪啪很猛的大神约炮丽人高素质外围女露脸开裆黑丝美腿抱起来干把妹子操的说不要不行了720P高清-桔子AV在线成人视频.mp4");
 		// 执行操作
 		ProcessBuilder builder = new ProcessBuilder(command);
 		Process process = builder.start();
