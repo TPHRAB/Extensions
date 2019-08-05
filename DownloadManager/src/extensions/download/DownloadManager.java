@@ -17,6 +17,9 @@ public class DownloadManager {
 
     // post : download the file from the url and output it to "out"
     public static void doDownloadSingleFile(URL url, File out, int threadNum, PipedWriter pW) throws Exception {
+    	if (out.exists()) {
+    		out.delete();
+    	}
         out.createNewFile();
         Download threads = new Download(url, out, threadNum, pW);
         threads.start();
