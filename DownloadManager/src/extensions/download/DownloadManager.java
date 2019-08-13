@@ -10,24 +10,27 @@ import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static extensions.download.ProgressBarThread.getBold;
 
 public class DownloadManager {
 
     // post : download the file from the url and output it to "out"
-    public static void doDownloadSingleFile(URL url, File out, int threadNum, PipedWriter pW) throws Exception {
+    public static void doDownloadSingleFile(URL url, File out, int threadNum, PipedWriter pW, 
+    		Map<String, String> requestProperties) throws Exception {
     	if (out.exists()) {
     		out.delete();
     	}
         out.createNewFile();
-        Download threads = new Download(url, out, threadNum, pW);
+        Download threads = new Download(url, out, threadNum, pW, requestProperties);
         threads.start();
         threads.join();
     }
 
     // post : donwload ts files from "first" to "last" and output them to dir
-    public static void downloadTSFileList(String first, String last, File dir, int threadNum) throws Exception {
+    public static void downloadTSFileList(String first, String last, File dir, int threadNum, 
+    		Map<String, String> requestProperties) throws Exception {
     	if (dir.exists()) {
     		if (dir.isDirectory()) {	
     			throw new IllegalArgumentException();
@@ -45,26 +48,19 @@ public class DownloadManager {
             String var = addZeros(difference.length() - String.valueOf(i).length()) + i;
             list.add(part1 + var + part2);
         }
-        downloadTSFileList(list, dir, threadNum);
+        downloadTSFileList(list, dir, threadNum, requestProperties);
     }
 
-    public static void downloadTSFileListCustom(String part1, String part2, int start, int end, File dir,
-                                                int threads) throws Exception {
-    	if (dir.exists()) {
-    		if (dir.isDirectory()) {	
-    			throw new IllegalArgumentException();
-    		}
-    	} else {
-            dir.mkdir();
-        }
+    public static void downloadTSFileListCustom(String part1, String part2, int start, int end, File dir, 
+    		int threads, Map<String, String> requestProperties) throws Exception {
         List<String> list = new ArrayList<String>();
         for (int i = start; i <= end; i++) {
             list.add(part1 + i + part2);
         }
-        downloadTSFileList(list, dir, 10);
+        downloadTSFileList(list, dir, 10, requestProperties);
     }
 
-    public static void downloadTSFileList(List<String> list, File dir, int threadNum) throws Exception {
+    public static void downloadTSFileList(List<String> list, File dir, int threadNum, Map<String, String> requestProperties) throws Exception {
     	if (dir.exists()) {
     		if (!dir.isDirectory()) {	
     			throw new IllegalArgumentException();
@@ -86,7 +82,7 @@ public class DownloadManager {
             int end = start + num - 1;
             // hahahaha
             end = i == threadNum - 1 ? list.size() - 1 : end;
-            MultithreadDownloadList t = new MultithreadDownloadList(list, start, end, dir, pb.getPipedWriter());
+            MultithreadDownloadList t = new MultithreadDownloadList(list, start, end, dir, pb.getPipedWriter(), requestProperties);
             threadsPool.add(t);
             t.start();
             start += num;
@@ -100,12 +96,13 @@ public class DownloadManager {
 
     // pre  : dir is a existing directory
     // post : donwload ts files from "first" to "last" and output them to dir
-    public static void doDownloadTSFileList(List<String> list, int first, int last, File dir, PipedWriter pW) throws Exception {
+    public static void doDownloadTSFileList(List<String> list, int first, int last, File dir, PipedWriter pW, 
+    		Map<String, String> requestProperties) throws Exception {
         for (int i = first; i <= last; i++) {
             URL url = new URL(list.get(i));
             File out = new File(dir.getAbsoluteFile() + "/" + getURLFileName(url));
             out.createNewFile();
-            doDownloadSingleFile(url, out, 1, pW);
+            doDownloadSingleFile(url, out, 1, pW, requestProperties);
         }
     }
 
@@ -143,12 +140,15 @@ public class DownloadManager {
     }
 
     // post : return the URL file's length
-    public static long getURLFileLength(URL url) throws Exception {
+    public static long getURLFileLength(URL url, Map<String, String> requestProperties) throws Exception {
         long contentLength = -1;
         try {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setConnectTimeout(20000);
             connection.setRequestMethod("HEAD");
+            for (String property : requestProperties.keySet()) {
+				connection.setRequestProperty(property, requestProperties.get(property));
+			}
             if (connection.getResponseCode() == 200) {
                 contentLength = connection.getContentLength();
             } else {
@@ -162,10 +162,10 @@ public class DownloadManager {
     }
     
 
-    private static long getListFilesLength(List<String> list) throws Exception {
+    private static long getListFilesLength(List<String> list, Map<String, String> requestProperties) throws Exception {
         long totalBytes = 0;
         for (int i = list.size() - 1; i >= 0; i--) {
-            long fileLength = getURLFileLength(new URL(list.get(i)));
+            long fileLength = getURLFileLength(new URL(list.get(i)), requestProperties);
             if (fileLength != -1) {
                 totalBytes += fileLength;
             } else {
