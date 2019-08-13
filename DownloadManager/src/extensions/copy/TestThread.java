@@ -96,11 +96,22 @@ public class TestThread {
 		out.createNewFile();
 		long totalSize = 0;
 		List<Copy> threads = new ArrayList<Copy>();
-		Arrays.parallelSort(list);
-		for (File f : list) {
-			if (f.isFile()) {
-				threads.add(doCopySingleFile(f, out, totalSize));
-				totalSize += f.length();
+		list = extensions.file.fileUtils.mergeSortOnFilesNames(list);
+		int i = 0;
+		int count = 0;
+		while (i < list.length) {
+			if (count >= 500) {
+				extensions.copy.TestThread.waitThreads(threads);
+				threads.clear();
+				count = 0;
+			} else {
+				File f = list[i];
+				if (f.isFile() && f.length() > 0) {
+					threads.add(doCopySingleFile(f, out, totalSize));
+					totalSize += f.length();
+				}
+				i++;
+				count++;
 			}
 		}
 		showFilePB(out, totalSize);
@@ -140,11 +151,9 @@ public class TestThread {
 
 	// wait for threads to die
 	public static void waitThreads(List<Copy> threads) throws Exception {
-		System.out.println("waiting for saving...");
 		for (Copy c : threads) {
 			c.join();
 		}
-		System.out.println("Done!");
 	}
 
 }
