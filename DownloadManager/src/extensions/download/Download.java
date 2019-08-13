@@ -6,8 +6,7 @@ package extensions.download;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import me.tongfei.progressbar.ProgressBarBuilder;
+import java.util.Map;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -19,7 +18,8 @@ public class Download {
 	private long fileLength;
 	private String fileName;
 
-	public Download(URL url, File out, int threadNum, PipedWriter pW) throws Exception {
+	public Download(URL url, File out, int threadNum, PipedWriter pW, 
+			Map<String, String> requestProperties) throws Exception {
 		if (threadNum < 1) {
 			throw new IllegalArgumentException("thread number should be at least 1!");
 		}
@@ -32,7 +32,7 @@ public class Download {
 		long fileLength = -1;
 		this.threadsPool = new ArrayList<DownloadThread>();
 		try {
-			fileLength = DownloadManager.getURLFileLength(url);
+			fileLength = DownloadManager.getURLFileLength(url, requestProperties);
 		} catch (Exception e) {
 			forward = false;
 			pW.write(threadNum);
@@ -52,25 +52,36 @@ public class Download {
 				// connection = (HttpURLConnection) new URL(url.toString()).openConnection();
 				connection = (HttpURLConnection) url.openConnection();
 				connection.setRequestProperty("Range", "bytes=" + start + "-" + end);
+				// set request properties
+				for (String property : requestProperties.keySet()) {
+					connection.setRequestProperty(property, requestProperties.get(property));
+				}
 				threadsPool.add(new DownloadThread(connection, out, start, pW));
 				start += blockSize;
 			}
 			connection = (HttpURLConnection) url.openConnection();
+			// set request properties
+			for (String property : requestProperties.keySet()) {
+				connection.setRequestProperty(property, requestProperties.get(property));
+			}
 			connection.setRequestProperty("Range", "bytes=" + start + "-");
 			threadsPool.add(new DownloadThread(connection, out, start, pW));
 		}
 	}
 
-	public Download(String url, String file, int threadNum, PipedWriter pW) throws Exception {
-		this(new URL(url), new File(file), threadNum, pW);
+	public Download(String url, String file, int threadNum, PipedWriter pW, 
+			Map<String, String> requestProperties) throws Exception {
+		this(new URL(url), new File(file), threadNum, pW, requestProperties);
 	}
 
-	public Download(URL url, String file, int threadNum, PipedWriter pW) throws Exception {
-		this(url, new File(file), threadNum, pW);
+	public Download(URL url, String file, int threadNum, PipedWriter pW, 
+			Map<String, String> requestProperties) throws Exception {
+		this(url, new File(file), threadNum, pW, requestProperties);
 	}
 
-	public Download(String url, File file, int threadNum, PipedWriter pW) throws Exception {
-		this(new URL(url), file, threadNum, pW);
+	public Download(String url, File file, int threadNum, PipedWriter pW, 
+			Map<String, String> requestProperties) throws Exception {
+		this(new URL(url), file, threadNum, pW, requestProperties);
 	}
 
 	public void start() {
