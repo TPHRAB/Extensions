@@ -9,7 +9,8 @@ Download
 	- 有一个.ts文件创建成功却没内容，rsd
 	- dilidili m3u8文件url格式不同
 	- 默认路径
-	- 如果是文件夹自动加上反斜杠（先看new File(文件夹)后，getAbsolutePath()末尾是不是有反斜杠）
+	- /*如果是文件夹自动加上反斜杠（先看new File(文件夹)后，getAbsolutePath()末尾是不是有反斜杠）*/
+	- selenium可以直接或得文件名
 
 Copy
 	- 设置默认合并路径
