@@ -3,8 +3,11 @@ package extensions.download;
 import org.dom4j.Element;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
-import java.util.regex.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -14,9 +17,13 @@ import java.io.RandomAccessFile;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 import java.util.ArrayList;
+import java.util.HashMap;
 import org.dom4jExtension.*;
+
 
 public class AutoDownload {
 
@@ -43,50 +50,35 @@ public class AutoDownload {
         // 要得到父节点判断是哪个方法
         if(host.attributeValue("method").equals("m3u8Append")) {
             m3u8Appended(url, out, host);
-            System.out.print("Please input the path for combination: ");
-            String path = console.nextLine();
-            path = path + DownloadManager.getURLTitle(url) + ".ts";
-            File result = new File(path);
-            extensions.copy.TestThread.waitThreads(
-                    extensions.copy.TestThread.doCombine(out.listFiles(), result));
-            
-            if (out.getName().equals("raw")) {
-            	for (File f : out.listFiles()) {
-            		f.delete();
-            	}
-            }
-            
-            // 得到系统
-            String convert = host.attributeValue("autoConvert");
-            if (convert != null && convert.equals("true")) {
-	            String os = System.getProperty("os.name").toLowerCase();
-	            List<String> command = new ArrayList<>();
-	            boolean execution = false;
-	            if (os.contains("win")) {
-	            	command.add("cmd.exe");
-	            	command.add("/c"); 
-	            	command.add("start");
-	            	command.add("./ffmpeg.exe");
-	            	execution = true;
-	            } else if (os.contains("mac")) {
-	            	command.add("./ffmpeg");
-	            	execution = true;
-	            } else {
-	            	System.out.println("Not supported operating system! Please do the convertion by yourself!");
-	            }
-	            
-	            // set input file and output file
-	            command.add("-i");
-	            command.add(path);
-	            command.add(path.substring(0, path.length() - 2) + "mp4");
-	            
-	            // run script
-	            if (execution) {
-	            	videoConvert(command);
-	            	result.delete();
-	            }
-            }
-        } else {
+            videoCombine(console, url, out, host);
+        } else if (host.attributeValue("method").equals("directMP4")) {
+        	directMP4(url, out, host);
+        } else if (host.attributeValue("method").equals("seleniumMP4")) {
+    		System.setProperty("javax.net.ssl.keyStorePassword", "123456");
+    		System.setProperty("webdriver.gecko.driver", "./geckodriver");
+    		
+    		WebDriver browser = new FirefoxDriver();
+    		// set time interval to wait after loading a new page so that xpath could work fine
+    		browser.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+    		browser.get(url);
+    		// get video file
+    		String link = null;
+    		List<WebElement> target = browser.findElements(By.xpath("//iframe"));
+    		for (WebElement e : target) {
+    			if (e.getAttribute("src").contains("?videoid=")) {
+    				browser.switchTo().frame(e);
+    				WebElement realTarget = browser.findElement(By.tagName("source"));
+    				link = realTarget.getAttribute("src");
+    				break;
+    			}
+    		}
+    		browser.close();
+    		File result = new File(out.getAbsolutePath() + '/' + DownloadManager.getURLTitle(url) + ".mp4");
+    		ProgressBar pb = new ProgressBar("Download", 11, "Thread", 1, "10");
+    		pb.start();
+    		DownloadManager.doDownloadSingleFile(new URL(link), result, 10, pb.getPipedWriter(), new HashMap<String, String>());
+    		pb.join();
+        } else if (host.attributeValue("method").equals("tsCustom")) {
             System.out.print("Please input the first common part of the sequence url: ");
             String part1 = console.nextLine().trim();
             System.out.print("Please input the second part of the common url: ");
@@ -95,7 +87,20 @@ public class AutoDownload {
             int start = Integer.parseInt(console.nextLine());
             System.out.print("Please input the ending index: ");
             int end = Integer.parseInt(console.nextLine());
-            DownloadManager.downloadTSFileListCustom(part1, part2, start, end, out,1);
+            Map<String, String> requestProperties = new HashMap<>();
+    		requestProperties.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+    		requestProperties.put("Accept-Encoding", "utf-8");
+    		requestProperties.put("Accept-Language", "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2");
+    		requestProperties.put("Cache-Control", "max-age=0");
+    		requestProperties.put("Connection", "keep-alive");
+    		requestProperties.put("Host", "cdn.qooqlevideo.com");
+    		requestProperties.put("Upgrade-Insecure-Requests", "1");
+    		requestProperties.put("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0) Gecko/20100101 Firefox/68.0");
+    		requestProperties.put("Referer", url);
+            DownloadManager.downloadTSFileListCustom(part1, part2, start, end, out, 1, requestProperties);
+            videoCombine(console, url, out, host);
+        } else {
+        	System.out.println("Not supported website!");
         }
 
         // write history
@@ -134,7 +139,7 @@ public class AutoDownload {
         ProgressBar pb = new ProgressBar("Download", 1, "Threads",
                 1, "1");
         pb.start();
-        DownloadManager.doDownloadSingleFile(url, out, 1, pb.getPipedWriter());
+        DownloadManager.doDownloadSingleFile(url, out, 1, pb.getPipedWriter(), new HashMap<String, String>());
         pb.join();
 
         if (host.attributeValue("trace").equals("true")) {
@@ -149,7 +154,7 @@ public class AutoDownload {
             out = new File("./" + DownloadManager.getURLFileName(url));
             pb = new ProgressBar("Download", 1, "Threads", 1, "1");
             pb.start();
-            DownloadManager.doDownloadSingleFile(url, out, 1, pb.getPipedWriter());
+            DownloadManager.doDownloadSingleFile(url, out, 1, pb.getPipedWriter(), new HashMap<String, String>());
             pb.join();
             // set "out" to be "out2"
             read.close();
@@ -161,15 +166,24 @@ public class AutoDownload {
         if (list.size() / threads == 0) {
             throw new IllegalArgumentException("list.size() / threads == 0!");
         }
-        DownloadManager.downloadTSFileList(list, dir, 10);
-
-        for (File f : dir.listFiles()) {
-            if (f.length() == 0) {
-                f.delete();
-            }
-        }
+        DownloadManager.downloadTSFileList(list, dir, 10, new HashMap<String, String>());
     }
 
+    public static void directMP4(String l, File out, Element host) throws Exception {
+    	Document doc = Jsoup.connect(l).get();
+
+        // read selected "host" in xml to get the first m3u8 file
+        String link = doc.getElementsByTag(host.element("tag").getTextTrim())
+                .get(Integer.parseInt(host.element("index").getTextTrim()))
+                .attributes()
+                .get(host.element("attribute").getTextTrim());
+        File result = new File(out.getAbsolutePath() + '/' + DownloadManager.getURLTitle(link));
+        ProgressBar pb = new ProgressBar("Download", 1, "File", 10, String.valueOf(10));
+        pb.start();
+        DownloadManager.doDownloadSingleFile(new URL(link), result, 10, pb.getPipedWriter(), new HashMap<String, String>());
+        pb.join();
+    }
+    
     public static List<String> getAppendedList(String link, File m3u8, String from) throws Exception {
         Scanner read = new Scanner(m3u8);
         List<String> list = new ArrayList<String>();
@@ -194,6 +208,38 @@ public class AutoDownload {
         return list;
     }
     
+    public static boolean videoConvert(String path) throws Exception {
+        
+            String os = System.getProperty("os.name").toLowerCase();
+            List<String> command = new ArrayList<>();
+            boolean execution = false;
+            if (os.contains("win")) {
+            	command.add("cmd.exe");
+            	command.add("/c"); 
+            	command.add("start");
+            	command.add("./ffmpeg.exe");
+            	execution = true;
+            } else if (os.contains("mac")) {
+            	command.add("./ffmpeg");
+            	execution = true;
+            } else {
+            	System.out.println("Not supported operating system! Please do the convertion by yourself!");
+            }
+            
+            // set input file and output file
+            command.add("-i");
+            command.add(path);
+            command.add(path.substring(0, path.length() - 2) + "mp4");
+            
+            // run script
+            if (execution) {
+            	videoConvert(command);
+            	return true;
+            } else {
+            	return false;
+            }
+    }
+    
 	public static void videoConvert(List<String> command) throws IOException {
 		// 执行操作
 		ProcessBuilder builder = new ProcessBuilder(command);
@@ -214,5 +260,26 @@ public class AutoDownload {
 		if (errorStream != null) {
 			errorStream.close();
 		}
+	}
+	
+	public static void videoCombine(Scanner console, String url, File dir, Element host) throws Exception {
+		System.out.print("Please input the path for combination: ");
+        String path = console.nextLine();
+        path = path + '/' + DownloadManager.getURLTitle(url) + ".ts";
+        File result = new File(path);
+        extensions.copy.TestThread.waitThreads(
+                extensions.copy.TestThread.doCombine(dir.listFiles(), result));
+        
+        if (dir.getName().equals("raw")) {
+        	for (File f : dir.listFiles()) {
+        		f.delete();
+        	}
+        	dir.delete();
+        }
+        
+        String convert = host.attributeValue("autoConvert");
+        if (convert != null && convert.equals("true")) {
+        	if (videoConvert(path)) result.delete();
+        }
 	}
 }
