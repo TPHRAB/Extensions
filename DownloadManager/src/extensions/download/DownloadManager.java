@@ -74,8 +74,8 @@ public class DownloadManager {
         }
         int start = 0;
         List<MultithreadDownloadList> threadsPool = new ArrayList<MultithreadDownloadList>();
-        ProgressBar pb = new ProgressBar("Download", list.size(), "files", 1,
-                Integer.toString(threadNum));
+        ProgressBar pb = new ProgressBar("Download ts file list", list.size(), "Files", 1,
+                Integer.toString(list.size()));
         pb.start();
         // start all threads
         for (int i = 0; i < threadNum; i++) {
@@ -100,7 +100,7 @@ public class DownloadManager {
     		Map<String, String> requestProperties) throws Exception {
         for (int i = first; i <= last; i++) {
             URL url = new URL(list.get(i));
-            File out = new File(dir.getAbsoluteFile() + "/" + getURLFileName(url));
+            File out = new File(dir.getAbsoluteFile() + AutoDownload.DIRECTORY_SEPERATOR + getURLFileName(url));
             out.createNewFile();
             doDownloadSingleFile(url, out, 1, pW, requestProperties);
         }
