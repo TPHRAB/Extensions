@@ -46,10 +46,16 @@
             	<targetAttribute>src</targetAttribute>
             </host>
             <host id="avgle.com" method="tsCustom" autoConvert="false"></host>
+            <host id="www.pornhub.com" method="directMP4">
+            	<xpath>//video-element[1]/div/video/source[1]</xpath>
+            	<attribute>src</attribute>
+            </host>>
     </methods>
     <history record="true" path="./history.txt"/>
     <convert>
         <windows>ffmpeg.exe</windows>
         <macos>ffmpeg</macos>
     </convert>
+    <defaultPath id="mac" seperator="/">/Users/zhaochenze/Desktop/download</defaultPath>
+    <defaultPath id="win" seperator="\">C:\Users\Timmy\Desktop\download</defaultPath>
 </config>
