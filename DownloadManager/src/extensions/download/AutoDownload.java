@@ -48,12 +48,9 @@ public class AutoDownload {
         String outputDirectory = console.nextLine();
         if (outputDirectory.trim().isEmpty()) {
         	String xpath = "/config/defaultPath[@seperator='" + DIRECTORY_SEPERATOR + "']";
-        	System.out.println(xpath);
         	outputDirectory = xml.selectSingleNode(xpath).getText();
         }
         File out = new File(outputDirectory);
-        
-        System.out.println(out.exists() + ", " + outputDirectory + ".");
         
         String xpath = "/config/methods/host[@id='" + new URL(url).getHost() + "']";
         Element host = (Element) xml.selectSingleNode(xpath);
@@ -111,7 +108,7 @@ public class AutoDownload {
             DownloadManager.downloadTSFileListCustom(part1, part2, start, end, out, 1, requestProperties);
             videoCombine(console, url, out, host);
         } else if (host.attributeValue("method").equals("directMP4")) {
-        	
+        	directMP4(url, out, host);
         } else {
         	System.out.println("Not supported website!");
         }
@@ -193,12 +190,12 @@ public class AutoDownload {
     	browser.manage().timeouts().implicitlyWait(15,TimeUnit.SECONDS);
     	browser.get(url);
     	String link = browser.findElements(By.tagName("video")).get(0).findElement(By.tagName("source")).getAttribute("src");
-        File result = new File(out.getAbsolutePath() + DIRECTORY_SEPERATOR + browser.getTitle() + ".mp4");
+    	String fileName = browser.getTitle().replaceAll("\\**", "");
+        File result = new File(out.getAbsolutePath() + DIRECTORY_SEPERATOR + fileName + ".mp4");
         browser.close();
         int threads = 10;
         long fileLength = DownloadManager.getURLFileLength(new URL(link), new HashMap<String, String>());
         if (fileLength % 10 > 0) threads++;
-        
         ProgressBar pb = new ProgressBar("Download single file", threads, "Size", 1, String.valueOf(fileLength));
         pb.start();
         DownloadManager.doDownloadSingleFile(new URL(link), result, 10, pb.getPipedWriter(), new HashMap<String, String>());
