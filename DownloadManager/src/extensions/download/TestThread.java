@@ -11,14 +11,14 @@ public class TestThread {
 		System.setProperty("javax.net.ssl.keyStore", "icekeystore.jks");
 		System.setProperty("javax.net.ssl.keyStorePassword", "123456");
 		Scanner console = new Scanner(System.in);
-//		System.out.println("Directory Path: ");
-//		String path = console.nextLine();
-//		File dir = new File(path);
-		File f = new File("C:\\Users\\Timmy\\Desktop\\\"Classy Babe becomes an Unclassy Slut! *4k* Samantha Flair - Pornhub.com.mp4\"");
-		System.out.println(f.getAbsolutePath());
-		f.createNewFile();
+		System.out.println("Directory Path: ");
+		String path = console.nextLine().replaceAll("\\**", "");
+		File dir = new File(path);
+		System.out.println(dir.getAbsolutePath());
+		dir.createNewFile();
 	}
 
 }
 
 // C:\Users\Timmy\Desktop\download
+// C:\Users\Timmy\Desktop\Classy Babe becomes an Unclassy Slut! *4k* Samantha Flair - Pornhub.com.mp4
