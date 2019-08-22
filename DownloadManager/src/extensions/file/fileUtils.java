@@ -61,4 +61,15 @@ public class fileUtils {
 			}
 		}
 	}
+	
+	public static void deleteDirectory(File dir) {
+		for (File f : dir.listFiles()) {
+			if (f.isFile()) {
+				f.delete();
+			} else {
+				deleteDirectory(f);
+				f.delete();
+			}
+		}
+	}
 }
