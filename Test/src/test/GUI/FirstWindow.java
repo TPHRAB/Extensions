@@ -9,16 +9,29 @@ public class FirstWindow {
 
 	public static void main(String[] args) throws InterruptedException {
 		Frame frame = new Frame("First Window");
-		frame.setBackground(Color.DARK_GRAY);
-		frame.setSize(400, 300);
-		Panel p = new Panel();
-		p.setLocation(20, 20);
-		p.setSize(360, 260);
-		p.setBackground(Color.YELLOW);
-		Button b = new Button("click");
-		Monitor m = new Monitor();
+		frame.setBounds(400, 200, 700, 500);
+		frame.setLayout(new FlowLayout());
+		frame.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});
+		
+		// create button
+		Button bu = new Button("Button");
+		bu.setBounds(10, 10, 340, 240);
+		bu.addActionListener(new ActionListener() {
+			private int count = 0;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				bu.setLabel(count + "");
+				count++;
+			}
+		});
+		frame.add(bu);
+		
 		frame.setVisible(true);
-		frame.add(p);
 	}
 
 }
