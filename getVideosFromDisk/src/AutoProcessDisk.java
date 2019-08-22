@@ -6,19 +6,27 @@
 
 // AutoProcessDisk class can 1. move videos in a disk to desktop 2. rename videos from disks to disks' name
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
 import static extensions.file.fileUtils.*;
 
 public class AutoProcessDisk {
 
 	public static final String DIRECTORY_SEPERATOR = System.getProperty("os.name").toLowerCase().contains("win") ? "\\" : "/";
+	public static final long MB = 1024 * 1024;
 	
 	public static void main(String[] args) throws Exception {
 		Scanner console = new Scanner(System.in);
 		System.out.println("(1)Move videos from disk");
 		System.out.println("(2)Sort videos after moving");
+		System.out.println("(3)Convert videos after sorting");
+		System.out.println("(4)Combine Videos");
 		System.out.print("Your choice: ");
 		int choice = console.nextInt();
 		console.nextLine(); // skip \n
@@ -26,6 +34,10 @@ public class AutoProcessDisk {
 			moveVideosFromDisk(console);
 		} else if (choice == 2) {
 			sortVideos(console);
+		} else if (choice == 3) {
+			convertVideos(console);
+		} else if (choice == 4) {
+			combineVideos(console);
 		} else {
 			System.out.println("No such choice!");
 		}
@@ -106,29 +118,163 @@ public class AutoProcessDisk {
 		nextTurn = true;
 		
 		// get prefix for videos
-		String prefix = in.getName() + " | ";
+		String prefix = in.getName() + "_";
 		
 		// process videos
 		File[] list = in.listFiles();
 		list = mergeSortOnFilesNames(list);
-		for (int i = 0; i < list.length; i++) {
-			File dir = list[i];
+		for (File dir : list) {
 			if (dir.isHidden()) {
 				continue;
 			}
 			File[] videos = dir.listFiles();
 			videos = mergeSortOnFilesNames(videos);
-			for (int j = 0; j < videos.length; j++) {
-				File vob = videos[j];
+			for (File vob : videos) {
 				String regex1 = ".*_.*_[1-2]\\.VOB";
 				String regex2 = ".*_TS\\.VOB";
-				if (vob.isHidden() || !(vob.getName().matches(regex1) || vob.getName().matches(regex2)))
+				if (vob.isHidden() || !(vob.getName().matches(regex1) || vob.getName().matches(regex2)) || vob.length() <= MB) {
 					continue;
+				}
 				String fileName = vob.getName().substring(vob.getName().indexOf('_') + 1);
-				vob.renameTo(new File(in.getAbsolutePath() + DIRECTORY_SEPERATOR + prefix + "D" + dir.getName() 
-							 + " | V" + fileName));
+				vob.renameTo(new File(in.getAbsolutePath() + DIRECTORY_SEPERATOR + prefix + dir.getName() 
+							 + "_" + fileName));
 			}
-			dir.delete();
 		}
+	}
+	
+	public static void convertVideos(Scanner console) throws IOException {
+		boolean nextTurn = true;
+		
+		// get output path
+		File out = null;
+		while (nextTurn) {
+			System.out.print("Please input the path for generating videos: ");
+			out = new File(console.nextLine());
+			if (!out.exists()) {
+				System.out.println("Directory or file doesn't exist!");
+			} else {
+				nextTurn = false;
+			}
+		}
+		nextTurn = true;
+		
+		// get input path
+		File source = null;
+		while (nextTurn) {
+			System.out.print("Please input the videos' path to convert: ");
+			source = new File(console.nextLine());
+			if (!source.exists()) {
+				System.out.println("Directory or file doesn't exist!");
+			} else {
+				nextTurn = false;
+			}
+		}
+		nextTurn = true;
+		
+		List<String> command = new ArrayList<>();
+		command.add("./ffmpeg");
+		command.add("-i");
+		command.add("-b:v");
+		command.add("500k");
+		command.add("-r");
+		command.add("25");
+		command.add("-s");
+		command.add("320*180");
+		
+		File[] list = extensions.file.fileUtils.mergeSortOnFilesNames(source.listFiles());
+		for (File f : list) {		
+			if (f.isHidden() || f.isDirectory() || !f.getName().split("\\.")[1].equals("VOB")) {
+				continue;
+			}
+			// add source and output path
+			command.add(2, f.getAbsolutePath());
+			command.add(out.getAbsolutePath() + DIRECTORY_SEPERATOR + f.getName());
+			processStart(command);
+			// remove source and output path
+			command.remove(command.size() - 1);
+			command.remove(2);
+		}
+		
+//		System.out.print("Do you want to delete the previous processed directory?(Y/~) ");
+//		if (console.nextLine().charAt(0) == 'Y') {
+//			extensions.file
+//		}
+	}
+	
+	public static void combineVideos(Scanner console) throws IOException {
+		boolean nextTurn = true;
+		
+		File out = null;
+		while (nextTurn) {
+			System.out.print("Please input the path for generating combined videos: ");
+			out = new File(console.nextLine());
+			if (!out.exists()) {
+				System.out.println("Directory doesn't exist!");
+			} else {
+				nextTurn = false;
+			}
+		}
+		nextTurn = true;
+		
+		File source = null;
+		while(nextTurn) {
+			System.out.print("Please input the path of videos to combine: ");
+			source = new File(console.nextLine());
+			if (!source.exists()) {
+				System.out.println("Directory doesn't exist!");
+			} else {
+				nextTurn = false;
+			}
+		}
+		nextTurn = true;
+		
+		// ffmpeg command
+		List<String> command = new ArrayList<>();
+		command.add("./ffmpeg");
+		command.add("-i");
+		command.add("-c");
+		command.add("copy");
+		File[] list = extensions.file.fileUtils.mergeSortOnFilesNames(source.listFiles());
+		String firstIndex = "";
+		String filesToConcat = "";
+		for (int i = 0; i < list.length; i++) {
+			File f = list[i];
+			if (f.isHidden() || !f.getName().split("\\.")[1].equals("VOB") || f.isDirectory()) {
+				continue;
+			}
+			String regex1 = ".*_.*_\\d*_\\d.VOB";
+			if (firstIndex.isEmpty()) {
+				firstIndex = f.getName().split("_")[2];
+				filesToConcat = "concat:" + f.getAbsolutePath();
+				command.add(out.getAbsolutePath() + DIRECTORY_SEPERATOR + 
+						f.getName().substring(0, f.getName().lastIndexOf('_')) + ".mp4");
+			} else if (f.getName().matches(regex1) && firstIndex.equals(f.getName().split("_")[2])) {
+				filesToConcat = filesToConcat +  "|" + f.getAbsolutePath();
+			} else {
+				command.add(2, filesToConcat);
+				processStart(command);
+				command.remove(command.size() - 1);
+				command.remove(2);
+				firstIndex = "";
+				filesToConcat = "";
+				i--; // not going forward
+			}	
+		}
+		// if last file's index is the same as the file before it, then it need to add manually
+		if (!firstIndex.isEmpty()) {
+			command.add(2, filesToConcat);
+			processStart(command);
+		}
+	}
+	
+	public static void processStart(List<String> command) throws IOException {
+		System.out.println(command);
+		Process process = new ProcessBuilder(command).start();
+		BufferedReader reader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+		String line = null;
+		while ((line = reader.readLine()) != null) {
+			System.out.println(line);
+		}
+		reader.close();
 	}
 }
