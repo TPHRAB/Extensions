@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import extensions.progresbar.ProgressBar;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;

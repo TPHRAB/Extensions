@@ -1,4 +1,4 @@
-package extensions.download;
+package extensions.progresbar;
 
 import java.io.PipedReader;
 

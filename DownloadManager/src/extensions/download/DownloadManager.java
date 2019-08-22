@@ -3,6 +3,10 @@ package extensions.download;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import extensions.progresbar.ProgressBar;
+
+import static extensions.progresbar.ProgressBarThread.getBold;
+
 import java.io.File;
 import java.io.PipedWriter;
 import java.net.HttpURLConnection;
@@ -11,8 +15,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import static extensions.download.ProgressBarThread.getBold;
 
 public class DownloadManager {
 

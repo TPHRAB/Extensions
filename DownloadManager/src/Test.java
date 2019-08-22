@@ -3,7 +3,7 @@ import java.net.URL;
 import java.io.File;
 
 import extensions.download.DownloadThread;
-import extensions.download.ProgressBar;
+import extensions.progresbar.ProgressBar;
 
 public class Test {
 
