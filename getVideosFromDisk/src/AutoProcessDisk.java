@@ -13,13 +13,15 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import static extensions.file.fileUtils.*;
 
 public class AutoProcessDisk {
 
 	public static final String DIRECTORY_SEPERATOR = System.getProperty("os.name").toLowerCase().contains("win") ? "\\" : "/";
-	public static final long MB = 1024 * 1024;
+	public static final String PROGRAM = System.getProperty("os.name").toLowerCase().contains("win") ? "./ffmpeg.exe" : "./ffmpeg";
+	public static final long MB = -1024 * 1024;
 	
 	public static void main(String[] args) throws Exception {
 		Scanner console = new Scanner(System.in);
@@ -128,13 +130,15 @@ public class AutoProcessDisk {
 				continue;
 			}
 			File[] videos = dir.listFiles();
+			System.out.println(Arrays.toString(videos));
 			videos = mergeSortOnFilesNames(videos);
+			int useIndexName = 0;
 			for (File vob : videos) {
-				String regex1 = ".*_.*_[1-2]\\.VOB";
-				String regex2 = ".*_TS\\.VOB";
-				if (vob.isHidden() || !(vob.getName().matches(regex1) || vob.getName().matches(regex2)) || vob.length() <= MB) {
+				String regex1 = ".*_0[2-9]_[1-2]\\.VOB";
+				if (vob.isHidden() || vob.length() <= MB || !vob.getName().matches(regex1)) {
+					useIndexName++;
 					continue;
-				}
+				} 
 				String fileName = vob.getName().substring(vob.getName().indexOf('_') + 1);
 				vob.renameTo(new File(in.getAbsolutePath() + DIRECTORY_SEPERATOR + prefix + dir.getName() 
 							 + "_" + fileName));
@@ -172,7 +176,7 @@ public class AutoProcessDisk {
 		nextTurn = true;
 		
 		List<String> command = new ArrayList<>();
-		command.add("./ffmpeg");
+		command.add(PROGRAM);
 		command.add("-i");
 		command.add("-b:v");
 		command.add("500k");
@@ -230,24 +234,33 @@ public class AutoProcessDisk {
 		
 		// ffmpeg command
 		List<String> command = new ArrayList<>();
-		command.add("./ffmpeg");
+		command.add(PROGRAM);
 		command.add("-i");
 		command.add("-c");
 		command.add("copy");
 		File[] list = extensions.file.fileUtils.mergeSortOnFilesNames(source.listFiles());
 		String firstIndex = "";
 		String filesToConcat = "";
+		int namingIndex = 1;
+		String diskNumber = "1";
 		for (int i = 0; i < list.length; i++) {
 			File f = list[i];
-			if (f.isHidden() || !f.getName().split("\\.")[1].equals("VOB") || f.isDirectory()) {
+			if (f.isHidden() || f.isDirectory() || !f.getName().split("\\.")[1].equals("VOB")) {
 				continue;
 			}
 			String regex1 = ".*_.*_\\d*_\\d.VOB";
+			String[] namingParts = f.getName().split("_");
+			if (!namingParts[1].equals(diskNumber)) {
+				namingIndex = 1;
+				diskNumber = namingParts[1];
+			}
+			
 			if (firstIndex.isEmpty()) {
-				firstIndex = f.getName().split("_")[2];
+				firstIndex = namingParts[2];
 				filesToConcat = "concat:" + f.getAbsolutePath();
 				command.add(out.getAbsolutePath() + DIRECTORY_SEPERATOR + 
-						f.getName().substring(0, f.getName().lastIndexOf('_')) + ".mp4");
+						f.getName().substring(0, f.getName().lastIndexOf('_') - 2) + namingIndex + ".mp4");
+				namingIndex++;
 			} else if (f.getName().matches(regex1) && firstIndex.equals(f.getName().split("_")[2])) {
 				filesToConcat = filesToConcat +  "|" + f.getAbsolutePath();
 			} else {
@@ -268,7 +281,6 @@ public class AutoProcessDisk {
 	}
 	
 	public static void processStart(List<String> command) throws IOException {
-		System.out.println(command);
 		Process process = new ProcessBuilder(command).start();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 		String line = null;
