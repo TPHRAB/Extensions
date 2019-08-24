@@ -2,6 +2,7 @@ package extensions.download;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.seleniumhq.jetty9.server.session.FileSessionDataStore;
 
 import extensions.progresbar.ProgressBar;
 
@@ -28,6 +29,7 @@ public class DownloadManager {
         Download threads = new Download(url, out, threadNum, pW, requestProperties);
         threads.start();
         threads.join();
+        out.setLastModified(System.currentTimeMillis());
     }
 
     // post : donwload ts files from "first" to "last" and output them to dir
