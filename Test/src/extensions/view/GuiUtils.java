@@ -3,14 +3,17 @@ package extensions.view;
 import java.awt.*;
 
 import javax.swing.JFrame;
+import javax.swing.UIManager;
 
 public class GuiUtils {
+	public static String FAST_LOOK_AND_FEEL = "com.jtattoo.plaf.fast.FastLookAndFeel";
+	
 	// set image for frame
-	public static void setFrameImage(JFrame jf) {
+	public static void setFrameImage(JFrame jf, String image) {
 		// get toolkit class
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		// get image from path
-		Image i = tk.getImage("source\\1029784.jpg");
+		Image i = tk.getImage(image);
 		// set image for JFrame
 		jf.setIconImage(i);
 	}
@@ -34,4 +37,5 @@ public class GuiUtils {
 		jf.setLocation(x, y);
 		
 	}
+	
 }
