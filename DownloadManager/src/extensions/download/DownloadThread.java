@@ -44,6 +44,7 @@ public class DownloadThread implements Runnable {
 				out.write(buffer, 0, count);
 			}
 			pW.write(1);
+			out.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

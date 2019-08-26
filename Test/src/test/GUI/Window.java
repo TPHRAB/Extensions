@@ -33,7 +33,7 @@ public class Window extends JFrame {
 	 * @throws UnsupportedLookAndFeelException 
 	 */
 	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
-		UIManager.setLookAndFeel("com.jtattoo.plaf.fast.FastLookAndFeel");
+		UIManager.setLookAndFeel(extensions.view.GuiUtils.FAST_LOOK_AND_FEEL);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -127,7 +127,7 @@ public class Window extends JFrame {
 	}
 	
 	public void init() {
-		extensions.view.GuiUtils.setFrameImage(this);
+		extensions.view.GuiUtils.setFrameImage(this, "source\\1.jpg");
 		extensions.view.GuiUtils.setFrameCenter(this);
 	}
 }
