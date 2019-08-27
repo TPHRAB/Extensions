@@ -14,16 +14,16 @@ import javax.swing.JFileChooser;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.JSplitPane;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class GUI extends JFrame {
-
+	private JFrame rootFrame;
 	private JPanel contentPane;
 	private JTextField destinationPath;
 	private JTextField sourcePath;
@@ -52,6 +52,7 @@ public class GUI extends JFrame {
 	 * Create the frame.
 	 */
 	public GUI() {
+		this.rootFrame = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 724, 309);
 		
@@ -95,12 +96,12 @@ public class GUI extends JFrame {
 		moveVideos.setLayout(null);
 		
 		JLabel labelSourcePath = new JLabel("Source Path:");
-		labelSourcePath.setFont(new Font("Î¢ÈíÑÅºÚ Light", Font.PLAIN, 14));
+		labelSourcePath.setFont(new Font("Î¢ï¿½ï¿½ï¿½Åºï¿½ Light", Font.PLAIN, 14));
 		labelSourcePath.setBounds(102, 62, 108, 15);
 		moveVideos.add(labelSourcePath);
 		
 		JLabel labelDestinationPath = new JLabel("Destination Path: ");
-		labelDestinationPath.setFont(new Font("Î¢ÈíÑÅºÚ Light", Font.PLAIN, 14));
+		labelDestinationPath.setFont(new Font("Î¢ï¿½ï¿½ï¿½Åºï¿½ Light", Font.PLAIN, 14));
 		labelDestinationPath.setBounds(102, 112, 108, 15);
 		moveVideos.add(labelDestinationPath);
 		
@@ -108,9 +109,9 @@ public class GUI extends JFrame {
 		destinationPath.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (sourcePath.getBackground().equals(Color.RED)) {
-					sourcePath.setText("");
-					sourcePath.setBackground(Color.WHITE);
+				if (!destinationPath.getBackground().equals(Color.WHITE)) {
+					destinationPath.setText("");
+					destinationPath.setBackground(Color.WHITE);
 				}
 			}
 		});
@@ -122,7 +123,7 @@ public class GUI extends JFrame {
 		sourcePath.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (sourcePath.getBackground().equals(Color.RED)) {
+				if (!sourcePath.getBackground().equals(Color.WHITE)) {
 					sourcePath.setText("");
 					sourcePath.setBackground(Color.WHITE);
 				}
@@ -133,7 +134,7 @@ public class GUI extends JFrame {
 		sourcePath.setColumns(10);
 		
 		JLabel diskNumber = new JLabel("Disk Added: 0");
-		diskNumber.setFont(new Font("Î¢ÈíÑÅºÚ Light", Font.PLAIN, 12));
+		diskNumber.setFont(new Font("Î¢ï¿½ï¿½ï¿½Åºï¿½ Light", Font.PLAIN, 12));
 		diskNumber.setBounds(578, 210, 98, 15);
 		moveVideos.add(diskNumber);
 		
@@ -153,12 +154,14 @@ public class GUI extends JFrame {
 					destinationPath.setBackground(Color.RED);
 					return;
 				}
+				
 				try {
+					rootFrame.setVisible(false);
 					AutoProcessDisk1.moveVideosFromDisk(in, out);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
-					JOptionPane.showMessageDialog(contentPane, e1.getStackTrace().toString());
-					JOptionPane.showMessageDialog(contentPane, "Programing will exist after confirming...");
+					e1.printStackTrace();
+					JOptionPane.showMessageDialog(contentPane, "Error encountered, program exiting");
 					System.exit(ERROR);
 				}
 				
@@ -189,7 +192,7 @@ public class GUI extends JFrame {
 				JFileChooser jFileChooser = new JFileChooser();
 				jFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 				int i = jFileChooser.showOpenDialog(null);
-				if(i== jFileChooser.APPROVE_OPTION){ //´ò¿ªÎÄ¼þ
+				if(i== jFileChooser.APPROVE_OPTION){ //ï¿½ï¿½ï¿½Ä¼ï¿½
 					sourcePath.setText(jFileChooser.getSelectedFile().getAbsolutePath());
 				} else {
 					sourcePath.setText("No file selected");
@@ -210,7 +213,7 @@ public class GUI extends JFrame {
 				JFileChooser jFileChooser = new JFileChooser();
 				jFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 				int i = jFileChooser.showOpenDialog(null);
-				if(i == jFileChooser.APPROVE_OPTION){ //´ò¿ªÎÄ¼þ
+				if(i == jFileChooser.APPROVE_OPTION){ //ï¿½ï¿½ï¿½Ä¼ï¿½
 					destinationPath.setText(jFileChooser.getSelectedFile().getAbsolutePath());
 				} else {
 					destinationPath.setText("No file selected");
@@ -228,7 +231,7 @@ public class GUI extends JFrame {
 		
 		JLabel lblSourcePath_1 = new JLabel("Source Path:");
 		lblSourcePath_1.setForeground(Color.WHITE);
-		lblSourcePath_1.setFont(new Font("Î¢ÈíÑÅºÚ Light", Font.PLAIN, 14));
+		lblSourcePath_1.setFont(new Font("Î¢ï¿½ï¿½ï¿½Åºï¿½ Light", Font.PLAIN, 14));
 		lblSourcePath_1.setBounds(97, 93, 108, 15);
 		sortVideos.add(lblSourcePath_1);
 		
@@ -236,7 +239,7 @@ public class GUI extends JFrame {
 		sourcePath1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (sourcePath1.getBackground().equals(Color.RED)) {
+				if (!sourcePath1.getBackground().equals(Color.WHITE)) {
 					sourcePath1.setBackground(Color.WHITE);
 					sourcePath1.setText("");
 				}
@@ -288,26 +291,75 @@ public class GUI extends JFrame {
 		JLabel label = new JLabel("Source Path:");
 		label.setBounds(102, 62, 108, 15);
 		label.setForeground(Color.WHITE);
-		label.setFont(new Font("Î¢ÈíÑÅºÚ Light", Font.PLAIN, 14));
+		label.setFont(new Font("Î¢ï¿½ï¿½ï¿½Åºï¿½ Light", Font.PLAIN, 14));
 		combineVideos.add(label);
 		
 		JLabel label_1 = new JLabel("Destination Path: ");
 		label_1.setForeground(Color.WHITE);
 		label_1.setBounds(102, 112, 108, 15);
-		label_1.setFont(new Font("Î¢ÈíÑÅºÚ Light", Font.PLAIN, 14));
+		label_1.setFont(new Font("Î¢ï¿½ï¿½ï¿½Åºï¿½ Light", Font.PLAIN, 14));
 		combineVideos.add(label_1);
 		
 		sourcePath2 = new JTextField();
+		sourcePath2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (!sourcePath2.getBackground().equals(Color.WHITE)) {
+					sourcePath2.setText("");
+					sourcePath2.setBackground(Color.WHITE);
+				}
+			}
+		});
 		sourcePath2.setBounds(220, 60, 266, 21);
 		sourcePath2.setColumns(10);
 		combineVideos.add(sourcePath2);
 		
 		destinationPath2 = new JTextField();
+		destinationPath2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (!destinationPath2.getBackground().equals(Color.WHITE)) {
+					destinationPath2.setText("");
+					destinationPath2.setBackground(Color.WHITE);
+				}
+			}
+		});
 		destinationPath2.setBounds(220, 110, 266, 21);
 		destinationPath2.setColumns(10);
 		combineVideos.add(destinationPath2);
 		
 		JButton button = new JButton("Start");
+		button.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// get in and out
+				File in = new File(sourcePath2.getText().trim());
+				if (!in.exists() || !in.isDirectory() || !in.getName().equals("VIDEO_TS")) {
+					JOptionPane.showMessageDialog(contentPane, "Please the DVD's videos' directory!");
+					sourcePath2.setBackground(Color.RED);
+					return;
+				}
+				File out = new File(destinationPath2.getText().trim());
+				if (!out.exists() || !out.isDirectory()) {
+					JOptionPane.showMessageDialog(contentPane, "Please input a exising directory!");
+					destinationPath2.setBackground(Color.RED);
+					return;
+				}
+				
+				
+				try {
+					AutoProcessDisk1.combineVideos(in, out);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+					JOptionPane.showMessageDialog(contentPane, "Program will exit after confirming...");
+					System.exit(ERROR);
+				} 
+				
+				// set text field background color
+				sourcePath2.setBackground(Color.GREEN);
+				destinationPath2.setBackground(Color.GREEN);
+			}
+		});
 		button.setBounds(378, 155, 108, 23);
 		combineVideos.add(button);
 		
@@ -351,5 +403,10 @@ public class GUI extends JFrame {
 	
 	public void init() {
 		extensions.view.GuiUtils.setFrameCenter(this);
+		this.setResizable(false);
+	}
+	
+	public void showRootFrame() {
+		rootFrame.setVisible(true);
 	}
 }

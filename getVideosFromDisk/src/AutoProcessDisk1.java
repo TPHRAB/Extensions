@@ -10,11 +10,22 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
+import java.io.PipedReader;
+import java.io.PipedWriter;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+
+import javax.swing.JFrame;
+import javax.swing.JProgressBar;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingWorker;
+
 import static extensions.file.fileUtils.*;
 
 public class AutoProcessDisk1 {
@@ -135,14 +146,14 @@ public class AutoProcessDisk1 {
 				continue;
 			}
 			File result = new File(dir.getAbsolutePath() + DIRECTORY_SEPERATOR + f.getName());
-			System.out.println(result.getAbsolutePath());
 			videosSource.add(f);
 			videosDestination.add(result);
 		}
 		convertVideos(videosSource, videosDestination);
 	}
 
-	public static void convertVideos(List<File> source, List<File> out) throws IOException {
+	public static void convertVideos(List<File> source, List<File> out) throws IOException, InterruptedException {
+		// initialize command
 		List<String> command = new ArrayList<>();
 		command.add(PROGRAM);
 		command.add("-i");
@@ -152,15 +163,35 @@ public class AutoProcessDisk1 {
 		command.add("25");
 		command.add("-s");
 		command.add("320*180");
-
-		for (int i = 0; i < source.size(); i++) {
-			// add source and output path
-			command.add(2, source.get(i).getAbsolutePath());
-			command.add(out.get(i).getAbsolutePath());
-			processStart(command);
-			// remove source and output path
-			command.remove(command.size() - 1);
-			command.remove(2);
+	
+		// initialize frame
+		ProgressBarFrame pbf = new ProgressBarFrame();
+		pbf.setVisible(true);
+		JTextArea area = pbf.getTextArea();
+		pbf.initPB("Convert Videos", source.size());
+		try {
+			new SwingWorker<Void, Void>() {
+				@Override
+				protected Void doInBackground() throws Exception {
+					for (int i = 0; i < source.size(); i++) {
+						// add source and output path
+						command.add(2, source.get(i).getAbsolutePath());
+						command.add(out.get(i).getAbsolutePath());
+						// set progress
+						processStart(new ArrayList<>(command), area, pbf.getPB());
+						// remove source and output path
+						command.remove(command.size() - 1);
+						command.remove(2);
+					}
+					return null;
+				}
+				@Override
+				protected void done() {
+					// show root panel
+				}
+			}.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -179,7 +210,6 @@ public class AutoProcessDisk1 {
 			System.out.println(Arrays.toString(videos));
 			videos = mergeSortOnFilesNames(videos);
 			for (File vob : videos) {
-				String regex1 = ".*_0[2-9]_[1-2]\\.VOB";
 				if (vob.isHidden()) {
 					continue;
 				}
@@ -191,7 +221,7 @@ public class AutoProcessDisk1 {
 		}
 	}
 
-	public static void combineVideos(File source, File out) throws IOException {
+	public static void combineVideos(File source, File out) throws IOException, InterruptedException {
 		// ffmpeg command
 		List<String> command = new ArrayList<>();
 		command.add(PROGRAM);
@@ -203,6 +233,13 @@ public class AutoProcessDisk1 {
 		String filesToConcat = "";
 		int namingIndex = 1;
 		String diskNumber = "1";
+		
+		// initialize frame
+		ProgressBarFrame pbf = new ProgressBarFrame();
+		pbf.setTitle("Convert Videos");
+		pbf.initPB("Combine Videos", list.length);
+		
+		JTextArea area = pbf.getTextArea();
 		for (int i = 0; i < list.length; i++) {
 			File f = list[i];
 			if (f.isHidden() || f.isDirectory() || !f.getName().split("\\.")[1].equals("VOB")) {
@@ -225,32 +262,33 @@ public class AutoProcessDisk1 {
 				filesToConcat = filesToConcat + "|" + f.getAbsolutePath();
 			} else {
 				command.add(2, filesToConcat);
-				processStart(command);
+				// set progress
+				processStart(command, area, pbf.getPB());
 				command.remove(command.size() - 1);
 				command.remove(2);
 				firstIndex = "";
 				filesToConcat = "";
 				i--; // not going forward
 			}
-		}
-		// if last file's index is the same as the file before it, then it need to add
-		// manually
+					}
+		// if last file's index is the same as the file before it, then it need to add manually
 		if (!firstIndex.isEmpty()) {
 			command.add(2, filesToConcat);
-			processStart(command);
+			// set progress
+			processStart(command, area, pbf.getPB());
 		}
 	}
 
-	public static void processStart(List<String> command) throws IOException {
-		System.out.println("--------------------------");
-		System.out.println(command);
-		System.out.println("--------------------------");
+	public static void processStart(List<String> command, JTextArea area, JProgressBar pb)
+			throws IOException, InterruptedException {
 		Process process = new ProcessBuilder(command).start();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 		String line = null;
 		while ((line = reader.readLine()) != null) {
-			System.out.println(line);
-		}
-		reader.close();
+			area.append(line + "\r\n");
+			area.setCaretPosition(area.getText().length() - line.length());
+		} 
+		pb.setValue(pb.getValue() + 1);
+		
 	}
 }
