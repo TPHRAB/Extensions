@@ -75,7 +75,7 @@ public class AutoProcessDisk1 {
 				nextTurn = true;
 
 				// move videos
-				moveVideosFromDisk(in, out);
+				moveVideosFromDisk(in, out, null);
 
 				// add another disk
 				System.out.print("Add another disk?(Y/~) ");
@@ -125,7 +125,7 @@ public class AutoProcessDisk1 {
 		}
 	}
 
-	public static void moveVideosFromDisk(File in, File out) throws Exception {
+	public static void moveVideosFromDisk(File in, File out, JFrame rootPanel) throws Exception {
 		// get destination
 		int count = 0;
 		for (File f : out.listFiles()) {
@@ -149,10 +149,10 @@ public class AutoProcessDisk1 {
 			videosSource.add(f);
 			videosDestination.add(result);
 		}
-		convertVideos(videosSource, videosDestination);
+		convertVideos(videosSource, videosDestination, rootPanel);
 	}
 
-	public static void convertVideos(List<File> source, List<File> out) throws IOException, InterruptedException {
+	public static void convertVideos(List<File> source, List<File> out, JFrame f) throws IOException, InterruptedException {
 		// initialize command
 		List<String> command = new ArrayList<>();
 		command.add(PROGRAM);
@@ -188,6 +188,7 @@ public class AutoProcessDisk1 {
 				@Override
 				protected void done() {
 					// show root panel
+					f.setVisible(true);
 				}
 			}.execute();
 		} catch (Exception e) {

@@ -54,7 +54,7 @@ public class GUI extends JFrame {
 	public GUI() {
 		this.rootFrame = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 724, 309);
+		setBounds(100, 100, 816, 309);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -97,12 +97,12 @@ public class GUI extends JFrame {
 		
 		JLabel labelSourcePath = new JLabel("Source Path:");
 		labelSourcePath.setFont(new Font("΢���ź� Light", Font.PLAIN, 14));
-		labelSourcePath.setBounds(102, 62, 108, 15);
+		labelSourcePath.setBounds(102, 62, 120, 15);
 		moveVideos.add(labelSourcePath);
 		
 		JLabel labelDestinationPath = new JLabel("Destination Path: ");
 		labelDestinationPath.setFont(new Font("΢���ź� Light", Font.PLAIN, 14));
-		labelDestinationPath.setBounds(102, 112, 108, 15);
+		labelDestinationPath.setBounds(102, 112, 120, 15);
 		moveVideos.add(labelDestinationPath);
 		
 		destinationPath = new JTextField();
@@ -115,7 +115,7 @@ public class GUI extends JFrame {
 				}
 			}
 		});
-		destinationPath.setBounds(220, 110, 266, 21);
+		destinationPath.setBounds(240, 110, 351, 21);
 		moveVideos.add(destinationPath);
 		destinationPath.setColumns(10);
 		
@@ -129,13 +129,13 @@ public class GUI extends JFrame {
 				}
 			}
 		});
-		sourcePath.setBounds(220, 60, 266, 21);
+		sourcePath.setBounds(240, 60, 351, 21);
 		moveVideos.add(sourcePath);
 		sourcePath.setColumns(10);
 		
 		JLabel diskNumber = new JLabel("Disk Added: 0");
 		diskNumber.setFont(new Font("΢���ź� Light", Font.PLAIN, 12));
-		diskNumber.setBounds(578, 210, 98, 15);
+		diskNumber.setBounds(692, 209, 98, 15);
 		moveVideos.add(diskNumber);
 		
 		
@@ -157,7 +157,7 @@ public class GUI extends JFrame {
 				
 				try {
 					rootFrame.setVisible(false);
-					AutoProcessDisk1.moveVideosFromDisk(in, out);
+					AutoProcessDisk1.moveVideosFromDisk(in, out, rootFrame);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -182,7 +182,7 @@ public class GUI extends JFrame {
 				}
 			}
 		});
-		btnStart.setBounds(378, 155, 108, 23);
+		btnStart.setBounds(361, 155, 108, 23);
 		moveVideos.add(btnStart);
 		
 		JButton btnChoose = new JButton("browse");
@@ -203,7 +203,7 @@ public class GUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnChoose.setBounds(496, 59, 79, 23);
+		btnChoose.setBounds(635, 59, 79, 23);
 		moveVideos.add(btnChoose);
 		
 		JButton button_1 = new JButton("browse");
@@ -220,7 +220,7 @@ public class GUI extends JFrame {
 				}
 			}
 		});
-		button_1.setBounds(496, 109, 79, 23);
+		button_1.setBounds(635, 109, 79, 23);
 		moveVideos.add(button_1);
 		
 		JPanel sortVideos = new JPanel();
@@ -232,7 +232,7 @@ public class GUI extends JFrame {
 		JLabel lblSourcePath_1 = new JLabel("Source Path:");
 		lblSourcePath_1.setForeground(Color.WHITE);
 		lblSourcePath_1.setFont(new Font("΢���ź� Light", Font.PLAIN, 14));
-		lblSourcePath_1.setBounds(97, 93, 108, 15);
+		lblSourcePath_1.setBounds(102, 93, 120, 15);
 		sortVideos.add(lblSourcePath_1);
 		
 		sourcePath1 = new JTextField();
@@ -245,7 +245,7 @@ public class GUI extends JFrame {
 				}
 			}
 		});
-		sourcePath1.setBounds(220, 91, 266, 21);
+		sourcePath1.setBounds(240, 91, 351, 21);
 		sortVideos.add(sourcePath1);
 		sourcePath1.setColumns(10);
 		
@@ -262,7 +262,7 @@ public class GUI extends JFrame {
 				AutoProcessDisk1.sortVideos(in);
 			}
 		});
-		btnStart_1.setBounds(393, 131, 93, 23);
+		btnStart_1.setBounds(361, 131, 108, 23);
 		sortVideos.add(btnStart_1);
 		
 		JButton button_2 = new JButton("browse");
@@ -279,7 +279,7 @@ public class GUI extends JFrame {
 				}
 			}
 		});
-		button_2.setBounds(496, 90, 79, 23);
+		button_2.setBounds(635, 90, 79, 23);
 		sortVideos.add(button_2);
 		
 		JPanel combineVideos = new JPanel();
@@ -289,14 +289,14 @@ public class GUI extends JFrame {
 		combineVideos.setLayout(null);
 		
 		JLabel label = new JLabel("Source Path:");
-		label.setBounds(102, 62, 108, 15);
+		label.setBounds(102, 62, 120, 15);
 		label.setForeground(Color.WHITE);
 		label.setFont(new Font("΢���ź� Light", Font.PLAIN, 14));
 		combineVideos.add(label);
 		
 		JLabel label_1 = new JLabel("Destination Path: ");
 		label_1.setForeground(Color.WHITE);
-		label_1.setBounds(102, 112, 108, 15);
+		label_1.setBounds(102, 112, 120, 15);
 		label_1.setFont(new Font("΢���ź� Light", Font.PLAIN, 14));
 		combineVideos.add(label_1);
 		
@@ -310,7 +310,7 @@ public class GUI extends JFrame {
 				}
 			}
 		});
-		sourcePath2.setBounds(220, 60, 266, 21);
+		sourcePath2.setBounds(240, 60, 351, 21);
 		sourcePath2.setColumns(10);
 		combineVideos.add(sourcePath2);
 		
@@ -324,7 +324,7 @@ public class GUI extends JFrame {
 				}
 			}
 		});
-		destinationPath2.setBounds(220, 110, 266, 21);
+		destinationPath2.setBounds(240, 110, 351, 21);
 		destinationPath2.setColumns(10);
 		combineVideos.add(destinationPath2);
 		
@@ -360,7 +360,7 @@ public class GUI extends JFrame {
 				destinationPath2.setBackground(Color.GREEN);
 			}
 		});
-		button.setBounds(378, 155, 108, 23);
+		button.setBounds(361, 155, 108, 23);
 		combineVideos.add(button);
 		
 		JButton button_3 = new JButton("browse");
@@ -377,7 +377,7 @@ public class GUI extends JFrame {
 				}
 			}
 		});
-		button_3.setBounds(496, 59, 79, 23);
+		button_3.setBounds(635, 59, 79, 23);
 		combineVideos.add(button_3);
 		
 		JButton button_4 = new JButton("browse");
@@ -394,7 +394,7 @@ public class GUI extends JFrame {
 				}
 			}
 		});
-		button_4.setBounds(496, 109, 79, 23);
+		button_4.setBounds(635, 109, 79, 23);
 		combineVideos.add(button_4);
 		
 		// init
