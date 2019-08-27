@@ -3,13 +3,36 @@ package TestingClasses;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.concurrent.ExecutionException;
+
+import javax.swing.SwingWorker;
 
 public class Test {
 	public static void main(String[] args) throws IOException {
-		File source = new File("/Users/zhaochenze/Desktop/imitation");
-		int[] counter = new int[2];
-		recursiveHelper(source, counter);
-		System.out.println("total: " + counter[0] + "matches: " + counter[1]);
+		System.out.println("0");
+		SwingWorker<Void, Void> thread = new SwingWorker<Void, Void>() {
+			@Override
+			protected Void doInBackground() throws Exception {
+				// TODO Auto-generated method stub
+				System.out.println("1");
+				return null;
+			}
+			@Override
+			protected void done() {
+				System.out.println("Done");
+			}	
+		};
+		thread.execute();
+		try {
+			thread.get();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public static void recursiveHelper(File source, int[] counter) {

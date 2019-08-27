@@ -8,6 +8,6 @@
 	<classpathentry kind="lib" path="lib/progressbar.jar"/>
 	<classpathentry kind="lib" path="lib/selenium-server-standalone-3.141.59.jar"/>
 	<classpathentry kind="lib" path="lib/dom4jExtension.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/Java SE 12.0.2 [12.0.2]"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_221"/>
 	<classpathentry kind="output" path="out/production/DownloadManager"/>
 </classpath>
