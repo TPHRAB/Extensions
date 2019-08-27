@@ -31,7 +31,8 @@ public class ProgressBarFrame extends JFrame {
 	private JRadioButton rdbtnShowDetail;
 	private JScrollBar horizontal;
 	private JScrollBar vertical;
-
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -53,17 +54,17 @@ public class ProgressBarFrame extends JFrame {
 	 * Create the frame.
 	 * @throws IOException 
 	 */
-	public ProgressBarFrame() throws IOException {		
+	public ProgressBarFrame() throws IOException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 115);
+		setBounds(100, 100, 469, 131);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		pb = new JProgressBar();
 		pb.setFont(new Font("Lucida Grande", Font.PLAIN, 22));
-		pb.setBounds(65, 19, 313, 28);
+		pb.setBounds(65, 19, this.getWidth() - 65 * 2, 28);
 		contentPane.add(pb);
 		
 		// information field
@@ -78,7 +79,7 @@ public class ProgressBarFrame extends JFrame {
 				((JFrame) contentPane.getTopLevelAncestor()).dispose();
 			}
 		});
-		finish.setBounds(354, 62, 90, 21);
+		finish.setBounds(353, 62, 90, 21);
 		finish.setEnabled(false);
 		contentPane.add(finish);
 		
@@ -109,7 +110,7 @@ public class ProgressBarFrame extends JFrame {
 				}
 			}
 		});
-		rdbtnShowDetail.setBounds(6, 59, 141, 23);
+		rdbtnShowDetail.setBounds(6, 61, 141, 23);
 		contentPane.add(rdbtnShowDetail);
 		
 	}
@@ -127,7 +128,6 @@ public class ProgressBarFrame extends JFrame {
 	public JProgressBar getPB() {
 		return pb;
 	}
-	
 	
 	public JTextArea getTextArea() {
 		return area;
