@@ -21,6 +21,8 @@ import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
 import javax.swing.SwingWorker;
 
+import progressbar.ProgressBarFrame;
+
 import static extensions.file.fileUtils.*;
 
 public class AutoProcessDisk1 {
@@ -179,7 +181,10 @@ public class AutoProcessDisk1 {
 					command.remove(command.size() - 1);
 					command.remove(2);
 				}
+				pbf.enableFinish();
 				rootFrame.setVisible(true);
+				rootFrame.requestFocus();
+				pbf.requestFocus();
 				return null;
 			}
 		}.execute();
@@ -273,7 +278,10 @@ public class AutoProcessDisk1 {
 					processStart(command, area);
 					pb.setValue(pb.getValue() + 1);
 				}
+				pbf.enableFinish();
 				rootFrame.setVisible(true);
+				rootFrame.requestFocus();
+				pbf.requestFocus();
 				return null;
 			}
 		}.execute();
