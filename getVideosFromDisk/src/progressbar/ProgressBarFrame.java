@@ -1,4 +1,4 @@
-package getVideosFromDisk;
+package progressbar;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.text.BadLocationException;
 import javax.swing.JProgressBar;
 import java.awt.Font;
 
@@ -128,8 +129,14 @@ public class ProgressBarFrame extends JFrame {
 				int scrollbarMax = finish.getY() - pb.getY() - distance * 2 - pb.getHeight();
 				JScrollBar vertical = scrollPane_1.getVerticalScrollBar();
 				if (showDetail.isSelected() && vertical.getValue() >= scrollbarMax) {
-					String areaText = area.getText();
-					area.setCaretPosition(area.getText().lastIndexOf("\n", areaText.length() - 1) + 1);
+					if (area.getLineCount() >= 400) {
+						try {
+							area.replaceRange("", 0, area.getLineEndOffset(200));
+						} catch (BadLocationException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
 				}
 			}
 			
