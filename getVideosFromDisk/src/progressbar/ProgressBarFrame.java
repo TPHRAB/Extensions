@@ -126,23 +126,24 @@ public class ProgressBarFrame extends JFrame {
 			
 			@Override
 			public void insertUpdate(DocumentEvent e) {
+//				System.out.printf("JFrame: %d, %d, JProgressbar: %d, %d", rootFrame.getWidth(), rootFrame.getHeight(), pb.getValue(), pb.getMaximum());
+				
 				int scrollbarMax = finish.getY() - pb.getY() - distance * 2 - pb.getHeight();
 				JScrollBar vertical = scrollPane_1.getVerticalScrollBar();
-				if (showDetail.isSelected() && vertical.getValue() >= scrollbarMax) {
-					if (area.getLineCount() >= 400) {
-						try {
-							area.replaceRange("", 0, area.getLineEndOffset(200));
-						} catch (BadLocationException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-					}
+				if (vertical.getValue() > scrollbarMax && vertical.getMaximum() - vertical.getValue() > 200 && showDetail.isSelected()) {
+					return;
+				}
+				
+				try {
+					area.setCaretPosition(area.getLineEndOffset(area.getLineCount() - 1));
+				} catch (BadLocationException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			}
 			
 			@Override
 			public void changedUpdate(DocumentEvent e) {
-				
 			}
 	    });
 		
