@@ -20,6 +20,7 @@ import javax.swing.JFrame;
 import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
 import javax.swing.SwingWorker;
+import javax.swing.text.BadLocationException;
 
 import progressbar.ProgressBarFrame;
 
@@ -241,6 +242,7 @@ public class AutoProcessDisk1 {
 				for (int i = 0; i < list.length; i++) {
 					File f = list[i];
 					if (f.isHidden() || f.isDirectory() || !f.getName().split("\\.")[1].equals("VOB")) {
+						pb.setValue(pb.getValue() + 1);
 						continue;
 					}
 					String regex1 = ".*_.*_\\d*_\\d.VOB";
@@ -253,8 +255,12 @@ public class AutoProcessDisk1 {
 					if (firstIndex.isEmpty()) {
 						firstIndex = namingParts[2];
 						filesToConcat = "concat:" + f.getAbsolutePath();
+						/*
+						 * command.add(out.getAbsolutePath() + DIRECTORY_SEPERATOR
+						 *		+ f.getName().substring(0, f.getName().lastIndexOf('_') - 2) + namingIndex + ".mp4");
+						 */
 						command.add(out.getAbsolutePath() + DIRECTORY_SEPERATOR
-								+ f.getName().substring(0, f.getName().lastIndexOf('_') - 2) + namingIndex + ".mp4");
+								+ f.getName().substring(0, f.getName().lastIndexOf('_') - 3) + '-' + namingIndex + ".mp4");
 						namingIndex++;
 					} else if (f.getName().matches(regex1) && firstIndex.equals(f.getName().split("_")[2])) {
 						filesToConcat = filesToConcat + "|" + f.getAbsolutePath();
@@ -293,13 +299,27 @@ public class AutoProcessDisk1 {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 		String line = null;
 		while ((line = reader.readLine()) != null) {
-			System.out.println(line);
+			if (area.getLineCount() >= 400) {
+				try {
+					area.replaceRange("", 0, area.getLineEndOffset(200));
+				} catch (BadLocationException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
 			area.append(line + "\r\n");
 		} 
 		reader.close();
 		reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 		while ((line = reader.readLine()) != null) {
-			System.out.println(line);
+			if (area.getLineCount() >= 400) {
+				try {
+					area.replaceRange("", 0, area.getLineEndOffset(200));
+				} catch (BadLocationException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
 			area.append(line + "\r\n");
 		}
 		reader.close();
