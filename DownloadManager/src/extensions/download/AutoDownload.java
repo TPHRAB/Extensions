@@ -222,7 +222,7 @@ public class AutoDownload {
     	browser.manage().timeouts().implicitlyWait(15,TimeUnit.SECONDS);
     	browser.get(url);
     	String link = browser.findElements(By.tagName("video")).get(0).findElement(By.tagName("source")).getAttribute("src");
-    	String fileName = browser.getTitle().replaceAll("\\**", "");
+    	String fileName = browser.getTitle().replaceAll("[\\\\/:*?\"<>|]]*", "");
         File result = new File(out.getAbsolutePath() + DIRECTORY_SEPERATOR + fileName + ".mp4");
         browser.close();
         int threads = 10;
