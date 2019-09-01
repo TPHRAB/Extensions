@@ -260,7 +260,7 @@ public class AutoProcessDisk1 {
 						 *		+ f.getName().substring(0, f.getName().lastIndexOf('_') - 2) + namingIndex + ".mp4");
 						 */
 						command.add(out.getAbsolutePath() + DIRECTORY_SEPERATOR
-								+ f.getName().substring(0, f.getName().lastIndexOf('_') - 3) + '-' + namingIndex + ".mp4");
+								+ f.getName().substring(0, f.getName().lastIndexOf('_') - 2) + namingIndex + ".mp4");
 						namingIndex++;
 					} else if (f.getName().matches(regex1) && firstIndex.equals(f.getName().split("_")[2])) {
 						filesToConcat = filesToConcat + "|" + f.getAbsolutePath();
