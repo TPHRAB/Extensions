@@ -4,19 +4,18 @@
 
 // Github--extensions
 
-// Class TestThread is the main class for calling CopyThread and Copy. It can use
-// command line to communicate with its users.
+// Class TestThread is the main class for calling CopyThread and Copy. It use Multiple threads 
+// to copy or combine files
 
 package extensions.copy;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.List;
 import me.tongfei.progressbar.ProgressBar;
 
-// Use Multiple threads to copy or combine files
 public class TestThread {
 
 	public static final char FILE_SYMBOL = '.';
@@ -54,19 +53,38 @@ public class TestThread {
 		console.close();
 	}
 
-	// copy a file from "in" to "out"
-	public static Copy doCopySingleFile(File in, File out, long offset) throws Exception {
+	// pre    : 1. in.exists() (throws IOException if not)
+	//          2. !out.exist() && offset >= 0 (throws IllegalArgumentException if not)
+	// post   : copy a file from "in" to "out"
+	// params : in     --- file to read
+	//          out    --- file to write
+	//          offset --- starting position to write in "out"
+	public static Copy doCopySingleFile(File in, File out, long offset) throws IllegalArgumentException, IOException {
+		if (out.exists()) {
+			throw new IllegalArgumentException("Output file already exist!");
+		}
+		
 		Copy task = new Copy(4, in, out, offset);
 		task.start();
 		return task;
 	}
 
-	// copy directory to "out"
-	public static List<Copy> doCopyDirectory(File[] list, File out, boolean showPB) throws Exception {
+	// pre    : 1. list != null (throws IllegalStateException if not)
+	//          2. !out.exists() (throws IllegalArgumentException if not)
+	// post   : copy directory to "out"
+	// params : list   --- file list to do copying
+	//          out    --- output directory
+	//          showPB --- whether or not to show the progressbar
+	public static List<Copy> doCopyDirectory(File[] list, File out, boolean showPB) throws IllegalArgumentException, IOException {
+		if (list == null) {
+			throw new IllegalStateException("Directory list is null");
+		}
+
 		if (out.exists()) {
 			throw new IllegalArgumentException(out.getName() + " alreay exits!");
 		}
 		out.mkdir();
+		
 		List<Copy> threads = new ArrayList<Copy>();
 		long totalSize = 0;
 		for (File f : list) {
@@ -88,11 +106,20 @@ public class TestThread {
 		return threads;
 	}
 
-	// combine all the files in "list" and output them to "out"
-	public static List<Copy> doCombine(File[] list, File out) throws Exception {
+	// pre    : 1. list != null (throws IllegalStateException if not)
+	//          2. !out.exists() (throws IllegalArgumentException if not)
+	// post   : combine all the files in "list" and output them to "out"
+	// params : list --- file list to do copying
+	public static List<Copy> doCombine(File[] list, File out) throws IOException {
+		if (list == null) {
+			throw new IllegalStateException("Directory list is null");
+		}
+
+		
 		if (out.exists()) {
 			throw new IllegalArgumentException(out.getName() + " already exists!");
 		}
+		
 		out.createNewFile();
 		long totalSize = 0;
 		List<Copy> threads = new ArrayList<Copy>();
@@ -101,7 +128,7 @@ public class TestThread {
 		int count = 0;
 		while (i < list.length) {
 			if (count >= 500) {
-				extensions.copy.TestThread.waitThreads(threads);
+				waitThreads(threads);
 				threads.clear();
 				count = 0;
 			} else {
@@ -118,8 +145,15 @@ public class TestThread {
 		return threads;
 	}
 
-	// show ProgressBar while generating a single file
+	// pre    : out != null (throws IllegalStateException if not)
+	// post   : show ProgressBar while generating a single file
+	// params : out       --- file to generate
+	//          totalSize --- "out"'s size
 	private static void showFilePB(File out, long totalSize) {
+		if (out == null) {
+			throw new IllegalStateException("Output file has not been created!");
+		}
+		
 		try (ProgressBar pb = new ProgressBar(out.getName(), totalSize)) {
 			while (out.length() < totalSize) {
 				pb.stepTo(out.length()); // step directly to n
@@ -127,7 +161,9 @@ public class TestThread {
 		}
 	}
 
-	// return totalSize for files in "threads"
+	// pre   : "threads" != null
+	// post  : return total size for files in "threads"
+	// param : threads --- thread pool which contains "Copy" objects
 	private static long getDirectorySize(List<Copy> threads) {
 		long totalSize = 0;
 		for (Copy c : threads) {
@@ -136,8 +172,11 @@ public class TestThread {
 		return totalSize;
 	}
 
-	// show ProgressBar while generating a directory
-	private static void showDirectoryPB(List<Copy> threads, long totalSize) throws Exception {
+	// pre    : "threads" != null
+	// post   : show progressbar while processing a directory in command line
+	// params : threads   --- thread pool which contains "Copy" objects
+	//          totalSize --- total size of the directory
+	private static void showDirectoryPB(List<Copy> threads, long totalSize) {
 		try (ProgressBar pb = new ProgressBar("Copy Directory", totalSize)) {
 			pb.stepTo(0);
 			long currentSize = getDirectorySize(threads);
@@ -149,10 +188,21 @@ public class TestThread {
 		}
 	}
 
-	// wait for threads to die
-	public static void waitThreads(List<Copy> threads) throws Exception {
+	// pre   : "threads" != null
+	// post  : wait for threads to die
+	// param : threads --- thread pool which contains "Copy" objects
+	public static void waitThreads(List<Copy> threads) {
+		if (threads == null) {
+			throw new IllegalArgumentException("Thread pool to wait for dying is null!");
+		}
+		
 		for (Copy c : threads) {
-			c.join();
+			try {
+				c.join();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 

@@ -11,30 +11,37 @@
 package extensions.copy;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.RandomAccessFile;
 
 public class CopyThread implements Runnable {
 
 	public static final int BUFFER_LENGTH = 1024; // length of the buffer to read from the file
+	private RandomAccessFile in;                  // File to read
+	private RandomAccessFile out;                 // File to write
+	private Thread thread; 		                  // Thread for this object
+	private long end; 			                  // position for this thread to end
 
-	private RandomAccessFile in;  // File to read
-	private RandomAccessFile out; // File to write
-	private Thread thread; 		  // Thread for this object
-	private long end; 			  // position for this thread to end
-
-	// pre   : "end" is smaller than "in"'s length && threadNum should be at least 1
-	// 		   && "in" exists && "out" exists (throws IllegalArgumentException if not)
+	// pre   : 1. in.exists() && end < in.length() (throws IOException if not)
+	//         2. start <= end && offset >= 0 (throws IllegalArgumentException if not)
 	// post  : construct a Copy class
-	// param : threadName --- name of this thread
-	// 		   threadNum --- number of threads to copy file
-	// 		   in --- File to read
-	// 		   out --- File to write
-	// 		   start --- start position to read from "in"
-	// 		   end --- end position to read from "in"
-	public CopyThread(File in, File out, long start, long end, long offset) throws Exception {
-		if (end > in.length()) {
-			throw new IllegalArgumentException("end position is greater than file's length!");
+	// param : in     --- File to read
+	// 		   out    --- File to write
+	// 		   start  --- start position to read from "in"
+	// 		   end    --- end position to read from "in"
+	//         offset --- starting position to write in "out"
+	public CopyThread(File in, File out, long start, long end, long offset) throws 
+			IllegalArgumentException, IOException {
+		// checking conditions
+		if (start > end) {
+			throw new IllegalArgumentException("Starting Position is greater than ending position!");
 		}
+		
+		if (offset < 0) {
+			throw new IllegalArgumentException("Offset value is less than zero");
+		}
+		
+		// assign values to fields
 		this.in = new RandomAccessFile(in, "r");
 		this.out = new RandomAccessFile(out, "rw");
 		this.in.seek(start);
