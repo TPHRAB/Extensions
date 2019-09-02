@@ -9,8 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.server.handler.interactions.touch.Down;
 
-import com.sun.net.ssl.HttpsURLConnection;
-
+import extensions.dom4j.Dom4jUtil;
 import extensions.progresbar.ProgressBar;
 
 import java.io.BufferedReader;
@@ -29,7 +28,6 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
-import org.dom4jExtension.*;
 
 
 public class AutoDownload {

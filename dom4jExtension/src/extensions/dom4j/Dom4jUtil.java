@@ -1,13 +1,18 @@
 // Timmy Zhao
-package org.dom4jExtension;
+
+// 07/22/19
+
+// Dom4jUtil simplifies procedure to manipulate SAX and XMLWriter
+
+package extensions.dom4j;
 
 import java.io.*;
 import org.dom4j.*;
 import org.dom4j.io.*;
 
-// Dom4jUtil simplifies procedure to manipulate SAX and XMLWriter
 public class Dom4jUtil {
    
+   // pre  : "filePath" points to a valid XML document
    // post : return document for the xml file with the specified "filePath"
    public static Document getDocument(String filePath) {
       try {
@@ -19,6 +24,7 @@ public class Dom4jUtil {
       return null;
    }
    
+   // pre  : "filePath" points to a valid XML document && "document" != null
    // post : write "document" to "filePath"
    public static void writeBack(String filePath, Document document) {
       try {
