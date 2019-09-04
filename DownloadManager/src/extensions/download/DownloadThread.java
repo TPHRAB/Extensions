@@ -2,24 +2,34 @@
 
 // 7/25/19
 
-// Github---extensions
+// "DownloadThread" class serves to be "Thread" to download files while also sending current progress to pipe
 
 package extensions.download;
 
 import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.PipedWriter;
 import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
 
 public class DownloadThread implements Runnable {
-	public static final int BUFFER_LENGTH = 1024;
-	private BufferedInputStream in;
-	private RandomAccessFile out;
-	private PipedWriter pW;
-	private Thread thread;
+	public static final int BUFFER_LENGTH = 1024; // length of the buffer to store data
+	private BufferedInputStream in;               // source to read
+	private RandomAccessFile out;                 // output file
+	private PipedWriter pW;                       // pipe to send current progress
+	private Thread thread;                        // object's "Thread"
 	
-	public DownloadThread(BufferedInputStream in, File out, int start, PipedWriter pW) throws Exception {
+	// pre    : pW has connected to the PipedReader which is used by the progressbar
+	// pose   : create a "DownloadThread" which read from "in" and write to "out" which 
+	//          starts at the specified position "start"
+	// params : in    --- source to read from
+	//          out   --- file to write (may not been created yet)
+	//          start --- starting position to write in "out"
+	//          pW    --- PipedWriter that is connected to progressbar's PipedReader for
+	//                    sending current progress
+	public DownloadThread(BufferedInputStream in, File out, int start, PipedWriter pW)
+			throws Exception {
 		this.in = in;
 		this.out = new RandomAccessFile(out, "rws");
 		this.out.seek(start);
@@ -27,15 +37,34 @@ public class DownloadThread implements Runnable {
 		this.thread = new Thread(this);
 	}
 	
-	public DownloadThread(HttpURLConnection connection, String out, int start, PipedWriter pW) throws Exception {
+	// pre    : pW has connected to the PipedReader which is used by the progressbar
+	// pose   : create a "DownloadThread" which read from "connection"'s inputstream and write to 
+	//          the path "out", starting at the specified position "start" 
+	// params : connection --- source to get data to read
+	//          out        --- path that points to the file to write (may not been created yet)
+	//          start      --- starting position to write in "out"'s file
+	//          pW         --- PipedWriter that is connected to progressbar's PipedReader
+	//                         for sending current progress
+	public DownloadThread(HttpURLConnection connection, String out, int start, PipedWriter pW)
+			throws Exception {
 		this(new BufferedInputStream(connection.getInputStream()), new File(out), start, pW);
 	}
 	
-	public DownloadThread(HttpURLConnection connection, File out, int start, PipedWriter pW) throws Exception {
+	// pre    : pW has connected to the PipedReader which is used by the progressbar
+	// pose   : create a "DownloadThread" which read from "connection"'s inputstream and write to 
+	//          "out", starting at the specified position "start" 
+	// params : connection --- source to get data to read
+	//          out        --- file to write (may not been created yet)
+	//          start      --- starting position to write in "out"'s file
+	//          pW         --- PipedWriter that is connected to progressbar's PipedReader
+	//                         for sending current progress
+	public DownloadThread(HttpURLConnection connection, File out, int start, PipedWriter pW)
+			throws Exception {
 		this(new BufferedInputStream(connection.getInputStream()), out, start, pW);
 	}
 
 	@Override
+	// post : write everything from "in" to "out"
 	public void run() {
 		try {
 			byte[] buffer = new byte[BUFFER_LENGTH];
@@ -51,9 +80,12 @@ public class DownloadThread implements Runnable {
 		
 	}
 	
+	// post : start "thread"
 	public void start() {
 		thread.start();
 	}
+	
+	// post : wait for "thread" to die
 	public void join() throws Exception {
 		thread.join();
 	}
