@@ -18,7 +18,7 @@ import me.tongfei.progressbar.ProgressBar;
 
 public class TestThread {
 
-	public static final char FILE_SYMBOL = '.';
+	public static final char FILE_SYMBOL = '.'; // identifier for a file
 
 	public static void main(String[] args) throws Exception {
 		// get input and output path

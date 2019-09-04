@@ -26,7 +26,7 @@ public class Copy {
 	// post  : construct a Copy Class
 	// param : threadNum --- number of threads to use while copying
 	//		   in        --- file to be copied
-	//         out 		 --- file to generate
+	//         out 		 --- file to generate (may not been created yet)
 	//         offset    --- starting position to write in "out"
 	public Copy(int threadNum, File in, File out, long offset) throws IllegalArgumentException, IOException {
 		if (threadNum < 1) {
@@ -62,7 +62,7 @@ public class Copy {
 	// post  : construct a Copy Class
 	// param : threadNum --- number of threads to use while copying
 	//		   in        --- filePath for the file to be copied
-	//         out 		 --- filePath for the file to be generated
+	//         out 		 --- filePath for the file to be generated (may not been created yet)
 	//         offset    --- starting position to write in "out"
 	public Copy(int threadNum, String in, String out, long offset) throws Exception {
 		this(threadNum, new File(in), new File(out), offset);
@@ -73,7 +73,7 @@ public class Copy {
 	//            && offset >= 0 (throws IllegalArgumentException if not)
 	// post  : construct a Copy Class (set threadNum to be default number)
 	// param : in     --- filePath for the file to be copied
-	//         out    --- filePath for the file to be generated
+	//         out    --- filePath for the file to be generated (may not been created yet)
 	//         offset --- starting position to write in "out"
 	public Copy(String in, String out, long offset) throws Exception {
 		this(DEFAULT_THREAD_NUM, new File(in), new File(out), offset);
@@ -84,7 +84,7 @@ public class Copy {
 	//            && offset >= 0 (throws IllegalArgumentException if not)
 	// post  : construct a Copy Class (set threadNum to be default number)
 	// param : in  --- File to be copied
-	//         out --- File to be generated
+	//         out --- File to be generated (may not been created yet)
 	//         offset --- starting position to write in "out"
 	public Copy(File in, File out, long offset) throws Exception {
 		this(5, in, out, offset);

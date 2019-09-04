@@ -26,7 +26,7 @@ public class CopyThread implements Runnable {
 	//         2. start <= end && offset >= 0 (throws IllegalArgumentException if not)
 	// post  : construct a Copy class
 	// param : in     --- File to read
-	// 		   out    --- File to write
+	// 		   out    --- File to write (may not been created yet)
 	// 		   start  --- start position to read from "in"
 	// 		   end    --- end position to read from "in"
 	//         offset --- starting position to write in "out"
