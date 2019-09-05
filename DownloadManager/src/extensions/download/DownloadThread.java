@@ -9,6 +9,7 @@ package extensions.download;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PipedWriter;
 import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
@@ -20,8 +21,9 @@ public class DownloadThread implements Runnable {
 	private PipedWriter pW;                       // pipe to send current progress
 	private Thread thread;                        // object's "Thread"
 	
-	// pre    : pW has connected to the PipedReader which is used by the progressbar
-	// pose   : create a "DownloadThread" which read from "in" and write to "out" which 
+	// pre    : 1. pW has connected to the PipedReader which is used by the progressbar
+	//          2. out exists or out can be created (throws IOException if not)
+	// post   : create a "DownloadThread" which read from "in" and write to "out" which 
 	//          starts at the specified position "start"
 	// params : in    --- source to read from
 	//          out   --- file to write (may not been created yet)
@@ -29,7 +31,7 @@ public class DownloadThread implements Runnable {
 	//          pW    --- PipedWriter that is connected to progressbar's PipedReader for
 	//                    sending current progress
 	public DownloadThread(BufferedInputStream in, File out, int start, PipedWriter pW)
-			throws Exception {
+			throws IOException {
 		this.in = in;
 		this.out = new RandomAccessFile(out, "rws");
 		this.out.seek(start);
@@ -37,20 +39,8 @@ public class DownloadThread implements Runnable {
 		this.thread = new Thread(this);
 	}
 	
-	// pre    : pW has connected to the PipedReader which is used by the progressbar
-	// pose   : create a "DownloadThread" which read from "connection"'s inputstream and write to 
-	//          the path "out", starting at the specified position "start" 
-	// params : connection --- source to get data to read
-	//          out        --- path that points to the file to write (may not been created yet)
-	//          start      --- starting position to write in "out"'s file
-	//          pW         --- PipedWriter that is connected to progressbar's PipedReader
-	//                         for sending current progress
-	public DownloadThread(HttpURLConnection connection, String out, int start, PipedWriter pW)
-			throws Exception {
-		this(new BufferedInputStream(connection.getInputStream()), new File(out), start, pW);
-	}
-	
-	// pre    : pW has connected to the PipedReader which is used by the progressbar
+	// pre    : 1. pW has connected to the PipedReader which is used by the progressbar
+	//          2. out exists or out can be created (throws IOException if not)
 	// pose   : create a "DownloadThread" which read from "connection"'s inputstream and write to 
 	//          "out", starting at the specified position "start" 
 	// params : connection --- source to get data to read
@@ -59,7 +49,7 @@ public class DownloadThread implements Runnable {
 	//          pW         --- PipedWriter that is connected to progressbar's PipedReader
 	//                         for sending current progress
 	public DownloadThread(HttpURLConnection connection, File out, int start, PipedWriter pW)
-			throws Exception {
+			throws IOException {
 		this(new BufferedInputStream(connection.getInputStream()), out, start, pW);
 	}
 
@@ -86,7 +76,7 @@ public class DownloadThread implements Runnable {
 	}
 	
 	// post : wait for "thread" to die
-	public void join() throws Exception {
+	public void join() throws InterruptedException {
 		thread.join();
 	}
 

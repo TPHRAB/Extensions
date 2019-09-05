@@ -56,39 +56,39 @@ public class Copy {
 		}
 	}
 
-	// pre   : 1. "in" is an existing file (throws IOException if not)
-	//         2. threadNum >= 1 && in.length() / threadNum > 0 
-	//            && offset >= 0 (throws IllegalArgumentException if not)
-	// post  : construct a Copy Class
-	// param : threadNum --- number of threads to use while copying
-	//		   in        --- filePath for the file to be copied
-	//         out 		 --- filePath for the file to be generated (may not been created yet)
-	//         offset    --- starting position to write in "out"
-	public Copy(int threadNum, String in, String out, long offset) throws Exception {
-		this(threadNum, new File(in), new File(out), offset);
-	}
-
-	// pre   : 1. "in" is an existing file (throws IOException if not)
-	//         2. in.length() / threadNum > 0 
-	//            && offset >= 0 (throws IllegalArgumentException if not)
-	// post  : construct a Copy Class (set threadNum to be default number)
-	// param : in     --- filePath for the file to be copied
-	//         out    --- filePath for the file to be generated (may not been created yet)
-	//         offset --- starting position to write in "out"
-	public Copy(String in, String out, long offset) throws Exception {
-		this(DEFAULT_THREAD_NUM, new File(in), new File(out), offset);
-	}
-
-	// pre   : 1. "in" is an existing file (throws IOException if not)
-	//         2. in.length() / threadNum > 0 
-	//            && offset >= 0 (throws IllegalArgumentException if not)
-	// post  : construct a Copy Class (set threadNum to be default number)
-	// param : in  --- File to be copied
-	//         out --- File to be generated (may not been created yet)
-	//         offset --- starting position to write in "out"
-	public Copy(File in, File out, long offset) throws Exception {
-		this(5, in, out, offset);
-	}
+//	// pre   : 1. "in" is an existing file (throws IOException if not)
+//	//         2. threadNum >= 1 && in.length() / threadNum > 0 
+//	//            && offset >= 0 (throws IllegalArgumentException if not)
+//	// post  : construct a Copy Class
+//	// param : threadNum --- number of threads to use while copying
+//	//		   in        --- filePath for the file to be copied
+//	//         out 		 --- filePath for the file to be generated (may not been created yet)
+//	//         offset    --- starting position to write in "out"
+//	public Copy(int threadNum, String in, String out, long offset) throws Exception {
+//		this(threadNum, new File(in), new File(out), offset);
+//	}
+//
+//	// pre   : 1. "in" is an existing file (throws IOException if not)
+//	//         2. in.length() / threadNum > 0 
+//	//            && offset >= 0 (throws IllegalArgumentException if not)
+//	// post  : construct a Copy Class (set threadNum to be default number)
+//	// param : in     --- filePath for the file to be copied
+//	//         out    --- filePath for the file to be generated (may not been created yet)
+//	//         offset --- starting position to write in "out"
+//	public Copy(String in, String out, long offset) throws Exception {
+//		this(DEFAULT_THREAD_NUM, new File(in), new File(out), offset);
+//	}
+//
+//	// pre   : 1. "in" is an existing file (throws IOException if not)
+//	//         2. in.length() / threadNum > 0 
+//	//            && offset >= 0 (throws IllegalArgumentException if not)
+//	// post  : construct a Copy Class (set threadNum to be default number)
+//	// param : in  --- File to be copied
+//	//         out --- File to be generated (may not been created yet)
+//	//         offset --- starting position to write in "out"
+//	public Copy(File in, File out, long offset) throws Exception {
+//		this(5, in, out, offset);
+//	}
 
 	// post : start running all the threads in "threadPool"
 	public void start() {

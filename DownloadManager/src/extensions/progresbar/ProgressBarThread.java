@@ -50,7 +50,7 @@ public class ProgressBarThread implements Runnable {
         thread.start();
     }
 
-    public void join() throws Exception {
+    public void join() throws InterruptedException {
         thread.join();
     }
 

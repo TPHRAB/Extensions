@@ -51,7 +51,7 @@ public class CopyThread implements Runnable {
 	}
 	
 	
-	// post : copy task for one thread
+	// post : task for  CopyThread
 	public void run() {
 		try {
 			byte[] buffer = new byte[BUFFER_LENGTH];

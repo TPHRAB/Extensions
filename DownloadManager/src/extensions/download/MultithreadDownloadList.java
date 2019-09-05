@@ -37,5 +37,7 @@ public class MultithreadDownloadList implements Runnable {
     public void start() {
         thread.start();
     }
-    public void join() throws Exception { thread.join(); }
+    public void join() throws InterruptedException  { 
+    	thread.join(); 
+    }
 }

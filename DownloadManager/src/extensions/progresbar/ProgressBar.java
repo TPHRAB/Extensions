@@ -1,5 +1,6 @@
 package extensions.progresbar;
 
+import java.io.IOException;
 import java.io.PipedReader;
 import java.io.PipedWriter;
 
@@ -8,7 +9,7 @@ public class ProgressBar {
     private PipedReader pR;
     private PipedWriter pW;
 
-    public ProgressBar(String taskName, long total, String unit, int num, String threadNum) throws Exception {
+    public ProgressBar(String taskName, long total, String unit, int num, String threadNum) throws IOException {
         this.pR = new PipedReader();
         this.pW = new PipedWriter();
         this.pR.connect(pW);
@@ -23,7 +24,7 @@ public class ProgressBar {
         pb.start();
     }
 
-    public void join() throws Exception {
+    public void join() throws InterruptedException {
         pb.join();
     }
 }
