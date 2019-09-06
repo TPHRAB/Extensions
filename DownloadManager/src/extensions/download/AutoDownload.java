@@ -32,7 +32,8 @@ import java.util.HashMap;
 
 public class AutoDownload {
 
-    public static final String DIRECTORY_SEPERATOR = System.getProperty("os.name").toLowerCase().contains("win") ? "\\" : "/";
+    public static final String DIRECTORY_SEPERATOR = System.getProperty("os.name").
+    		toLowerCase().contains("win") ? "\\" : "/";
 
     public static void main(String[] args) throws Exception {
     	
@@ -85,28 +86,24 @@ public class AutoDownload {
     			}
     		}
     		browser.close();
-    		File result = new File(out.getAbsolutePath() + DIRECTORY_SEPERATOR + DownloadManager.getURLTitle(url) + ".mp4");
+    		File result = new File(out.getAbsolutePath() + DIRECTORY_SEPERATOR + DownloadManager.
+    				getURLTitle(url) + ".mp4");
     		ProgressBar pb = new ProgressBar("Download", 11, "Thread", 1, "10");
     		pb.start();
-    		DownloadManager.doDownloadSingleFile(new URL(link), result, 10, pb.getPipedWriter(), new HashMap<String, String>());
+    		DownloadManager.doDownloadSingleFile(new URL(link), result, 10, pb.getPipedWriter(),
+    				new HashMap<String, String>());
     		pb.join();
-        } else if (host.attributeValue("method").equals("m3u8Custom")) {
-//            System.out.print("Please input the first common part of the sequence url: ");
-//            String part1 = console.nextLine().trim();
-//            System.out.print("Please input the second part of the common url: ");
-//            String part2 = console.nextLine().trim();
-//            System.out.print("Please input the starting index: ");
-//            int start = Integer.parseInt(console.nextLine());
-//            System.out.print("Please input the ending index: ");
-//            int end = Integer.parseInt(console.nextLine());
-    		
+        } else if (host.attributeValue("method").equals("m3u8Custom")) {  		
         	Map<String, String> requestProperties = new HashMap<>();
-        	requestProperties.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+        	requestProperties.put("Accept", "text/html,application/xhtml+xml,application/xml;"
+        			+ "q=0.9,*/*;q=0.8");
     		requestProperties.put("Accept-Encoding", "utf-8");
-    		requestProperties.put("Accept-Language", "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2");
+    		requestProperties.put("Accept-Language", "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;"
+    				+ "q=0.5,en-US;q=0.3,en;q=0.2");
     		requestProperties.put("Connection", "keep-alive");
     		requestProperties.put("Upgrade-Insecure-Request", "1");
-    		requestProperties.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101 Firefox/68");
+    		requestProperties.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64;"
+    				+ " rv:68.0) Gecko/20100101 Firefox/68");
     		
     		System.out.print("Please input the m3u8 link: ");
             URL m3u8 = new URL(console.nextLine());
@@ -117,13 +114,15 @@ public class AutoDownload {
     		}
     		ProgressBar pb = new ProgressBar("Download", 1, "File", 1, "1");
     		pb.start();
-    		DownloadManager.doDownloadSingleFile(m3u8, m3u8File, 1, pb.getPipedWriter(), requestProperties);
+    		DownloadManager.doDownloadSingleFile(m3u8, m3u8File, 1, pb.getPipedWriter(),
+    				requestProperties);
     		pb.join();
     		if (m3u8.toString().contains("ahcdn.com")) {
     			requestProperties.put("Origin", "https://avgle.com");
     			requestProperties.put("TE", "Trailers");
     		}
-            DownloadManager.downloadTSFileList(getAppendedList(m3u8.toString(), m3u8File, null), out, 10, requestProperties);
+            DownloadManager.downloadTSFileList(getAppendedList(m3u8.toString(), m3u8File,
+            		null), out, 10, requestProperties);
             videoCombine(console, url, out, host);
         } else if (host.attributeValue("method").equals("directMP4")) {
         	directMP4(url, out, host);
@@ -136,14 +135,16 @@ public class AutoDownload {
                 .attributeValue("record")
                 .equals("true");
         if (recordHistory) {
-            String path = ((Element) xml.selectSingleNode("/config/history")).attributeValue("path");
+            String path = ((Element) xml.selectSingleNode("/config/history")).
+            		attributeValue("path");
             File history = new File(path);
             if (!history.exists()) {
                 history.createNewFile();
             }
             RandomAccessFile r = new RandomAccessFile(path, "rwd");
             r.seek(history.length());
-            r.writeChars(new Date() + "    " + url + "    " + DownloadManager.getURLTitle(url) + "\r\n");
+            r.writeChars(new Date() + "    " + url + "    " + DownloadManager.
+            		getURLTitle(url) + "\r\n");
             r.close();
         }
         console.close();
@@ -175,7 +176,7 @@ public class AutoDownload {
         ProgressBar pb = new ProgressBar("Download", 1, "Threads",
                 1, "1");
         pb.start();
-        DownloadManager.doDownloadSingleFile(url, out, 1, pb.getPipedWriter(), new HashMap<String, String>());
+        DownloadManager.doDownloadSingleFile(url, out, 1, pb.getPipedWriter(), null);
         pb.join();
 
         if (host.attributeValue("trace").equals("true")) {
@@ -190,7 +191,7 @@ public class AutoDownload {
             out = new File("./" + DownloadManager.getURLFileName(url));
             pb = new ProgressBar("Download", 1, "Threads", 1, "1");
             pb.start();
-            DownloadManager.doDownloadSingleFile(url, out, 1, pb.getPipedWriter(), new HashMap<String, String>());
+            DownloadManager.doDownloadSingleFile(url, out, 1, pb.getPipedWriter(), null);
             pb.join();
             // set "out" to be "out2"
             read.close();
@@ -219,20 +220,23 @@ public class AutoDownload {
     	WebDriver browser = new FirefoxDriver();
     	browser.manage().timeouts().implicitlyWait(15,TimeUnit.SECONDS);
     	browser.get(url);
-    	String link = browser.findElements(By.tagName("video")).get(0).findElement(By.tagName("source")).getAttribute("src");
+    	String link = browser.findElements(By.tagName("video")).get(0).findElement(
+    			By.tagName("source")).getAttribute("src");
     	String fileName = browser.getTitle().replaceAll("[\\\\/:*?\"<>|]]*", "");
         File result = new File(out.getAbsolutePath() + DIRECTORY_SEPERATOR + fileName + ".mp4");
         browser.close();
         int threads = 10;
-        long fileLength = DownloadManager.getURLFileLength(new URL(link), new HashMap<String, String>());
+        long fileLength = DownloadManager.getURLFileLength(new URL(link), null);
         if (fileLength % 10 > 0) threads++;
-        ProgressBar pb = new ProgressBar("Download single file", threads, "Size", 1, String.valueOf(fileLength));
+        ProgressBar pb = new ProgressBar("Download single file", threads, "Size", 1, 
+        		String.valueOf(fileLength));
         pb.start();
-        DownloadManager.doDownloadSingleFile(new URL(link), result, 10, pb.getPipedWriter(), new HashMap<String, String>());
+        DownloadManager.doDownloadSingleFile(new URL(link), result, 10, pb.getPipedWriter(), null);
         pb.join();
     }
     
-    public static List<String> getAppendedList(String link, File m3u8, String from) throws Exception {
+    public static List<String> getAppendedList(String link, File m3u8, String from)
+    		throws Exception {
         Scanner read = new Scanner(m3u8);
         List<String> list = new ArrayList<String>();
         boolean startCombine = (from == null);
@@ -270,7 +274,8 @@ public class AutoDownload {
             	command.add("./ffmpeg");
             	execution = true;
             } else {
-            	System.out.println("Not supported operating system! Please do the convertion by yourself!");
+            	System.out.println("Not supported operating system! Please do the convertion"
+            			+ " by yourself!");
             }
             
             // set input file and output file
@@ -309,7 +314,8 @@ public class AutoDownload {
 		}
 	}
 	
-	public static void videoCombine(Scanner console, String url, File dir, Element host) throws Exception {
+	public static void videoCombine(Scanner console, String url, File dir, Element host)
+			throws Exception {
 		System.out.print("Please input the path for combination: ");
         String path = console.nextLine();
         path = path + DIRECTORY_SEPERATOR + DownloadManager.getURLTitle(url) + ".ts";

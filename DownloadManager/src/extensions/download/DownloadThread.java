@@ -75,6 +75,7 @@ public class DownloadThread implements Runnable {
 		thread.start();
 	}
 	
+	// pre  : this intance thread can join properly (throws InterrupetedException if not)
 	// post : wait for "thread" to die
 	public void join() throws InterruptedException {
 		thread.join();

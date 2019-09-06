@@ -123,7 +123,7 @@ public class TestThread {
 		out.createNewFile();
 		long totalSize = 0;
 		List<Copy> threads = new ArrayList<Copy>();
-		list = extensions.file.fileUtils.mergeSortOnFilesNames(list);
+		list = extensions.file.FileUtils.mergeSortOnFilesNames(list);
 		int i = 0;
 		int count = 0;
 		while (i < list.length) {

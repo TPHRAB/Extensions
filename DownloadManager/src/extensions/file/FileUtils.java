@@ -1,9 +1,19 @@
+// Timmy Zhao
+
+// 08/13/2019
+
+// "FileUtils" class provides static methods for handling files
+
 package extensions.file;
 
 import java.io.File;
 import java.util.Arrays;
 
-public class fileUtils {
+public class FileUtils {
+	
+	// pre   : list != null
+	// post  : return the sorted file list based on names of the files
+	// param : list  --- directory that contains the file to sort
 	public static File[] mergeSortOnFilesNames(File[] list) {
 		if (list.length <= 1) {
 			return list;
@@ -38,6 +48,10 @@ public class fileUtils {
 		}
 	}
 	
+	// pre    : a != null && b != null
+	// post   : return the comparision result of a's name and b's name
+	// params : a --- file to compare name with b
+	//          b --- file to compare name with a
 	public static int compareFilesNames(File a, File b) {
 		String f1 = a.getName();
 		String f2 = b.getName();
@@ -62,6 +76,9 @@ public class fileUtils {
 		}
 	}
 	
+	// pre   : dir != null
+	// post  : recursivly delete the directory
+	// param : dir --- the directory to delete recursively
 	public static void deleteDirectory(File dir) {
 		for (File f : dir.listFiles()) {
 			if (f.isFile()) {

@@ -1,3 +1,9 @@
+// Timmy Zhao
+
+// 07/31/2019
+
+// "MultithreadDownloadList" class serves to be a thread class to for downloading list of url
+
 package extensions.download;
 
 import java.io.File;
@@ -6,17 +12,29 @@ import java.util.List;
 import java.util.Map;
 
 public class MultithreadDownloadList implements Runnable {
-    private File out;
-    private List<String> list;
-    private int start;
-    private int end;
-    private PipedWriter pW;
-    private Map<String, String> requesProperties;
-    private Thread thread;
+    private File dir;                             // directory to output files to
+    private List<String> list;                    // list of url files to download
+    private int start;                            // starting index of the url in "list" to
+                                                  // download
+    private int end;                              // last index of the url in "list" to download
+    private PipedWriter pW;                       // PipedWriter to write progress to 
+    private Map<String, String> requesProperties; // additional http request properties to add on 
+                                                  // the default download request 
+    private Thread thread;                        // thread of this instance object
 
-    public MultithreadDownloadList(List<String> list, int start, int end, File out, PipedWriter pW, 
+    // pre    : pW is from "ProgressBar"
+    // post   : construct a "MultithreadDownloadList" class
+    // params : list              --- list that contains the url to download
+    //          start             --- starting index of the url in "list" to download
+    //          end               --- last index of the url in "list" to download
+    //          dir               --- directory to output
+    //          pW                --- PipedWriter that has been connected to a PipedReader to send
+	//                                current progress
+    //          requestProperties --- additional http request properties to add on the default 
+	//                                download request  
+    public MultithreadDownloadList(List<String> list, int start, int end, File dir, PipedWriter pW, 
     		Map<String, String> requestProperties) {
-        this.out = out;
+        this.dir = dir;
         this.start = start;
         this.end = end;
         this.pW = pW;
@@ -26,17 +44,18 @@ public class MultithreadDownloadList implements Runnable {
     }
 
     @Override
+    // post : task for this thread
     public void run() {
-        try {
-            DownloadManager.doDownloadTSFileList(list, start, end, out, pW, requesProperties);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        DownloadManager.doDownloadTSFileList(list, start, end, dir, pW, requesProperties);
     }
 
+    // post : start this instance thread
     public void start() {
         thread.start();
     }
+    
+    // pre  : this intance thread can join properly (throws InterrupetedException if not)
+    // post : wait for this instance thread to join
     public void join() throws InterruptedException  { 
     	thread.join(); 
     }
