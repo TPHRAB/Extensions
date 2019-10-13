@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="progressbar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/progressbar.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

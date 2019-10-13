@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - MacShellCommand",
+            "request": "launch",
+            "mainClass": "test.MacShellCommand",
+            "projectName": "Test"
+        }
+    ]
+}
